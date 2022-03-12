@@ -31,31 +31,14 @@
 
             <!-- navigation bar -->
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center">Add a New Task</h1>
+            <h1 class="text-center">Announcements</h1>
             <div class="span12" style="text-align:center">
                 <a href="/dashboard"><button type="submit" value="dashboard" class="btn btn-primary" >Task</button></a>
                 <a href="/logout"><button type="submit" value="Logout" class="btn btn-warning">Logout</button></a>
             </div>
         </div>
-        <!-- form -->
-        {% with tasks = get_flashed_messages(category_filter=['task']) %}
-            {% if tasks %}
-                    {% for task in task %}
-                        <p class="text-danger">{{task}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        <form action="/add/show" method="POST" class="d-flex justify-content-between"  >
 
-            <div>
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title:</label>
-                    <input type="text" name="title" id="title" class="form-control">
-                </div>
 
-                <input type="submit" value="    Add    " class="btn btn-success">
-            </div>
-            </form>
         </div>
 </body>
 </html>
