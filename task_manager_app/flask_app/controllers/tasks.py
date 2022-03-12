@@ -7,28 +7,25 @@ from flask_app.models.user import User
 
 
 # html page for adding
-@app.route('/show/new')
+@app.route('/task/new')
 def add_new_show():
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
         'id': session['user_id']
     }
-    return render_template('new_show.html', user=User.get_one(data))
+    return render_template('new_task.html', user=User.get_one(data))
 # process adding form
-@app.route('/add/show', methods=['POST'])
+@app.route('/add/task', methods=['POST'])
 def add_show():
     if 'user_id' not in session:
         return redirect('/')
     data = {
         'title': request.form['title'],
-        'network': request.form['network'],
-        'description': request.form['description'],
-        'release_date': request.form['release_date'],
         "user_id": session["user_id"]
     }
     if not Task.validate_show(request.form):
-        return redirect('/show/new')
+        return redirect('/task/new')
     Task.create_task(data)
     return redirect ('/dashboard')
 
@@ -49,37 +46,33 @@ def show_details(id, user_id):
 
 
 # html edit page
-@app.route('/show/edit/<int:id>')
-def edit_show(id):
-    if 'user_id' not in session:
-        return redirect('/logout')
-    data = {
-        "id":id
-    }
-    user_data ={
-        'id': session['user_id']
-    }
+# @app.route('/task/edit/<int:id>')
+# def edit_tas(id):
+#     if 'user_id' not in session:
+#         return redirect('/logout')
+#     data = {
+#         "id":id
+#     }
+#     user_data ={
+#         'id': session['user_id']
+#     }
 
-    return render_template('edit_show.html', user=User.get_one(user_data), task=Task.get_one(data))
+#     return render_template('edit_task.html', user=User.get_one(user_data), task=Task.get_one(data))
 # process edit form
-@app.route('/edit/show', methods=['POST'])
-def update_show():
-    if 'user_id' not in session:
-        return redirect('/')
-    data = {
-        'title': request.form['title'],
-        'network': request.form['network'],
-        'description': request.form['description'],
-        'release_date': request.form['release_date'],
-        "user_id": session["user_id"],
-        'id': request.form['id']
-    }
-    if not Task.validate_show(request.form):
-        return redirect('/dashboard')
-    Task.update(data)
-    return redirect ('/dashboard')
+# @app.route('/edit/task', methods=['POST'])
+# def update_task():
+#     if 'user_id' not in session:
+#         return redirect('/')
+#     data = {
+#         'title': request.form['title'],
+#         'id': request.form['id']
+#     }
+#     if not Task.validate_show(request.form):
+#         return redirect('/dashboard')
+#     Task.update(data)
+#     return redirect ('/dashboard')
 
-@app.route('/destroy/show/<int:id>')
+@app.route('/destroy/task/<int:id>')
 def destroy(id):
     if 'user_id' not in session:
         return redirect('/')
