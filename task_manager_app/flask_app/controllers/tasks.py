@@ -8,7 +8,7 @@ from flask_app.models.user import User
 
 # html page for adding
 @app.route('/task/new')
-def add_new_show():
+def add_new_task():
     if 'user_id' not in session:
         return redirect('/logout')
     data ={
@@ -17,7 +17,7 @@ def add_new_show():
     return render_template('new_task.html', user=User.get_one(data))
 # process adding form
 @app.route('/add/task', methods=['POST'])
-def add_show():
+def add_task():
     if 'user_id' not in session:
         return redirect('/')
     data = {
