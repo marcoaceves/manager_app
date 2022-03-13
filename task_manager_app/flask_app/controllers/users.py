@@ -76,6 +76,17 @@ def dashboard():
     tasks = Task.get_all_tasks(data)
     return render_template("dashboard.html",user=User.get_one(data), users=users, tasks=tasks)
 
+@app.route('/links')
+def links():
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data ={
+        'id': session['user_id']
+    }
+    users= User.get_all()
+    tasks = Task.get_all_tasks(data)
+    return render_template("links.html",user=User.get_one(data), users=users, tasks=tasks)
+
 
 @app.route('/user/task')
 def user_task():
