@@ -14,7 +14,7 @@ def add_new_task():
     data ={
         'id': session['user_id']
     }
-    return render_template('new_task.html', user=User.get_one(data))
+    return render_template('new_task.html', user=User.get_one(data), users= User.get_all())
 # process adding form
 @app.route('/add/task', methods=['POST'])
 def add_task():
