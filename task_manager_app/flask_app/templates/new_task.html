@@ -11,51 +11,127 @@
 </head>
 <body>
 
-
+<!-- Navigation Bar -->
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
-        <img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"> 
+        <img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50">
         <div>
             <a href="/dashboard"><button type="submit" value="Home" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Home</button></a>
             <a href="/links"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Links</button></a>
+
+                        <!-- need for look to check if user has adimin role -->
             <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
             <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
-            <a href="/#"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
         </div>
 
 
         <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger" style="text-align:center">Logout</button></a>
     </div>
 
-
     <div class="wrapper">
+        <div class="d-flex justify-content-evenly" >
 
-            <!-- navigation bar -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="text-center">Add a New Task</h1>
-            <div class="span12" style="text-align:center">
-                <a href="/dashboard"><button type="submit" value="dashboard" class="btn btn-primary" >Task</button></a>
-                <a href="/logout"><button type="submit" value="Logout" class="btn btn-warning">Logout</button></a>
-            </div>
-        </div>
-        <!-- form -->
-        {% with tasks = get_flashed_messages(category_filter=['task']) %}
-            {% if tasks %}
-                    {% for task in task %}
-                        <p class="text-danger">{{task}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        <form action="/add/show" method="POST" class="d-flex justify-content-between"  >
-
-            <div>
+            <form action="/register" method="POST" class="container mx-auto bg-light " style="width: 400px" >
+                <h1>New Task</h1>
+                {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
+                    {% if messages %}                            <!-- check if there are any messages -->
+                        {% for message in messages %}            <!-- loop through the messages -->
+                            <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title:</label>
-                    <input type="text" name="title" id="title" class="form-control">
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select name=“priority">
+                        {% for user in users %}
+                        <option>{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
                 </div>
 
-                <input type="submit" value="    Add    " class="btn btn-success">
-            </div>
+
+                <div class="mb-3">
+                    <label for="tittle" class="form-label">Task:</label>
+                    <input type="text" name="tittle" id="tittle" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="priority" class="form-label">Priority:</label>
+                    <p>
+                        <select name=“priority">
+                        <option>High priority</option> 
+                        <option>Middle priority</option> 
+                        <option>Low priority</option> 
+                        </select>
+                    </p>
+                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
+                </div>
+                <div class="mb-3">
+                    <label for="due_date" class="form-label ">Due Date:</label>
+                    <input type="date" name="due_date" class="form-control" id="due_date" >
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="register_password" class="form-label">Password:</label>
+                    <input type="password" name="password" class="form-control" id="register_password" >
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password:</label>
+                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" >
+                </div> -->
+                <input type="submit" value="Add Task" class="btn btn-primary">
+            </form>
+            <form action="/login" method="POST" class="container mx-auto card" style="width: 400px" >
+                <h1>Assign Station</h1>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
+                    {% if messages %}                            <!-- check if there are any messages -->
+                        {% for message in messages %}            <!-- loop through the messages -->
+                            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="mb-3">
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select name=“priority">
+                        {% for user in users %}
+                        <option>{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label for="priority" class="form-label">Priority:</label>
+                    <p>
+                        <select name=“priority">
+                        <option>High priority</option> 
+                        <option>Middle priority</option> 
+                        <option>Low priority</option> 
+                        </select>
+                    </p>
+                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
+                </div>
+                <div class="mb-3">
+                    <label for="station" class="form-label">Station:</label>
+                    <p>
+                        <select name=“station">
+                        <option>Will Call</option> 
+                        <option>Shipping</option> 
+                        <option>Drop Off</option> 
+                        <option>Station 1</option> 
+                        <option>Station 2</option> 
+                        </select>
+                    </p>
+                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
+                </div>
+                <div class="mb-3">
+                    <label for="due_date" class="form-label ">Due Date:</label>
+                    <input type="date" name="due_date" class="form-control" id="due_date" >
+                </div>
+                <input type="submit" value="Add Task" class="btn btn-success">
             </form>
         </div>
+    </div>
 </body>
 </html>

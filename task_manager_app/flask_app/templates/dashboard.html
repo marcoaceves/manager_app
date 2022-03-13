@@ -11,19 +11,25 @@
 </head>
 <body>
 
-
             <!-- navigation bar -->
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
         <img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50">
         <div>
-            <a href="/dashboard"><button type="submit" value="Home" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Home</button></a>
             <a href="/links"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Links</button></a>
             <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
             <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
-            <a href="/#"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <!-- Dropdown -->
+            <a class="btn btn-primary dropdown-toggle badge badge-pill badge-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown links
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
         </div>
-
-
         <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger" style="text-align:center">Logout</button></a>
     </div>
     <!-- messages -->
@@ -34,7 +40,7 @@
             <h1 class="text-center  ms-5">DASHBOARD</h1>
         </div>
         <!-- gradient table -->
-        <section class="vh-100 gradient-custom-2">
+        <section class=" gradient-custom-2">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items h-100">
                     <div class="col-md-12 col-xl-12">
@@ -47,8 +53,8 @@
                                     <tr>
                                         <th scope="col">Team Member</th>
                                         <th scope="col"># Of Task's</th>
-                                        <th scope="col">Priority</th>
-                                        <th scope="col">completed</th>
+                                        <th scope="col">Lorem</th>
+                                        <th scope="col">Completed</th>
                                     </tr>
                                     </thead>
                                     {% for user in users %}
@@ -63,7 +69,7 @@
                                         <span >50</span >
                                         </td>
                                         <td class="align-middle">
-                                        <h6 class="mb-0"><span class="badge bg-danger">High priority</span></h6>
+                                        <h6 class="mb-0"><span class="badge bg-primary">Hello World</span></h6>
                                         </td>
                                         <td class="align-middle">
                                             <span >50</span >
