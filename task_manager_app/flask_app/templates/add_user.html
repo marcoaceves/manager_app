@@ -27,7 +27,7 @@
         <div class="d-flex justify-content-evenly" >
 
             <form action="/register" method="POST" class="container mx-auto bg-light card " style="width: 400px" >
-                <h1>Register</h1>
+                <h1>Add New User</h1>
                 {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
@@ -55,7 +55,7 @@
                     <label for="confirm_password" class="form-label">Confirm Password:</label>
                     <input type="password" name="confirm_password" class="form-control" id="confirm_password" >
                 </div>
-                <input type="submit" value="Register" class="btn btn-primary">
+                <input type="submit" value="Register" class="btn btn-primary mb-3">
             </form>
         </div>
 

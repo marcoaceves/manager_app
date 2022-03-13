@@ -24,7 +24,7 @@ def add_task():
         'title': request.form['title'],
         "user_id": session["user_id"]
     }
-    if not Task.validate_show(request.form):
+    if not Task.validate_task(request.form):
         return redirect('/task/new')
     Task.create_task(data)
     return redirect ('/dashboard')
