@@ -14,7 +14,7 @@ def add_new_task():
     data ={
         'id': session['user_id']
     }
-    return render_template('new_task.html', user=User.get_one(data))
+    return render_template('new_task.html', user=User.get_one(data), users= User.get_all())
 # process adding form
 @app.route('/add/task', methods=['POST'])
 def add_task():
@@ -24,7 +24,7 @@ def add_task():
         'title': request.form['title'],
         "user_id": session["user_id"]
     }
-    if not Task.validate_show(request.form):
+    if not Task.validate_task(request.form):
         return redirect('/task/new')
     Task.create_task(data)
     return redirect ('/dashboard')

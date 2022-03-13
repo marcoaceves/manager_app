@@ -17,9 +17,10 @@
         <div>
             <a href="/dashboard"><button type="submit" value="Home" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Home</button></a>
             <a href="/links"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Links</button></a>
+
+                        <!-- need for look to check if user has adimin role -->
             <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
-            <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
-            <a href="/#"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
         </div>
 
 
@@ -39,7 +40,19 @@
                     {% endif %}
                 {% endwith %}
                 <div class="mb-3">
-                    <label for="tittle" class="form-label">Tittle:</label>
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select name=“priority">
+                        {% for user in users %}
+                        <option>{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="tittle" class="form-label">Task:</label>
                     <input type="text" name="tittle" id="tittle" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -68,7 +81,7 @@
                 <input type="submit" value="Add Task" class="btn btn-primary">
             </form>
             <form action="/login" method="POST" class="container mx-auto card" style="width: 400px" >
-                <h1>New Special Task</h1>
+                <h1>Assign Station</h1>
                 {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
@@ -76,9 +89,16 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+
                 <div class="mb-3">
-                    <label for="tittle" class="form-label">Tittle:</label>
-                    <input type="text" name="tittle" id="tittle" class="form-control">
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select name=“priority">
+                        {% for user in users %}
+                        <option>{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
                 </div>
                 <div class="mb-3">
                     <label for="priority" class="form-label">Priority:</label>
@@ -92,12 +112,14 @@
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
                 </div>
                 <div class="mb-3">
-                    <label for="station" class="form-label">Stations:</label>
+                    <label for="station" class="form-label">Station:</label>
                     <p>
                         <select name=“station">
+                        <option>Will Call</option> 
+                        <option>Shipping</option> 
+                        <option>Drop Off</option> 
                         <option>Station 1</option> 
                         <option>Station 2</option> 
-                        <option>Station 3</option> 
                         </select>
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->

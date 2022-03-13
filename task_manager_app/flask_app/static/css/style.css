@@ -35,6 +35,7 @@ table.table-bordered > tbody > tr > td{
 
 /* gradient table */
 .gradient-custom-2 {
+    border-radius: 2em;
     /* fallback for old browsers */
     background: #7e40f6;
 
@@ -42,7 +43,8 @@ table.table-bordered > tbody > tr > td{
     background: -webkit-linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1))
+    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+
 }
 
 .mask-custom {

@@ -16,9 +16,11 @@
         <div>
             <a href="/dashboard"><button type="submit" value="Home" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Home</button></a>
             <a href="/links"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Links</button></a>
-            <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
+
+                        <!-- need for look to check if user has adimin role -->
+
             <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
-            <a href="/#"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
         </div>
         <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger" style="text-align:center">Logout</button></a>
     </div>
@@ -26,7 +28,7 @@
         <div class="d-flex justify-content-evenly" >
 
             <form action="/register" method="POST" class="container mx-auto bg-light card " style="width: 400px" >
-                <h1>Register</h1>
+                <h1>Add New User</h1>
                 {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
@@ -54,7 +56,7 @@
                     <label for="confirm_password" class="form-label">Confirm Password:</label>
                     <input type="password" name="confirm_password" class="form-control" id="confirm_password" >
                 </div>
-                <input type="submit" value="Register" class="btn btn-primary">
+                <input type="submit" value="Register" class="btn btn-primary mb-3">
             </form>
         </div>
 

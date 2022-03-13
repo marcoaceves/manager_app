@@ -99,6 +99,17 @@ def user_task():
     tasks = Task.get_all_tasks(data)
     return render_template("user_task.html",user=User.get_one(data), users=users, tasks=tasks)
 
+@app.route('/manage/users')
+def manage_users():
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data ={
+        'id': session['user_id']
+    }
+    users= User.get_all()
+
+    return render_template("manage_users.html",user=User.get_one(data), users=users,)
+
 @app.route('/logout')
 def logout():
     session.clear()
