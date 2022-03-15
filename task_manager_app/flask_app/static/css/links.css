@@ -2,7 +2,8 @@
     color: #fff;
     background-color: rgb(0, 0, 0);
     font-family: 'Work Sans', sans-serif;
-    font-size: 22px;
+    width: 10px 10px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -19,7 +20,7 @@
 #btnlink span:after{
     content:'';
     background: linear-gradient(to bottom,#4184ff,#872bff);
-    width: 25%;
+    width: 50%;
     height: 100%;
     opacity: 0;
     position: absolute;
