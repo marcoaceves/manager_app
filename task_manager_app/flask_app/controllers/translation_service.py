@@ -55,6 +55,11 @@ def translate():
 
     r = requests.post(TRANSLATE_BASE_URL, data=payload, headers=HEADERS)
     data=r.json()
-    print(data)
-    return render_template('translate.html', data=data)
+    data2=[]
+    data2.append(r.json())
+
+    print(data2)
+
+
+    return render_template('translate.html', data=data2)
 

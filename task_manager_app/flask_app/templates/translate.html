@@ -42,9 +42,9 @@
                 <div class="mb-3">
                     <label for="last_name" class="form-label">Spanish:</label>
                     <p>
-                        {'data': {'translations': [{'translatedText': 'Hola', 'detectedSourceLanguage': 'en'}]}}
-                        {% for key in pumpkin.methods %}
-                        <li>{{ pumpkin.methods[key] }}</li>
+                        <!-- {'data': {'translations': [{'translatedText': 'Hola', 'detectedSourceLanguage': 'en'}]}} -->
+                        {% for i in data %}
+                        <li>{{ data[0] }}</li>
                         {% endfor %}
                     </p>
 
