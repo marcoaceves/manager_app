@@ -4,6 +4,7 @@ from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.task import Task
 from flask_app.models.user import User
+from flask_app.models.post import Post
 
 
 # html page for adding
@@ -73,7 +74,7 @@ def show_details(id, user_id):
 #     return redirect ('/dashboard')
 
 @app.route('/destroy/task/<int:id>')
-def destroy(id):
+def destroy_task(id):
     if 'user_id' not in session:
         return redirect('/')
     data = {
