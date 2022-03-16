@@ -20,7 +20,8 @@
     <div class="wrapper">
         <div class="d-flex justify-content-evenly" >
 
-            <form action="/register" method="POST" class="container mx-auto bg-light " style="width: 400px" >
+            <form action="/add/task" method="POST" class="container mx-auto bg-light " style="width: 400px" >
+                <input type="hidden" name="complete" id="complete" value="no" class="form-control">
                 <h1>New Task</h1>
                 {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
@@ -32,9 +33,9 @@
                 <div class="mb-3">
                     <label for="user" class="form-label">User:</label>
                     <p>
-                        <select name=“priority">
+                        <select name="user_id">
                         {% for user in users %}
-                        <option>{{user.first_name}}</option>
+                        <option value="{{user.id}}">{{user.first_name}}</option>
                         {% endfor %}
                         </select>
                     </p>
@@ -42,16 +43,16 @@
 
 
                 <div class="mb-3">
-                    <label for="tittle" class="form-label">Task:</label>
-                    <input type="text" name="tittle" id="tittle" class="form-control">
+                    <label for="task_name" class="form-label">Task:</label>
+                    <input type="text" name="task_name" id="task_name" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="priority" class="form-label">Priority:</label>
                     <p>
-                        <select name=“priority">
-                        <option>High priority</option> 
-                        <option>Middle priority</option> 
-                        <option>Low priority</option> 
+                        <select name="priority" id="priority">
+                        <option value="High Priority">High Priority</option> 
+                        <option value="Middle Priority">Middle Priority</option> 
+                        <option value="Low Priority">Low Priority</option> 
                         </select>
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
@@ -60,30 +61,14 @@
                     <label for="due_date" class="form-label ">Due Date:</label>
                     <input type="date" name="due_date" class="form-control" id="due_date" >
                 </div>
-                <!-- <div class="mb-3">
-                    <label for="register_password" class="form-label">Password:</label>
-                    <input type="password" name="password" class="form-control" id="register_password" >
-                </div>
-                <div class="mb-3">
-                    <label for="confirm_password" class="form-label">Confirm Password:</label>
-                    <input type="password" name="confirm_password" class="form-control" id="confirm_password" >
-                </div> -->
                 <input type="submit" value="Add Task" class="btn btn-primary">
             </form>
-            <form action="/login" method="POST" class="container mx-auto card" style="width: 400px" >
+            <form action="/add/task" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1>Assign Station</h1>
-                {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
-                    {% if messages %}                            <!-- check if there are any messages -->
-                        {% for message in messages %}            <!-- loop through the messages -->
-                            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-
                 <div class="mb-3">
                     <label for="user" class="form-label">User:</label>
                     <p>
-                        <select name=“priority">
+                        <select name=“user_id">
                         {% for user in users %}
                         <option>{{user.first_name}}</option>
                         {% endfor %}
@@ -94,9 +79,9 @@
                     <label for="priority" class="form-label">Priority:</label>
                     <p>
                         <select name=“priority">
-                        <option>High priority</option> 
-                        <option>Middle priority</option> 
-                        <option>Low priority</option> 
+                        <option>High priority</option>
+                        <option>Middle priority</option>
+                        <option>Low priority</option>
                         </select>
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->

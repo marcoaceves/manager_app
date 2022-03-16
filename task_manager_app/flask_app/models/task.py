@@ -11,7 +11,10 @@ db = 'ahf_db'
 class Task:
     def __init__(self, data):
         self.id = data['id']
-        self.title = data['title']
+        self.task_name = data['task_name']
+        self.due_date = data['due_date']
+        self.priority = data['priority']
+        self.complete = data['complete']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -33,7 +36,7 @@ class Task:
 
     @classmethod
     def create_task(cls, data):
-        query= "INSERT INTO tasks (title, user_id) VALUES (%(title)s,%(user_id)s);"
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES (%(task_name)s,%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
         result = connectToMySQL(db).query_db(query,data)
         return result
 
@@ -42,34 +45,43 @@ class Task:
     def get_all_tasks(cls,data):
         query = "SELECT * FROM tasks"
         results = connectToMySQL(db).query_db(query,data)
-        tasks = []
+        all_tasks = []
         for task in results:
-            tasks.append( cls(task) )
-        return tasks
+            all_tasks.append( cls(task) )
+        return all_tasks
 
     @classmethod
-    def get_one(cls,data):
+    def get_all_user_tasks(cls,data):
+        query = "SELECT * FROM tasks WHERE user_id =  %(user2)s"
+        results = connectToMySQL(db).query_db(query,data)
+        taskss = []
+        for task in results:
+            taskss.append( cls(task) )
+        return taskss
+
+    @classmethod
+    def get_one_task(cls,data):
         query  = "SELECT * FROM tasks WHERE id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
         return cls(results[0])
 
 
     @classmethod
-    def update(cls, data):
-        query = "UPDATE tasks SET title=%(title)s, WHERE id = %(id)s;"
+    def complete_update(cls, data):
+        query = "UPDATE tasks SET complete=%(complete)s WHERE id = %(id)s;"
         return connectToMySQL(db).query_db(query,data)
 
     @classmethod
     def destroy(cls, data):
-        query = 'DELETE FROM shows WHERE tasks.id = %(id)s;'
+        query = 'DELETE FROM tasks WHERE tasks.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
 
     @staticmethod
     def validate_task( task ):
         is_valid = True
 
-        if len(task['title']) < 3:
-            flash("Show name must be at least 3 characters","task")
+        if len(task['task_name']) < 3:
+            flash("Task name must be at least 3 characters","task")
             is_valid= False
 
         return is_valid
