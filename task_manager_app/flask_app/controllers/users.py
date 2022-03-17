@@ -3,6 +3,7 @@ from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.user import User
 from flask_app.models.task import Task
+from flask_app.models.post import Post
 from flask_bcrypt import Bcrypt
 import re
 bcrypt = Bcrypt(app)
@@ -88,16 +89,7 @@ def links():
     return render_template("links.html",user=User.get_one(data), users=users, tasks=tasks)
 
 
-@app.route('/user/task')
-def user_task():
-    if 'user_id' not in session:
-        return redirect('/logout')
-    data ={
-        'id': session['user_id']
-    }
-    users= User.get_all()
-    tasks = Task.get_all_tasks(data)
-    return render_template("user_task.html",user=User.get_one(data), users=users, tasks=tasks)
+
 
 @app.route('/manage/users')
 def manage_users():

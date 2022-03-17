@@ -34,8 +34,8 @@ class User:
         return cls(result[0])
 
     @classmethod
-    def get_user_tv_show(cls,data):
-        query  = "SELECT * FROM  users as user2 JOIN shows ON user2.id = shows.user_id WHERE user2.id =  %(user2)s;"
+    def get_user_and_tasks(cls,data):
+        query  = "SELECT * FROM  users as user2 JOIN tasks ON user2.id = tasks.user_id WHERE user2.id =  %(user2)s;"
         results = connectToMySQL(db).query_db(query, data)
 
         print(results)
