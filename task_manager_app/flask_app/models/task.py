@@ -50,6 +50,7 @@ class Task:
             all_tasks.append( cls(task) )
         return all_tasks
 
+
 # get all tasks that belong to one user
     @classmethod
     def get_all_user_tasks(cls,data):
