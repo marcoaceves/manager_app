@@ -34,6 +34,7 @@ class User:
             return False
         return cls(result[0])
 
+# get all users and get all tasks
     @classmethod
     def get_user_and_tasks(cls,data):
         query  = "SELECT * FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id WHERE user2.id =  %(user2)s;"

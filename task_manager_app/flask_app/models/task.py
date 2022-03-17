@@ -50,13 +50,12 @@ class Task:
             all_tasks.append( cls(task) )
         return all_tasks
 
+# get all tasks that belong to one user
     @classmethod
     def get_all_user_tasks(cls,data):
-        query = "SELECT * FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id WHERE user2.id =  %(user2)s;"
+        query = "SELECT * FROM tasks WHERE user_id =  %(user2)s"
         results = connectToMySQL(db).query_db(query,data)
         taskss = []
-        print(taskss)
-        
         for task in results:
             taskss.append( cls(task) )
         return taskss
