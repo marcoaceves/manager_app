@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.user import User
 from flask_app.models.task import Task
 from flask_app.models.post import Post
+from flask_app.models.count import Count
 from flask_bcrypt import Bcrypt
 import re
 bcrypt = Bcrypt(app)
@@ -75,7 +76,8 @@ def dashboard():
     }
     users= User.get_all()
     tasks = Task.get_all_tasks(data)
-    return render_template("dashboard.html",user=User.get_one(data), users=users, tasks=tasks)
+    counts = Count.get_all_counts(data)
+    return render_template("dashboard.html",user=User.get_one(data), users=users, tasks=tasks, counts=counts)
 
 @app.route('/links')
 def links():

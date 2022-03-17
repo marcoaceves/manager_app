@@ -67,7 +67,9 @@
                                         <span class="ms-2"> <a href="/user/task/{{user.id}}" id="userLink">{{user.first_name}}</a></span>
                                         </th>
                                         <td class="align-middle">
-                                        <span >50</span >
+                                            {% for count in counts %}
+                                        <span >{{count.count}}</span >
+                                            {% endfor %}
                                         </td>
                                         <td class="align-middle">
                                         <h6 class="mb-0"><span class="badge bg-primary">Hello World</span></h6>

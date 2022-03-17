@@ -52,20 +52,6 @@ def user_task(user_id):
     tasks = Task.get_all_user_tasks(data)
     return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
 
-# @app.route('/details/<int:id>/<int:user_id>')
-# def show_details(id, user_id):
-#     if 'user_id' not in session:
-#         return redirect('/logout')
-
-#     data = {
-#         "id":id,
-#         "user2":user_id
-#     }
-#     user_data ={
-#         'id': session['user_id']
-#     }
-
-#     return render_template('show_details.html', task=Task.get_one(data), user=User.get_one(user_data), user2=User.get_user_tv_show(data))
 
 
 # process edit form
@@ -77,8 +63,9 @@ def update_complete():
         'complete': request.form['complete'],
         'id': request.form['id']
     }
+    print(data)
     Task.complete_update(data)
-    return redirect ('/user/task/2')
+    return redirect(request.referrer)
 
 @app.route('/destroy/task/', methods=['POST'])
 def destroy_task():
@@ -88,4 +75,4 @@ def destroy_task():
         'id': request.form['id']
     }
     Task.destroy(data)
-    return redirect('/user/task/2')
+    return redirect(request.referrer)
