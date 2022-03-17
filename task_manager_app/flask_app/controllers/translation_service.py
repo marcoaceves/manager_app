@@ -3,6 +3,7 @@ import requests
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.task import Task
+from flask_app.models.post import Post
 
 
 DETECT_BASE_URL = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect'

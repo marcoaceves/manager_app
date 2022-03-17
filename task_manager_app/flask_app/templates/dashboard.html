@@ -25,7 +25,7 @@
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
                 <div class="dropdown-content ">
                     <a href="/links">Links</a>
-                    <a href="#">Announcements</a>
+                    <a href="/announcements">Announcements</a>
                     <a href="/translate/app">Translate</a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                                         <th>
                                         <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" alt="avatar 1"
                                             style="width: 45px; height: auto;">
-                                        <span class="ms-2"> <a href="/user/task" id="userLink">{{user.first_name}}</a></span>
+                                        <span class="ms-2"> <a href="/user/task/{{user.id}}" id="userLink">{{user.first_name}}</a></span>
                                         </th>
                                         <td class="align-middle">
                                         <span >50</span >
