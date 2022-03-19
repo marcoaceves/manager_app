@@ -58,16 +58,16 @@
                                         <th scope="col">Completed</th>
                                     </tr>
                                     </thead>
-                                    {% for user in users %}
+                                    {% for count in counts %}
                                     <tbody>
                                     <tr class="fw-normal">
                                         <th>
                                         <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" alt="avatar 1"
                                             style="width: 45px; height: auto;">
-                                        <span class="ms-2"> <a href="/user/task/{{user.id}}" id="userLink">{{user.first_name}}</a></span>
+                                        <span class="ms-2"> <a href="/user/task/{{count.user_id}}" id="userLink">{{count.first_name}}</a></span>
                                         </th>
                                         <td class="align-middle">
-                                        <span >50</span >
+                                        <span >{{count.count}}</span >
                                         </td>
                                         <td class="align-middle">
                                         <h6 class="mb-0"><span class="badge bg-primary">Hello World</span></h6>

@@ -38,6 +38,11 @@
             <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark">
                 <h1 class="text-center  ms-5"> {{user2.first_name}}'s Assigned Task(s)</h1>
             </div>
+            {% for task in tasks%}
+                {% if task.due_date == None%}
+                <h1 class="text-center  ms-5">This User Has No Tasks</h1>
+                {% endif %}
+            {% endfor %}
         <!-- description box -->
         <section class="vh-100 gradient-custom-3">
             <div class="container py-5 h-100">
@@ -59,14 +64,18 @@
                                     </tr>
                                     </thead>
                                     {% for task in tasks%}
+
                                     <tbody>
                                     <tr class="fw-normal">
+                                        {% if task.due_date != None%}
                                         <th>
                                             <span>{{task.task_name}}</span>
                                         </th>
+                                        
                                         <td class="align-middle">
                                         <span >{{task.due_date.strftime('%B %d, %Y')}}</span >
                                         </td>
+                                        
                                         <td class="align-middle">
                                         {% if task.priority == "High Priority" %}
                                         <h6 class="mb-0"><span class="badge bg-danger">{{task.priority}}</span></h6>
@@ -78,6 +87,7 @@
                                         <h6 class="mb-0"><span class="badge bg-success">{{task.priority}}</span></h6>
                                         {% endif %}
                                         </td>
+
                                         <td class="align-middle">
                                             {% if task.complete == "no" %}
                                             <form action="/complete/submit" method="POST" >
@@ -93,6 +103,7 @@
                                             </form>
                                             {% endif %}
                                         </td>
+
                                         <td class="align-middle ">
                                             <form action="/destroy/task/" method="Post">
                                                 <input type="hidden" name="id" value="{{task.id}}" class="form-control">
@@ -106,6 +117,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        {% endif %}
                                     </tr>
                                     </tbody>
                                     {% endfor %}

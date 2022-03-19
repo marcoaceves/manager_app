@@ -30,13 +30,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="last_name" class="form-label">Spanish:</label>
-                    <p>
-                        <!-- {'data': {'translations': [{'translatedText': 'Hola', 'detectedSourceLanguage': 'en'}]}} -->
-                        {% for i in data %}
-                        <li>{{ data[0] }}</li>
-                        {% endfor %}
-                    </p>
 
+                        <!-- {'data': {'translations': [{'translatedText': 'Hola', 'detectedSourceLanguage': 'en'}]}} -->
+                            {{data}}
                     <input type="hidden" name="target" id="target" value="es" class="form-control">
                 </div>
                 <input type="submit" value="Translate" class="btn btn-primary mb-3">
