@@ -10,6 +10,7 @@ flash = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
 requests = "*"
+shell = "*"
 
 [dev-packages]
 

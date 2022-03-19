@@ -58,9 +58,9 @@ def translate():
     data=r.json()
     data2=[]
     data2.append(r.json())
-
     print(data2)
+    print(data2[0]['data']['translations'][0]['translatedText'])
 
 
-    return render_template('translate.html', data=data2)
+    return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'])
 
