@@ -25,5 +25,5 @@ class Count:
         counts = []
         for count in results:
             counts.append( cls(count) )
-        print(counts[0].count)
+        print(counts[0].count, 'Hello World')
         return counts
