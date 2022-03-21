@@ -55,7 +55,7 @@
                                         <th scope="col">Team Member</th>
                                         <th scope="col"># Of Task's</th>
                                         <th scope="col">Lorem</th>
-                                        <th scope="col">Completed</th>
+                                        <th scope="col"># Of Task Completed</th>
                                     </tr>
                                     </thead>
                                     {% for count in counts %}
@@ -73,7 +73,9 @@
                                         <h6 class="mb-0"><span class="badge bg-primary">Hello World</span></h6>
                                         </td>
                                         <td class="align-middle">
-                                            <span >50</span >
+
+                                            <span >{{count.complete}}</span >
+
                                         </td>
                                     </tr>
                                     </tbody>
