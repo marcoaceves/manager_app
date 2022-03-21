@@ -89,17 +89,17 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            {% if task.complete == "no" %}
+                                            {% if task.complete == 0 %}
                                             <form action="/complete/submit" method="POST" >
                                                 <input type="hidden" name="id" value="{{task.id}}" class="form-control">
-                                                <input type="checkbox" name="complete" id="check" value="yes" onChange='submit();'>
+                                                <input type="checkbox" name="complete" id="check" value="1" onChange='submit();'>
                                             </form>
                                             {% endif %}
-                                            {% if task.complete == "yes" %}
+                                            {% if task.complete == 1 %}
                                             <form action="/complete/submit" method="POST" >
                                                 <input type="hidden" name="id" value="{{task.id}}" class="form-control">
                                                 <input type="hidden" name="user_id" value="{{user2.id}}">
-                                                <input type="checkbox" name="complete" id="check2" value="no" onChange='submit();'>
+                                                <input type="checkbox" name="complete" id="check2" value="0" onChange='submit();'>
                                             </form>
                                             {% endif %}
                                         </td>
