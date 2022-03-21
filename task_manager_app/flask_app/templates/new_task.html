@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-evenly" >
 
             <form action="/add/task" method="POST" class="container mx-auto bg-light " style="width: 400px" >
-                <input type="hidden" name="complete" id="complete" value="no" class="form-control">
+                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
                 <h1>New Task</h1>
                 {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
