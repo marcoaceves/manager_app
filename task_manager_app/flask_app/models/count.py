@@ -13,17 +13,19 @@ class Count:
         self.user_id = data['user_id']
         self.first_name = data['first_name']
         self.count = data['count']
+        self.complete = data['complete']
 
 
 
 # total # of tasks
     @classmethod
     def get_all_counts(cls,data):
-        query = "SELECT first_name, user2.id as user_id, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
+        query = "SELECT first_name, user2.id as user_id, sum(complete) as complete, task_name, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
         results = connectToMySQL(db).query_db(query,data)
         print(results)
         counts = []
         for count in results:
             counts.append( cls(count) )
-        print(counts[0].count)
+        print(counts)
         return counts
+
