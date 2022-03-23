@@ -27,11 +27,10 @@
         </div>
         <!-- create a post form -->
         <div class="d-flex justify-content-center align-items-center center "id="post" >
-            <form >
+            <form action="/add/post" method="POST" >
                 <div class="inputbox d-flex justify-content-center">
 
-                    <textarea class="inputbox"" id="exampleFormControlTextarea1" rows="3" ></textarea>
-                    <input type="text" required="required"  >
+                    <textarea class="inputbox "" id="exampleFormControlTextarea1" rows="3" cols="3" type="text" required="required" name="content"></textarea>
                     <span class="">Create New Post</span>
                 </div>
 
@@ -46,8 +45,8 @@
                 </div>
             </form>
         </div>
-
-        <div id="post" class="border-bottom border-5 border-dark ">
+        {% for post in posts%}
+        <div id="post" class="border-bottom border-3 border-dark ">
             <div class="container">
                 <div class="card">
                     <div class="card__header">
@@ -55,13 +54,13 @@
                     </div>
                     <div class="card__body">
                         <span class="tag tag-blue">Ahf Pharmacy</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi perferendis molestiae non nemo doloribus. Doloremque, nihil! At ea atque quidem!</p>
+                        <p>{{post.content}}</p>
                     </div>
                     <div class="card__footer">
                         <div class="user">
                             <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" style="width: 60px; height: auto;" alt="user__image" class="user__image">
                             <div class="user__info">
-                                <h5>Jane Doe</h5>
+                                <h5>{{post.first_name}}</h5>
                                 <small>2h ago</small>
                             </div>
                         </div>
@@ -69,6 +68,7 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
 
     </div>
 
