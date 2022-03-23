@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    }
+
+.wrapper{
+    padding: 30px 100px;
+
+    max-width: 1100px;
+    margin: 0 auto; 
+}
+/* drop down  */
+.dropbtn {
+  background-color: #0d6efd;
+  color: white;
+  padding: 2px;
+  font-size: 10px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #0d60dd;}
+
+
+table.table-bordered{
+    border:1px solid rgb(0, 0, 0);
+    margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+    border:1px solid rgb(0, 0, 0);
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid rgb(0, 0, 0);
+}
+
+/* nav bar  */
+#nav{
+    background-color: black;
+    padding: 5px 90px;
+}
+
+
+#userLink{
+    color: white;
+
+    background-color: transparent;
+    text-decoration: none;
+}
+
+/* gradient table */
+.gradient-custom-2 {
+    border-radius: 2em;
+    /* fallback for old browsers */
+    background: #7e40f6;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
+
+}
+
+.mask-custom {
+    background: rgba(24, 24, 16, .2);
+    border-radius: 2em;
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #7e40f6;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(253, 253, 255), rgb(255, 255, 255));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255))
+}
+
+.mask-custom3 {
+    background: rgba(255, 255, 255, 0.884);
+    border-radius: 2em;
+    backdrop-filter: blur(25px);
+    border: 2px solid rgb(0, 0, 0);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+}
+
+
+/* check box */
+#check {
+    -webkit-appearance: none; /*hides the default checkbox*/
+    height: 24px;
+    width: 26px;
+    position: relative;
+
+    transition: 0.10s;
+    background-color: #FE0006;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    border-radius: 3px;
+    outline: none;
+  }
+  
+  #check:not(checked) {
+    content: "X";
+    color: white;
+
+  }
+  
+  #check:before {
+    content: "X"; 
+    color: white;
+
+  }
+  #check:checked:before {
+    content: "✓";
+    color: white;
+    content: color white
+    ;
+  }
+  
+  #check:hover {
+    cursor: pointer; 
+    opacity: 0.8;
+  }
+#check2 {
+    -webkit-appearance: none; /*hides the default checkbox*/
+    height: 24px;
+    width: 26px;
+    position: relative;
+    transition: 0.10s;
+    background-color: #28dd46;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    border-radius: 3px;
+    outline: none;
+  }
+  
+  #check2:checked {
+    content: "X";
+    color: white;
+  }
+  
+  #check2:before {
+    content: "✓";
+    color: white;
+    content: color white
+
+  }
+  #check2:checked:before {
+    content: "✓";
+    color: white;
+    content: color white
+    ;
+  }
+  
+  #check2:hover {
+    cursor: pointer; 
+    opacity: 0.8;
+  }
+
+
+  /* delete btn */
+#deleteBtn{
+  -webkit-appearance: none; /*hides the default checkbox*/
+  height: 24px;
+  width: 26px;
+  position: relative;
+  transition: 0.10s;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  border-radius: 3px;
+  outline: none;
+  padding: 3px;
+  
+}
+
+
+
+
