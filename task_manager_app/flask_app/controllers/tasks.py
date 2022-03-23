@@ -33,6 +33,31 @@ def add_task():
     Task.create_task(data)
     return redirect ('/dashboard')
 
+    # assign station
+@app.route('/assign/station', methods=['POST'])
+def assing_will_call():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'priority': request.form['priority'],
+        'due_date': request.form['due_date'],
+        'complete': request.form['complete'],
+        "user_id": request.form["user_id"]
+    }
+    # if not Task.validate_task(request.form):
+    #     return redirect('/task/new')
+    if request.form['station'] == "will_call":
+        Task.assign_will_call_1(data)
+        Task.assign_will_call_2(data)
+        Task.assign_will_call_3(data)
+        Task.assign_will_call_4(data)
+    if request.form['station'] == "shipping":
+        Task.assign_shipping_1(data)
+        Task.assign_shipping_2(data)
+        Task.assign_shipping_3(data)
+        Task.assign_shipping_4(data)
+    return redirect ('/dashboard')
+
 @app.route('/user/task/<int:user_id>')
 def user_task(user_id):
     if 'user_id' not in session:

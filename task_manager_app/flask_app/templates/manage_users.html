@@ -51,27 +51,38 @@
                                     <tr>
                                         <th scope="col">Team Member</th>
                                         <th scope="col">Role</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Save changes</th>
+                                        <th scope="col">Delete User</th>
                                     </tr>
                                 </thead>
                                 {% for user in users %}
                                 <tbody>
-                                    <tr class="fw-normal">
-                                        <th>
-                                            <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" class="shadow-1-strong rounded-circle" alt="avatar 1"
-                                            style="width: 55px; height: auto;">
-                                            <span class="ms-2">{{user.first_name}}</span>
-                                        </th>
+                                    <form action="/update/role" method="POST" >
+
+                                        <tr class="fw-normal">
+                                            <th>
+                                                <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" class="shadow-1-strong rounded-circle" alt="avatar 1"
+                                                style="width: 55px; height: auto;">
+                                                <span class="ms-2">{{user.first_name}}</span>
+                                            </th>
+                                            <td class="align-middle">
+                                                <input type="hidden" name='id' value="{{user.id}}" class="form-control">
+                                                <select name="role" class="btn btn-primary badge badge-pill badge-primary" id="exampleFormControlSelect1">
+                                                    <option class="bg-secondary" value="admin" >Admin</option>
+                                                    <option class="bg-secondary" value="staff" >Staff</option>
+                                                </select>
+                                            </td>
+                                            <td class="align-middle">
+                                                <button type="submit" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Save</button>
+                                            </td>
+                                    </form>
+                                    <form action="/destroy/user/" method="Post">
                                         <td class="align-middle">
-                                            <select class="btn btn-primary badge badge-pill badge-primary" id="exampleFormControlSelect1">
-                                                <option class="bg-secondary">Admin</option>
-                                                <option class="bg-secondary">Staff</option>
-                                            </select>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="/#"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger"" style="text-align:center">Delete User</button></a>
+                                            <input type="hidden" name='id' value="{{user.id}}" class="form-control">
+                                            <button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger"" style="text-align:center">Delete User</button>
                                         </td>
                                     </tr>
+                                    </form>
                                 </tbody>
                                 {% endfor %}
                             </table>

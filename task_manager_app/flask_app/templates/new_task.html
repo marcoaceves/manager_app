@@ -63,38 +63,31 @@
                 </div>
                 <input type="submit" value="Add Task" class="btn btn-primary">
             </form>
-            <form action="/add/task" method="POST" class="container mx-auto card" style="width: 400px" >
+            <form action="/assign/station" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1>Assign Station</h1>
                 <div class="mb-3">
                     <label for="user" class="form-label">User:</label>
                     <p>
-                        <select name=“user_id">
+                        <select name="user_id">
                         {% for user in users %}
-                        <option>{{user.first_name}}</option>
+                        <option value="{{user.id}}">{{user.first_name}}</option>
                         {% endfor %}
                         </select>
                     </p>
                 </div>
-                <div class="mb-3">
-                    <label for="priority" class="form-label">Priority:</label>
-                    <p>
-                        <select name=“priority">
-                        <option>High priority</option>
-                        <option>Middle priority</option>
-                        <option>Low priority</option>
-                        </select>
-                    </p>
-                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
-                </div>
+                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
+                <input type="hidden" name="priority" id="priority" value="Middle Priority" class="form-control">
+
+
                 <div class="mb-3">
                     <label for="station" class="form-label">Station:</label>
                     <p>
-                        <select name=“station">
-                        <option>Will Call</option> 
-                        <option>Shipping</option> 
-                        <option>Drop Off</option> 
-                        <option>Station 1</option> 
-                        <option>Station 2</option> 
+                        <select name='station'>
+                        <option value="will_call">Will Call</option> 
+                        <option value="shipping">Shipping</option> 
+                        <option value="drop_off">Drop Off</option> 
+                        <option value="station_1">Station 1</option> 
+                        <option value="station_2">Station 2</option> 
                         </select>
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->

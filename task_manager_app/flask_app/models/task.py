@@ -40,6 +40,50 @@ class Task:
         result = connectToMySQL(db).query_db(query,data)
         return result
 
+    # Will Call Station Tasks
+    @classmethod
+    def assign_will_call_1(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Will Call Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_2(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Delivery Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_3(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Not Scanned Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_4(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Pending in Store Receiving ',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+
+    # Shipping Station Tasks
+    @classmethod
+    def assign_shipping_1(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Clean and Calibrate Kirbys',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_shipping_2(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Receive Cardinal Order',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_shipping_3(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('PSA Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_shipping_4(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('FedEx Exception Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+
 
     @classmethod
     def get_all_tasks(cls,data):
