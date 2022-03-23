@@ -26,27 +26,26 @@ def register():
     data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
+        'role': request.form['role'],
         'email': request.form['email'],
         'password': pw_hash,
         'confirm_password': request.form['confirm_password'],
     }
     User.save(data)
 
-    login_data = { "email" : request.form["email"] }
-    user_in_db = User.get_by_email(login_data)
-    # user is not registered in the db
-    if not user_in_db:
-        flash("Invalid Email/Password","login")
-        return redirect("/")
-    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
-        # if we get False after checking the password
-        flash("Invalid Email/Password", "login")
+@app.route('/update/role', methods=['POST'])
+def update_role():
+    if 'user_id' not in session:
         return redirect('/')
-    # if the passwords matched, we set the user_id into session
-    session['user_id'] = user_in_db.id
+    data = {
+
+        'id': request.form['id'],
+        'role': request.form['role']
+    }
+    User.update_role(data)
+    return redirect(request.referrer)
 
 
-    return redirect ('/dashboard')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -108,3 +107,13 @@ def manage_users():
 def logout():
     session.clear()
     return redirect('/')
+
+@app.route('/destroy/user/', methods=['POST'])
+def destroy_user():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'id': request.form['id']
+    }
+    User.destroy(data)
+    return redirect(request.referrer)
