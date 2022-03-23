@@ -15,8 +15,11 @@ def announcemets():
     data ={
         'id': session['user_id']
     }
-    return render_template('announcements.html', user=User.get_one(data), users= User.get_all())
-# process adding form
+    users= User.get_all()
+    posts = Post.get_all_posts(data)
+    return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
+
+
 @app.route('/add/post', methods=['POST'])
 def add_post():
     if 'user_id' not in session:
@@ -25,8 +28,8 @@ def add_post():
         'content': request.form['content'],
         "user_id": session["user_id"]
     }
-    if not Post.validate_post(request.form):
-        return redirect('/announcements')
+    # if not Post.validate_post(request.form):
+    #     return redirect('/announcements')
     Post.create_post(data)
     return redirect ('/announcements')
 

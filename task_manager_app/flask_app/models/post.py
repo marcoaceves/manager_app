@@ -11,6 +11,7 @@ db = 'ahf_db'
 class Post:
     def __init__(self, data):
         self.id = data['id']
+        self.first_name = data['first_name']
         self.content = data['content']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -38,14 +39,19 @@ class Post:
         return result
 
 
+# total # of tasks
     @classmethod
     def get_all_posts(cls,data):
-        query = "SELECT * FROM posts"
+        query = "SELECT first_name, user2.id as user_id, posts.id as id, posts.created_at, posts.updated_at,  content FROM  users as user2 LEFT JOIN posts ON user2.id = posts.user_id GROUP BY created_at"
+        "SELECT first_name, user2.id as user_id, sum(complete) as complete, task_name, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
         results = connectToMySQL(db).query_db(query,data)
+        print(results)
         posts = []
         for post in results:
             posts.append( cls(post) )
+        print('POST',posts)
         return posts
+    
 
     @classmethod
     def get_one_post(cls,data):
