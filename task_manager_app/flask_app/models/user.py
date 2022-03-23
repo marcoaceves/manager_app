@@ -17,13 +17,24 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
+        self.role = data['role']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);'
+        query = 'INSERT INTO users (first_name, last_name, email, password, role) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(role)s);'
         return connectToMySQL(db).query_db(query, data)
+
+    @classmethod
+    def update_role(cls, data):
+        query = "UPDATE users SET role = %(role)s WHERE users.id = %(id)s;"
+        return connectToMySQL(db).query_db(query,data)
+
+    @classmethod
+    def destroy(cls, data):
+        query = 'DELETE FROM users WHERE users.id = %(id)s;'
+        return connectToMySQL(db).query_db(query,data)
 
     @classmethod
     def get_by_email(cls,data):
@@ -85,6 +96,9 @@ class User:
             is_valid= False
         if len(user['last_name']) < 3:
             flash("Last name must be at least 3 characters","register")
+            is_valid= False
+        if len(user['role']) < 3:
+            flash("")
             is_valid= False
         if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
