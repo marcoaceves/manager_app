@@ -32,6 +32,22 @@ def register():
         'confirm_password': request.form['confirm_password'],
     }
     User.save(data)
+    login_data = { "email" : request.form["email"] }
+    user_in_db = User.get_by_email(login_data)
+    # user is not registered in the db
+    if not user_in_db:
+        flash("Invalid Email/Password","login")
+        return redirect("/")
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+        # if we get False after checking the password
+        flash("Invalid Email/Password", "login")
+        return redirect('/')
+    # if the passwords matched, we set the user_id into session
+    session['user_id'] = user_in_db.id
+
+
+    return redirect ('/dashboard')
+
 
 @app.route('/update/role', methods=['POST'])
 def update_role():
@@ -74,9 +90,8 @@ def dashboard():
         'id': session['user_id']
     }
     users= User.get_all()
-    tasks = Task.get_all_tasks(data)
     counts = Count.get_all_counts(data)
-    return render_template("dashboard.html",user=User.get_one(data), users=users, tasks=tasks, counts=counts)
+    return render_template("dashboard.html",user=User.get_one(data), users=users, counts=counts)
 
 @app.route('/links')
 def links():

@@ -6,16 +6,18 @@ textarea {
     border: none;
     overflow: auto;
     outline: none;
+    border: 2px solid #000;
     border-radius: 10px;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    padding: 10px;
 
     resize: none; /*remove the resize handle on the bottom right*/
   }
 textarea:focus {
     background: white;
-    border: 1px solid grey;
+    border: 1px solid rgb(0, 0, 0);
   }
 .center {
   position: relative;
@@ -39,7 +41,7 @@ textarea:focus {
   height:100px;
   margin-bottom: 30px;
 }
-.center .inputbox input {
+.center .inputboxtextareaarea {
   position: absolute;
   top: 0;
   left: 0;
@@ -63,8 +65,8 @@ textarea:focus {
   font-family: sans-serif;
 
 }
-.center .inputbox input:focus ~ span,
-.center .inputbox input:valid ~ span {
+.center .inputbox textarea:focus ~ span,
+.center .inputbox textarea:valid ~ span {
   transform: translateX(-13px) translateY(-35px);
   font-size: 1em;
 }
