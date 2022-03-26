@@ -17,7 +17,7 @@ class Post:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
-        self.likes = 0  #increment this number
+        self.likes = 0
 
 
 
@@ -83,7 +83,7 @@ class Post:
 
         return is_valid
 
-
+# Amani code starts..................................................
 # Likes class method
     @classmethod
     def get_all_likes(cls):
@@ -120,3 +120,4 @@ class Post:
         query= "INSERT INTO likes (user_id, post_id) VALUES (%(user_id)s,%(post_id)s);"
         result = connectToMySQL(db).query_db(query,data)
         return result
+# Amani code ends..................................................
