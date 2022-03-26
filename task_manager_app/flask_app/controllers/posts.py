@@ -19,6 +19,28 @@ def announcemets():
     posts = Post.get_all_posts(data)
     return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
 
+# Amani code starts
+def new_func():
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data ={
+        'id': session['user_id']
+    }
+    users= User.get_all()
+    posts = Post.get_all_likes(data)
+    return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
+
+@app.route("/like/<int:post_id>") #('/details/<int:id>/<int:user_id>')
+def like_post(post_id):
+    data = {
+        "user_id": session["user_id"],
+        "post_id" : post_id
+    }
+    Post.like(data)
+    return redirect("/announcements")
+
+# Amani code ends
+
 
 @app.route('/add/post', methods=['POST'])
 def add_post():
