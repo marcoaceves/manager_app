@@ -137,5 +137,16 @@ class Task:
         if len(task['task_name']) < 3:
             flash("Task name must be at least 3 characters","task")
             is_valid= False
+        if len(task['due_date']) < 3:
+            flash("Must Select Due Date!","task")
+            is_valid= False
+
+        return is_valid
+    @staticmethod
+    def validate_station( task ):
+        is_valid = True
+        if len(task['due_date']) < 3:
+            flash("Must Select Due Date!","station")
+            is_valid= False
 
         return is_valid
