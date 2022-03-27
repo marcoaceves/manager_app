@@ -29,7 +29,7 @@ def add_task():
         "user_id": request.form["user_id"]
     }
     if not Task.validate_task(request.form):
-        return redirect('/task/new')
+        return redirect(request.referrer)
     Task.create_task(data)
     return redirect ('/dashboard')
 
@@ -37,15 +37,15 @@ def add_task():
 @app.route('/assign/station', methods=['POST'])
 def assing_will_call():
     if 'user_id' not in session:
-        return redirect('/')
+        return redirect(request.referrer)
     data = {
         'priority': request.form['priority'],
         'due_date': request.form['due_date'],
         'complete': request.form['complete'],
         "user_id": request.form["user_id"]
     }
-    # if not Task.validate_task(request.form):
-    #     return redirect('/task/new')
+    if not Task.validate_station(request.form):
+        return redirect(request.referrer)
     if request.form['station'] == "will_call":
         Task.assign_will_call_1(data)
         Task.assign_will_call_2(data)
