@@ -18,12 +18,13 @@
     </div>
 
     <div class="wrapper">
+        
         <div class="d-flex justify-content-evenly" >
 
             <form action="/add/task" method="POST" class="container mx-auto bg-light " style="width: 400px" >
                 <input type="hidden" name="complete" id="complete" value="0" class="form-control">
                 <h1>New Task</h1>
-                {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
+                {% with messages = get_flashed_messages(category_filter=['task']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
                             <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
@@ -65,6 +66,13 @@
             </form>
             <form action="/assign/station" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1>Assign Station</h1>
+                {% with messages = get_flashed_messages(category_filter=['station']) %}     <!-- declare a variable called messages -->
+                {% if messages %}                            <!-- check if there are any messages -->
+                    {% for message in messages %}            <!-- loop through the messages -->
+                        <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
                 <div class="mb-3">
                     <label for="user" class="form-label">User:</label>
                     <p>
