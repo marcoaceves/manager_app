@@ -11,8 +11,6 @@ db = 'ahf_db'
 
 class Like:
     def __init__(self, data):
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
         self.user_id = data['user_id']
         self.post_id = data['post_id']
 
@@ -58,3 +56,14 @@ class Like:
     def destroy(cls, data):
         query = 'DELETE FROM likes WHERE comments.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+
+
+
+    @classmethod
+    def get_likes_by_id(cls,data):
+        query = "SELECT *  FROM likes WHERE post_id = %(post_id)s AND user_id = %(user_id)s;"
+        result = connectToMySQL(db).query_db(query,data)
+        # Didn't find a matching user
+        if len(result) < 1:
+            return False
+        return cls(result[0])

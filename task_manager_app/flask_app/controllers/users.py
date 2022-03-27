@@ -130,5 +130,10 @@ def destroy_user():
     data = {
         'id': request.form['id']
     }
+
+
+    User.destroy_tasks(data)
+    User.destroy_likes(data)
+    User.destroy_posts(data)
     User.destroy(data)
     return redirect(request.referrer)

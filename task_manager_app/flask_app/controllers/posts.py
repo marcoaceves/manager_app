@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.task import Task
 from flask_app.models.user import User
 from flask_app.models.post import Post
+from flask_app.models.like import Like
 
 
 # html page for adding
@@ -21,15 +22,15 @@ def announcemets():
 
 # Amani code starts.....................................
 # @app.route('/announcements')
-def announcemets():
-    if 'user_id' not in session:
-        return redirect('/logout')
-    data ={
-        'id': session['user_id']
-    }
-    users= User.get_all()
-    posts = Post.get_all_likes(data)
-    return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
+# def announcemets():
+#     if 'user_id' not in session:
+#         return redirect('/logout')
+#     data ={
+#         'id': session['user_id']
+#     }
+#     users= User.get_all()
+#     posts = Post.get_all_likes(data)
+#     return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
 
 @app.route("/like/<int:post_id>")
 def like_post(post_id):
@@ -37,7 +38,12 @@ def like_post(post_id):
         "user_id": session["user_id"],
         "post_id" : post_id
     }
-    Post.like(data)
+
+    like_in_db = Like.get_likes_by_id(data)
+    if not like_in_db:
+        Post.like(data)
+    else:
+        Post.destroy_like(data)
     return redirect("/announcements")
 
 # Amani code ends..................................................

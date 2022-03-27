@@ -206,6 +206,31 @@ table.table-bordered > tbody > tr > td{
   
 }
 
+.tag2 {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+
+}
+
+.tag2 + .tag2 {
+  margin-left: .5em;
+}
+
+.tag2-blue {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  color: #fafafa;
+
+}
+.tag2-purple {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #00a8c5, #00f8e3);
+  color: #fafafa;
+
+}
+
 
 
 

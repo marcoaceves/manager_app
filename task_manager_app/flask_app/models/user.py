@@ -32,6 +32,18 @@ class User:
         return connectToMySQL(db).query_db(query,data)
 
     @classmethod
+    def destroy_tasks(cls, data):
+        query = 'DELETE FROM tasks WHERE user_id = %(id)s;'
+        return connectToMySQL(db).query_db(query,data)
+    @classmethod
+    def destroy_likes(cls, data):
+        query = 'DELETE FROM likes WHERE user_id = %(id)s;'
+        return connectToMySQL(db).query_db(query,data)
+    @classmethod
+    def destroy_posts(cls, data):
+        query =  'DELETE FROM posts WHERE user_id = %(id)s;'
+        return connectToMySQL(db).query_db(query,data)
+    @classmethod
     def destroy(cls, data):
         query = 'DELETE FROM users WHERE users.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)

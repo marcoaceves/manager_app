@@ -17,7 +17,7 @@ class Post:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
-        self.likes = 0
+        self.total_likes = data['total_likes']
 
 
 
@@ -45,8 +45,8 @@ class Post:
 # total # of tasks
     @classmethod
     def get_all_posts(cls,data):
-        query = "SELECT first_name, user2.id as user_id, posts.id as id, posts.created_at, posts.updated_at,  content FROM  users as user2 LEFT JOIN posts ON user2.id = posts.user_id GROUP BY created_at"
-        "SELECT first_name, user2.id as user_id, sum(complete) as complete, task_name, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
+        query = """SELECT first_name, user2.id as user_id, posts.id as id, posts.created_at, posts.updated_at, count(post_id) as total_likes,  content
+        FROM  users as user2 JOIN posts ON user2.id = posts.user_id LEFT JOIN likes ON posts.id = likes.post_id  GROUP BY created_at ORDER by posts.id DESC"""
         results = connectToMySQL(db).query_db(query,data)
         print(results)
         posts = []
@@ -121,3 +121,17 @@ class Post:
         result = connectToMySQL(db).query_db(query,data)
         return result
 # Amani code ends..................................................
+
+    @classmethod
+    def destroy_like(cls, data):
+        query = 'DELETE FROM likes WHERE post_id = %(post_id)s AND user_id = %(user_id)s;'
+        return connectToMySQL(db).query_db(query,data)
+
+    @classmethod
+    def get_likes_by_id(cls,data):
+        query = "SELECT *  FROM likes WHERE post_id = %(post_id)s AND user_id = %(user_id)s;"
+        result = connectToMySQL(db).query_db(query,data)
+        # Didn't find a matching user
+        if len(result) < 1:
+            return False
+        return cls(result[0])

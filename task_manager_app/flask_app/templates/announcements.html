@@ -53,20 +53,19 @@
                         <img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600">
                     </div>
                     <div class="card__body">
-                        <span class="tag tag-blue">Ahf Pharmacy</span>
                         <p>{{post.content}}</p>
                     </div>
                     <div class="card__footer">
                         <div class="user">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" style="width: 60px; height: auto;" alt="user__image" class="user__image">
-                            <div class="user__info">
-                                <h5>{{post.first_name}}</h5>
-                                <small>2h ago</small>
+                            <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" style="width: 70px; height: auto;" alt="user__image" class="user__image">
+                            <div class="d-flex flex-column user__info ">
+                                <span class="tag tag-blue">{{post.first_name}}</span>
+                                <small>{{post.created_at.strftime(' %b %a %Y ')}}</small>
+                                <small>{{post.created_at.strftime('%I:%M %p ')}}</small>
                             </div>
                             <!-- likes form -->
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <a class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center" href="/like/{{post.id}}">Like</a>
-                                <h5>{{post.likes}}</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-3 ms-5">
+                                <a class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center" href="/like/{{post.id}}">{{post.total_likes}} Like(s)</a>
                             </div>
                         </div>
                     </div>
@@ -79,6 +78,7 @@
 
 </body>
 </html>
+
 
 
         </div>
