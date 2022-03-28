@@ -12,6 +12,8 @@ from flask_app.models.post import Post
 def add_new_task():
     if 'user_id' not in session:
         return redirect('/logout')
+    if session['role'] == 'staff':
+        return redirect("/user/dash")
     data ={
         'id': session['user_id']
     }

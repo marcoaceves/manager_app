@@ -115,3 +115,8 @@ class User:
         if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
         return is_valid
+    @staticmethod
+    def validate_role( ):
+
+
+        flash("Role Updated Successfully!","updated")
