@@ -61,6 +61,8 @@ def translate():
     print(data2)
     print(data2[0]['data']['translations'][0]['translatedText'])
 
-
-    return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'])
+    data ={
+        'id': session['user_id']
+    }
+    return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'], user=User.get_one(data))
 

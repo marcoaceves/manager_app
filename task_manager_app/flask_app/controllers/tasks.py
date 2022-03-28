@@ -51,11 +51,30 @@ def assing_will_call():
         Task.assign_will_call_2(data)
         Task.assign_will_call_3(data)
         Task.assign_will_call_4(data)
+        Task.assign_will_call_5(data)
+        Task.assign_will_call_6(data)
+        Task.assign_will_call_7(data)
     if request.form['station'] == "shipping":
         Task.assign_shipping_1(data)
         Task.assign_shipping_2(data)
         Task.assign_shipping_3(data)
         Task.assign_shipping_4(data)
+        Task.assign_shipping_5(data)
+        Task.assign_shipping_6(data)
+    if request.form['station'] == "drop_off":
+        Task.assign_drop_off_1(data)
+        Task.assign_drop_off_2(data)
+        Task.assign_drop_off_3(data)
+        Task.assign_drop_off_4(data)
+    if request.form['station'] == "station_1":
+        Task.assign_station_one_1(data)
+        Task.assign_station_one_2(data)
+        Task.assign_station_one_3(data)
+        Task.assign_station_one_4(data)
+    if request.form['station'] == "station_2":
+        Task.assign_station_two_1(data)
+        Task.assign_station_two_2(data)
+
     return redirect ('/dashboard')
 
 @app.route('/user/task/<int:user_id>')

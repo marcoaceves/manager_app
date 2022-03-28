@@ -15,15 +15,20 @@
 
                 <!-- navigation bar -->
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
-        <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
 
+        {% if user.role == 'admin'%}
+        <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
+        {% endif %}
+        {% if user.role == 'staff'%}
+        <a href="/user/dash"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
+        {% endif %}
 
                     <!-- Dropdown -->
             <div class="dropdown btn btn-primary badge badge-pill badge-primary">
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
                 <div class="dropdown-content ">
                     <a href="/links">Links</a>
-                    <a href="#">Announcements</a>
+                    <a href="/announcements">Announcements</a>
                     <a href="/translate/app">Translate</a>
                 </div>
             </div>
@@ -35,7 +40,7 @@
 
 
             <!-- navigation bar -->
-            <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark">
+            <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark ">
                 <h1 class="text-center  ms-5"> {{user2.first_name}}'s Assigned Task(s)</h1>
             </div>
             {% for task in tasks%}
@@ -44,15 +49,13 @@
                 {% endif %}
             {% endfor %}
         <!-- description box -->
-        <section class="vh-100 gradient-custom-3">
+        <section class="gradient-custom-3 ">
             <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items h-100">
-                    <div class="col-md-12 col-xl-12">
-                        <div class="card mask-custom3">
-                            <div class="card-body p-4 text-black">
-                                <div class="text-center  pb-2">
-                                </div>
-                                <table class="table text-black mb-0">
+                <div class="row d-flex justify-content-center align-items">
+                    <div class="col-md-12 col-xl-12 pb-2">
+                        <div class="card mask-custom ">
+                            <div class="card-body p-4 text-white">
+                                <table class="table text-white mb-0  ">
                                     <thead>
                                     <tr>
                                         <th scope="col">Task(s)</th>

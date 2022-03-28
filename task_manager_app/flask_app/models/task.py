@@ -58,7 +58,22 @@ class Task:
         return result
     @classmethod
     def assign_will_call_4(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Pending in Store Receiving ',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Pending in Store Receiving',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_5(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Check Voice Mail',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_6(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Visual check Will Call',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_will_call_7(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('File Prescriptions',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
         result = connectToMySQL(db).query_db(query,data)
         return result
 
@@ -83,6 +98,72 @@ class Task:
         query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('FedEx Exception Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
         result = connectToMySQL(db).query_db(query,data)
         return result
+    @classmethod
+    def assign_shipping_5(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Financial Hardship Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_shipping_6(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Submit Daily Order',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+
+    # Shipping drop off Tasks
+    @classmethod
+    def assign_drop_off_1(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Calendar Events',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_drop_off_2(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Check Sfax RXs',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_drop_off_3(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Refill Queue',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_drop_off_4(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Rejection Queue',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    # Shipping station 1 Tasks
+    @classmethod
+    def assign_station_one_1(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('AR Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_station_one_2(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Receive Mail',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_station_one_3(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Check CRC emails (afternoon)',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_station_one_4(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Brinks (Tuesday)',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    # Shipping station 2 Tasks
+    @classmethod
+    def assign_station_two_1(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Bill Nursing homes',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+    @classmethod
+    def assign_station_two_2(cls, data):
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('35 Day Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        result = connectToMySQL(db).query_db(query,data)
+        return result
+
+
 
 
     @classmethod

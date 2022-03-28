@@ -94,15 +94,16 @@ table.table-bordered > tbody > tr > td{
     box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
 .gradient-custom-3 {
+    border-radius: 2em;
     /* fallback for old browsers */
     background: #7e40f6;
 
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgb(253, 253, 255), rgb(255, 255, 255));
+    background: -webkit-linear-gradient(to right, rgba(126, 64, 246, 1), rgba(80, 139, 252, 1));
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255))
-}
+    background: linear-gradient(to right, rgb(64, 210, 246), rgb(80, 154, 252));}
+
 
 .mask-custom3 {
     background: rgba(255, 255, 255, 0.884);

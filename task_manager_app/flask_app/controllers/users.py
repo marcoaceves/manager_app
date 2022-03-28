@@ -32,20 +32,18 @@ def register():
         'confirm_password': request.form['confirm_password'],
     }
     User.save(data)
-    login_data = { "email" : request.form["email"] }
-    user_in_db = User.get_by_email(login_data)
-    # user is not registered in the db
-    if not user_in_db:
-        flash("Invalid Email/Password","login")
-        return redirect("/")
-    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
-        # if we get False after checking the password
-        flash("Invalid Email/Password", "login")
-        return redirect('/')
-    # if the passwords matched, we set the user_id into session
-    session['user_id'] = user_in_db.id
-
-
+    # # login_data = { "email" : request.form["email"] }
+    # # user_in_db = User.get_by_email(login_data)
+    # # # user is not registered in the db
+    # # if not user_in_db:
+    # #     flash("Invalid Email/Password","login")
+    # #     return redirect("/")
+    # # if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+    # #     # if we get False after checking the password
+    # #     flash("Invalid Email/Password", "login")
+    # #     return redirect('/')
+    # # if the passwords matched, we set the user_id into session
+    # session['user_id'] = user_in_db.id
     return redirect ('/dashboard')
 
 
@@ -78,8 +76,29 @@ def login():
         return redirect('/')
     # if the passwords matched, we set the user_id into session
     session['user_id'] = user_in_db.id
+
+    session['role'] = user_in_db.role
+    if session['role'] == 'admin':
+        return redirect("/dashboard")
     # never render on a post!!!
-    return redirect("/dashboard")
+    return redirect("/user/dash")
+
+@app.route('/user/dash')
+def user_task_dash():
+    if 'user_id' not in session:
+        return redirect('/logout')
+
+
+    data = {
+
+        "user2": session['user_id']
+    }
+    user_data ={
+        'id': session['user_id']
+    }
+    users= User.get_all()
+    tasks = Task.get_all_user_tasks(data)
+    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
 
 
 @app.route('/dashboard')

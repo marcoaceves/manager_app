@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css') }}">
-    
 
 </head>
 <body>
@@ -38,7 +37,7 @@
                         <div class="card-header p-3 align-text-center">
                             <h5 class="text-center  ms-12"><i class="fas fa-tasks me-2"></i>Users</h5>
                         </div>
-                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height:auto">
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
@@ -86,8 +85,9 @@
                                         </td>
                                     </tr>
                                     </form>
+                                    {% endfor %}
                                 </tbody>
-                                {% endfor %}
+
                             </table>
                         </div>
                         </div>
