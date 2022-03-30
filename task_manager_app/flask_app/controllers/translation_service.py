@@ -53,7 +53,7 @@ def translate():
     url_encoded_text = f"q={'%20'.join(long_list_of_words)}&target={target}"
 
     payload = url_encoded_text
-
+    print(text)
     r = requests.post(TRANSLATE_BASE_URL, data=payload, headers=HEADERS)
     data=r.json()
     data2=[]
@@ -64,5 +64,5 @@ def translate():
     data ={
         'id': session['user_id']
     }
-    return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'], user=User.get_one(data))
+    return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'], user=User.get_one(data), text=text)
 
