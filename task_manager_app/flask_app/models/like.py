@@ -15,26 +15,25 @@ class Like:
         self.post_id = data['post_id']
 
 
-    def time_span(self):
-        now = datetime.now()
-        delta = now - self.created_at
-        print(delta.days)
-        print(delta.total_seconds())
-        if delta.days > 0:
-            return f"{delta.days} day(s) ago"
-        elif (math.floor(delta.total_seconds() / 60)) >= 60:
-            return f"{math.floor(math.floor(delta.total_seconds() / 60)/60)} hour(s) ago"
-        elif delta.total_seconds() >= 60:
-            return f"{math.floor(delta.total_seconds() / 60)} minute(s) ago"
-        else:
-            return f"{math.floor(delta.total_seconds())} second(s) ago"
+    # def time_span(self):
+    #     now = datetime.now()
+    #     delta = now - self.created_at
+    #     print(delta.days)
+    #     print(delta.total_seconds())
+    #     if delta.days > 0:
+    #         return f"{delta.days} day(s) ago"
+    #     elif (math.floor(delta.total_seconds() / 60)) >= 60:
+    #         return f"{math.floor(math.floor(delta.total_seconds() / 60)/60)} hour(s) ago"
+    #     elif delta.total_seconds() >= 60:
+    #         return f"{math.floor(delta.total_seconds() / 60)} minute(s) ago"
+    #     else:
+    #         return f"{math.floor(delta.total_seconds())} second(s) ago"
 
     @classmethod
     def create_like(cls, data):
         query= "INSERT INTO likes (user_id, post_id) VALUES (%(user_id)s,%(post_id)s);"
         result = connectToMySQL(db).query_db(query,data)
         return result
-
 
     @classmethod
     def get_all_likes(cls,data):
@@ -56,8 +55,6 @@ class Like:
     def destroy(cls, data):
         query = 'DELETE FROM likes WHERE comments.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
-
-
 
     @classmethod
     def get_likes_by_id(cls,data):

@@ -18,6 +18,7 @@ def add_new_task():
         'id': session['user_id']
     }
     return render_template('new_task.html', user=User.get_one(data), users= User.get_all())
+
 # process adding form
 @app.route('/add/task', methods=['POST'])
 def add_task():
@@ -35,9 +36,9 @@ def add_task():
     Task.create_task(data)
     return redirect ('/dashboard')
 
-    # assign station
+# assign station
 @app.route('/assign/station', methods=['POST'])
-def assing_will_call():
+def assign_station():
     if 'user_id' not in session:
         return redirect(request.referrer)
     data = {
@@ -83,22 +84,18 @@ def assing_will_call():
 def user_task(user_id):
     if 'user_id' not in session:
         return redirect('/logout')
-
-
     data = {
-
         "user2":user_id
     }
     user_data ={
         'id': session['user_id']
     }
 
-    print(data)
+    # print(data)
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
+
     return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
-
-
 
 # process edit form
 @app.route('/complete/submit', methods=['POST'])
@@ -109,7 +106,7 @@ def update_complete():
         'complete': request.form['complete'],
         'id': request.form['id']
     }
-    print(data)
+    # print(data)
     Task.complete_update(data)
     return redirect(request.referrer)
 

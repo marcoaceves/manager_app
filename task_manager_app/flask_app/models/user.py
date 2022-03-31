@@ -35,14 +35,17 @@ class User:
     def destroy_tasks(cls, data):
         query = 'DELETE FROM tasks WHERE user_id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+
     @classmethod
     def destroy_likes(cls, data):
         query = 'DELETE FROM likes WHERE user_id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+
     @classmethod
     def destroy_posts(cls, data):
         query =  'DELETE FROM posts WHERE user_id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+
     @classmethod
     def destroy(cls, data):
         query = 'DELETE FROM users WHERE users.id = %(id)s;'
@@ -57,18 +60,14 @@ class User:
             return False
         return cls(result[0])
 
-
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
-
         results = connectToMySQL(db).query_db(query)
         users = []
-
         for i in results:
             users.append( cls(i) )
         return users
-
 
 # get all users and get all tasks
     @classmethod
@@ -79,8 +78,6 @@ class User:
             return(1)
         print(results)
         return cls(results[0])
-
-
 
     @classmethod
     def get_one(cls,data):
@@ -115,8 +112,7 @@ class User:
         if user['password'] != user['confirm_password']:
             flash("Passwords don't match","register")
         return is_valid
+
     @staticmethod
     def validate_role( ):
-
-
         flash("Role Updated Successfully!","updated")

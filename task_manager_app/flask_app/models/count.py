@@ -16,8 +16,6 @@ class Count:
         self.complete = data['complete']
         self.role = data['role']
 
-
-
 # total # of tasks
     @classmethod
     def get_all_counts(cls,data):

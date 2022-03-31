@@ -1,4 +1,3 @@
-
 from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.user import User
@@ -19,7 +18,6 @@ def index():
     for i in user_check:
         if i == 'staff':
             return redirect ('/add/new_user/51975261726459')
-
 
     return render_template("login.html")
 
@@ -70,7 +68,6 @@ def register_first_user():
     User.save(data)
     return redirect ('/')
 
-
 @app.route('/update/role', methods=['POST'])
 def update_role():
     if 'user_id' not in session:
@@ -83,8 +80,6 @@ def update_role():
     User.update_role(data)
     User.validate_role()
     return redirect(request.referrer)
-
-
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -112,10 +107,7 @@ def login():
 def user_task_dash():
     if 'user_id' not in session:
         return redirect('/logout')
-
-
     data = {
-
         "user2": session['user_id']
     }
     user_data ={
@@ -124,7 +116,6 @@ def user_task_dash():
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
     return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
-
 
 @app.route('/dashboard')
 def dashboard():
@@ -149,9 +140,6 @@ def links():
     users= User.get_all()
     tasks = Task.get_all_tasks(data)
     return render_template("links.html",user=User.get_one(data), users=users, tasks=tasks)
-
-
-
 
 @app.route('/manage/users')
 def manage_users():
@@ -178,7 +166,6 @@ def destroy_user():
     data = {
         'id': request.form['id']
     }
-
 
     User.destroy_tasks(data)
     User.destroy_likes(data)

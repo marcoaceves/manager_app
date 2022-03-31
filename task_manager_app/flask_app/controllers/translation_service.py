@@ -5,7 +5,7 @@ from flask_app.models.user import User
 from flask_app.models.task import Task
 from flask_app.models.post import Post
 
-
+# Translated API
 DETECT_BASE_URL = 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect'
 TRANSLATE_BASE_URL = 'https://google-translate1.p.rapidapi.com/language/translate/v2'
 HEADERS = {
@@ -13,7 +13,6 @@ HEADERS = {
     'x-rapidapi-key': "2c53d14e06msh2af67bbd54301e4p1625f6jsnec8d1de07b38",
     'content-type': "application/x-www-form-urlencoded"
     }
-
 
 
 @app.route('/translate/app')
@@ -26,21 +25,21 @@ def translate_app():
 
     return render_template("translate.html",user=User.get_one(data))
 
-@app.route('/detect', methods=['POST'])
-def detect():
-    # parse args
-    text = request.form.get('text')
+# @app.route('/detect', methods=['POST'])
+# def detect():
+#     # parse args
+#     text = request.form.get('text')
 
-    # url encode text
-    long_list_of_words = text.split(' ')
-    url_encoded_text = f"source=en&target=es&q={'%20'.join(long_list_of_words)}"
+#     # url encode text
+#     long_list_of_words = text.split(' ')
+#     url_encoded_text = f"source=en&target=es&q={'%20'.join(long_list_of_words)}"
 
-    payload = url_encoded_text
+#     payload = url_encoded_text
 
-    # make the request
-    r = requests.post(DETECT_BASE_URL, data=payload, headers=HEADERS)
+#     # make the request
+#     r = requests.post(DETECT_BASE_URL, data=payload, headers=HEADERS)
 
-    return r.json()
+#     return r.json()
 
 @app.route('/translate', methods=['POST'])
 def translate():
@@ -53,16 +52,17 @@ def translate():
     url_encoded_text = f"q={'%20'.join(long_list_of_words)}&target={target}"
 
     payload = url_encoded_text
-    print(text)
+    # print(text)
     r = requests.post(TRANSLATE_BASE_URL, data=payload, headers=HEADERS)
     data=r.json()
     data2=[]
     data2.append(r.json())
-    print(data2)
-    print(data2[0]['data']['translations'][0]['translatedText'])
+    # print(data2)
+    # print(data2[0]['data']['translations'][0]['translatedText'])
 
     data ={
         'id': session['user_id']
     }
+
     return render_template('translate.html', data=data2[0]['data']['translations'][0]['translatedText'], user=User.get_one(data), text=text)
 

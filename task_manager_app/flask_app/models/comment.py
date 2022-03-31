@@ -1,4 +1,5 @@
 # from winreg import QueryInfoKey
+"""
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
 from flask_app import app
@@ -16,7 +17,6 @@ class Comment:
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
         self.post_id = data['post_id']
-
 
     def time_span(self):
         now = datetime.now()
@@ -38,7 +38,6 @@ class Comment:
         result = connectToMySQL(db).query_db(query,data)
         return result
 
-
     @classmethod
     def get_all_comments(cls,data):
         query = "SELECT * FROM comments"
@@ -53,7 +52,6 @@ class Comment:
         query  = "SELECT * FROM comments WHERE id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
         return cls(results[0])
-
 
     @classmethod
     def update(cls, data):
@@ -74,3 +72,4 @@ class Comment:
             is_valid= False
 
         return is_valid
+"""
