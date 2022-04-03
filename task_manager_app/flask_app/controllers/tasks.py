@@ -104,7 +104,6 @@ def user_task(user_id):
         'id': session['user_id']
     }
     today=datetime.today().date()
-    print(today,"$$$$$$")
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
 

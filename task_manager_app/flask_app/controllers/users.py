@@ -6,6 +6,7 @@ from flask_app.models.post import Post
 from flask_app.models.count import Count
 from flask_bcrypt import Bcrypt
 import re
+from datetime import datetime
 bcrypt = Bcrypt(app)
 
 @app.route('/')
@@ -113,9 +114,10 @@ def user_task_dash():
     user_data ={
         'id': session['user_id']
     }
+    today=datetime.today().date()
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
-    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
+    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)
 
 @app.route('/dashboard')
 def dashboard():
