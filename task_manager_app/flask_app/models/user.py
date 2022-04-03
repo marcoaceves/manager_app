@@ -62,7 +62,7 @@ class User:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM users;"
+        query = "SELECT id, LOWER(first_name) as first_name, LOWER(last_name) as last_name, email, password, role, created_at, updated_at  FROM users;"
         results = connectToMySQL(db).query_db(query)
         users = []
         for i in results:

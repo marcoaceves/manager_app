@@ -63,7 +63,9 @@
                                         <th scope="col">Due Date</th>
                                         <th scope="col">Priority</th>
                                         <th scope="col">Status</th>
+                                        {% if user.role == 'admin'%}
                                         <th scope="col">Action</th>
+                                        {% endif %}
 
                                     </tr>
                                     </thead>
@@ -113,7 +115,7 @@
                                             </form>
                                             {% endif %}
                                         </td>
-
+                                        {% if user.role == 'admin'%}
                                         <td class="align-middle ">
                                             <form action="/destroy/task/" method="Post">
                                                 <input type="hidden" name="id" value="{{task.id}}" class="form-control">
@@ -127,6 +129,7 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        {% endif %}
                                         {% endif %}
                                     </tr>
                                     </tbody>
