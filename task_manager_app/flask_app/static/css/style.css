@@ -72,6 +72,33 @@ table.table-bordered > tbody > tr > td{
     text-decoration: none;
 }
 
+#due{
+  font-weight: bold;
+}
+
+
+
+.lowername{ 
+  text-transform: lowercase;
+ } /* :first-letter is applicable to blocks */
+
+.uppername {
+  display:inline-block}
+.uppername::first-letter {
+  text-transform: capitalize;        /* Make the first letters uppercase      */
+}
+
+.uppertask{ 
+  text-transform: lowercase;
+ } /* :first-letter is applicable to blocks */
+
+.uppertask > span {
+  text-transform: capitalize;
+  display:inline-block}
+.uppertask >span:first-letter {
+  text-transform: uppercase;        /* Make the first letters uppercase      */
+}
+
 /* gradient table */
 .gradient-custom-2 {
     border-radius: 2em;

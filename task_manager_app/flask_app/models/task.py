@@ -193,12 +193,12 @@ class Task:
 # get all tasks that belong to one user
     @classmethod
     def get_all_user_tasks(cls,data):
-        query = "SELECT * FROM tasks WHERE user_id =  %(user2)s"
+        query = "SELECT id, user_id, LOWER(task_name) as task_name, priority, complete, date(due_date) as due_date, created_at, updated_at FROM tasks WHERE user_id =  %(user2)s ORDER by due_date ASC"
         results = connectToMySQL(db).query_db(query,data)
-        taskss = []
+        tasks = []
         for task in results:
-            taskss.append( cls(task) )
-        return taskss
+            tasks.append( cls(task) )
+        return tasks
 
     @classmethod
     def complete_update(cls, data):

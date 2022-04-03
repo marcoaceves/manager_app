@@ -42,7 +42,7 @@
 
             <!-- navigation bar -->
             <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark ">
-                <h1 class="text-center  ms-5"> {{user2.first_name}}'s Assigned Task(s)</h1>
+                <h1 class="text-center  ms-5 text-capitalize"> {{user2.first_name}}'s Assigned Task(s)</h1>
             </div>
             {% for task in tasks%}
                 {% if task.due_date == None%}
@@ -56,11 +56,11 @@
                     <div class="col-md-12 col-xl-12 pb-2">
                         <div class="card mask-custom ">
                             <div class="card-body p-4 text-white">
-                                <table class="table text-white mb-0  ">
+                                <table class="table text-white mb-0 ">
                                     <thead>
                                     <tr>
                                         <th scope="col">Task(s)</th>
-                                        <th scope="col">Assigned Date</th>
+                                        <th scope="col">Due Date</th>
                                         <th scope="col">Priority</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
@@ -72,14 +72,20 @@
                                     <tbody>
                                     <tr class="fw-normal">
                                         {% if task.due_date != None%}
-                                        <th>
-                                            <span>{{task.task_name}}</span>
+                                        <th class="lowertask uppertask">
+                                            <span >{{task.task_name}}</span>
                                         </th>
-                                        
+                                        {% if today == task.due_date %}
                                         <td class="align-middle">
-                                        <span >{{task.due_date.strftime('%B %d, %Y')}}</span >
+                                        <span class="text" id="due">{{task.due_date.strftime('%B %d, %Y')}}</span >
                                         </td>
-                                        
+                                        {% endif %}
+                                        {% if today != task.due_date %}
+                                        <td class="align-middle">
+                                        <span class="text-dark">{{task.due_date.strftime('%B %d, %Y')}}</span >
+                                        </td>
+                                        {% endif %}
+
                                         <td class="align-middle">
                                         {% if task.priority == "High Priority" %}
                                         <h6 class="mb-0"><span class="badge bg-danger">{{task.priority}}</span></h6>

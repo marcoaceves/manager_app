@@ -5,6 +5,9 @@ from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.task import Task
 from flask_app.models.user import User
 from flask_app.models.post import Post
+from flask_app.models.mail_auto import Email
+from datetime import datetime
+
 
 
 # html page for adding
@@ -31,10 +34,20 @@ def add_task():
         'complete': request.form['complete'],
         "user_id": request.form["user_id"]
     }
+    data2 ={
+        "id": request.form["user_id"]
+    }
+    user_email=Email.get_one_email(data2)
+    email = user_email[0]['email']
+    print(email)
     if not Task.validate_task(request.form):
         return redirect(request.referrer)
     Task.create_task(data)
+    Email.send_email(email)
+
     return redirect ('/dashboard')
+
+
 
 # assign station
 @app.route('/assign/station', methods=['POST'])
@@ -90,12 +103,12 @@ def user_task(user_id):
     user_data ={
         'id': session['user_id']
     }
-
-    # print(data)
+    today=datetime.today().date()
+    print(today,"$$$$$$")
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
 
-    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data))
+    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)
 
 # process edit form
 @app.route('/complete/submit', methods=['POST'])
