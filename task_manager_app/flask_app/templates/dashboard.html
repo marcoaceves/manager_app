@@ -38,7 +38,7 @@
     <div class="wrapper">
 
         <div class="d-flex justify-content-start align-items-center mb-3 border-bottom border-5 border-dark">
-            <h3 class="text-center me-5 ">Welcome, {{user.first_name}}!</h3>
+            <h3 class="text-center me-5 text-capitalize">Welcome, {{user.first_name}}!</h3>
             <h1 class="text-center  ms-5">DASHBOARD</h1>
         </div>
         <!-- gradient table -->
@@ -54,9 +54,9 @@
                                     <thead>
                                     <tr>
                                         <th scope="col" class="text-center">Team Member</th>
-                                        <th scope="col" class="text-center"># Of Task's</th>
+                                        <th scope="col" class="text-center">Pending Task's</th>
                                         <th scope="col" class="text-center">Privileges</th>
-                                        <th scope="col" class="text-center"># Of Task Completed</th>
+                                        <th scope="col" class="text-center">Completed Task's</th>
                                     </tr>
                                     </thead>
                                     {% for count in counts %}
@@ -68,7 +68,7 @@
                                         <span class="ms-2 text-center lowername uppername" > <a href="/user/task/{{count.user_id}}" id="userLink">{{count.first_name}}</a></span>
                                         </th>
                                         <td class="align-middle text-center">
-                                        <span >{{count.count}}</span >
+                                        <span >{{count.count - count.complete}}</span >
                                         </td>
                                         <td class="align-middle text-center">
                                             {% if count.role == 'admin' %}

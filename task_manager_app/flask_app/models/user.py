@@ -81,7 +81,7 @@ class User:
 
     @classmethod
     def get_one(cls,data):
-        query  = "SELECT * FROM users WHERE id = %(id)s;"
+        query  = "SELECT id, LOWER(first_name) as first_name, LOWER(last_name) as last_name, email, password, role, created_at, updated_at FROM users WHERE id = %(id)s;"
         results = connectToMySQL(db).query_db(query, data)
         return cls(results[0])
 
