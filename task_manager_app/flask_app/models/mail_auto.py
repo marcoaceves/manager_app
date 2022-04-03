@@ -33,7 +33,7 @@ class Email:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         # Make sure to give app access in your Google account
-        server.login('ahf.task.manager@gmail.com', '')
+        server.login('ahf.task.manager@gmail.com', 'xrhkeiruhpcazfws')
         email = EmailMessage()
         email['From'] = 'ahf.task.manager@gmail.com'
         email['To'] = receiver
