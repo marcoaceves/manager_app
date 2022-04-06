@@ -69,7 +69,9 @@
                                         <span class="ms-2 text-center lowername uppername" > <a href="/user/task/{{count.user_id}}" id="userLink">{{count.first_name}}</a></span>
                                         </th>
                                         <td class="align-middle text-center">
+                                            {% if count.count != 0 %}
                                         <span >{{count.count - count.complete}}</span >
+                                            {% endif %}
                                         </td>
                                         <td class="align-middle text-center">
                                             {% if count.role == 'admin' %}
