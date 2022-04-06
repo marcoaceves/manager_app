@@ -263,3 +263,26 @@ background: linear-gradient(to bottom, #00a8c5, #00f8e3);
 
 
 
+/* task comments section */
+#taskComment{
+  background: white;
+  border: none;
+  overflow: auto;
+  outline: none;
+  border: 2px solid #000;
+  border-radius: 10px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  padding: 0px 10px;
+  width: 150px;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
+
+/* dates  */
+
+#datesOne{ margin: 5px;}
+#datesTwo{ margin: 5px;}
+#datesThree{ margin: 5px;}
+#datesFour{ margin: 5px;}

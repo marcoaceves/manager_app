@@ -1,5 +1,7 @@
 
+from array import array
 from dataclasses import dataclass
+import re
 from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.task import Task
@@ -44,8 +46,36 @@ def add_task():
         return redirect(request.referrer)
     Task.create_task(data)
     Email.send_email(email)
+    Task.task_added_success()
+    return redirect (request.referrer)
 
-    return redirect ('/dashboard')
+@app.route('/prep/task', methods=['POST'])
+def add_prep():
+    
+    if 'user_id' not in session:
+        return redirect('/')
+    prep_arr=request.form
+    new_arr = []
+    print(request.form)
+    for i in range(32):
+        if "task_name"+str(i+1) in prep_arr:
+            new_arr.append("Prep LA"+ str(i+1).zfill(2))
+    print(new_arr)
+    if not Task.validate_task_date(request.form):
+            return redirect(request.referrer)
+    for i in range(len(new_arr)):
+        data = {
+            'task_name': new_arr[i],
+            'priority': request.form['priority'],
+            'due_date': request.form['due_date'],
+            'complete': request.form['complete'],
+            "user_id": request.form["user_id"]
+        }
+
+        Task.create_task(data)
+    Task.task_added_success()
+
+    return redirect (request.referrer)
 
 
 
@@ -90,8 +120,8 @@ def assign_station():
     if request.form['station'] == "station_2":
         Task.assign_station_two_1(data)
         Task.assign_station_two_2(data)
-
-    return redirect ('/dashboard')
+    Task.task_added_success()
+    return redirect (request.referrer)
 
 @app.route('/user/task/<int:user_id>')
 def user_task(user_id):
@@ -120,6 +150,18 @@ def update_complete():
     }
     # print(data)
     Task.complete_update(data)
+    return redirect(request.referrer)
+# add comment to task form
+@app.route('/task/comment', methods=['POST'])
+def comment_task():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'comment': request.form['comment'],
+        'id': request.form['id']
+    }
+    # print(data)
+    Task.update_comment(data)
     return redirect(request.referrer)
 
 @app.route('/destroy/task/', methods=['POST'])
