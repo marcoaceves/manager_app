@@ -136,7 +136,7 @@
         </div>
 
         <div class="d-flex justify-content-evenly" >
-
+            <!-- prep homes form -->
             <form action="/prep/task" method="POST" class="container mx-auto card mt-5" style="width: 410px" >
                 <input type="hidden" name="complete" id="complete" value="0" class="form-control">
                 <h1>Prep</h1>
@@ -232,6 +232,201 @@
                 </div>
                 <input type="submit" value="Add Task" class="btn btn-primary mb-5">
             </form>
+            <!-- text homes form -->
+            <form action="/text/task" method="POST" class="container mx-auto card mt-5" style="width: 410px" >
+                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
+                <h1>Text</h1>
+                {% with messages = get_flashed_messages(category_filter=['task_text']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="mb-3">
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select class="text-capitalize" name="user_id">
+                        {% for user in users %}
+                        <option class="text-capitalize" value="{{user.id}}">{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
+                </div>
+
+
+                <div class="mb-3 d-flex flex-sm-column">
+                    <p>Select Dates:</p>
+
+                    <div class="d-flex flex-row">
+                        {% for i in range(1,8) %}
+                        <div class="form-check" id="datesOne">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{'%02d' % i}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(8,15) %}
+                        <div class="form-check " id="datesTwo">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{'%02d' % i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(15,22) %}
+                        <div class="form-check" id="datesThree">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(22,29) %}
+                        <div class="form-check" id="datesFour">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row" >
+                        {% for i in range(29,32) %}
+                        <div class="form-check" id="datesFour">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="priority" class="form-label">Priority:</label>
+                    <p>
+                        <select name="priority" id="priority">
+                        <option value="High Priority">High Priority</option> 
+                        <option value="Middle Priority">Middle Priority</option> 
+                        <option value="Low Priority">Low Priority</option> 
+                        </select>
+                    </p>
+                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
+                </div>
+                <div class="mb-3">
+                    <label for="due_date" class="form-label ">Due Date:</label>
+                    <input type="date" name="due_date" class="form-control" id="due_date" >
+                </div>
+                <input type="submit" value="Add Task" class="btn btn-primary mb-5">
+            </form>
+        </div>
+        <div class="d-flex " >
+            <!-- refill request homes form -->
+            <form action="/refill/task" method="POST" class="container mx-auto card mt-5" style="width: 410px" >
+                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
+                <h1>Refill Request</h1>
+                {% with messages = get_flashed_messages(category_filter=['task_refill']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="mb-3">
+                    <label for="user" class="form-label">User:</label>
+                    <p>
+                        <select class="text-capitalize" name="user_id">
+                        {% for user in users %}
+                        <option class="text-capitalize" value="{{user.id}}">{{user.first_name}}</option>
+                        {% endfor %}
+                        </select>
+                    </p>
+                </div>
+
+
+                <div class="mb-3 d-flex flex-sm-column">
+                    <p>Select Dates:</p>
+                    
+                    <div class="d-flex flex-row">
+                        {% for i in range(1,8) %}
+                        <div class="form-check" id="datesOne">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{'%02d' % i}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(8,15) %}
+                        <div class="form-check " id="datesTwo">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{'%02d' % i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(15,22) %}
+                        <div class="form-check" id="datesThree">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row">
+                        {% for i in range(22,29) %}
+                        <div class="form-check" id="datesFour">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="d-flex flex-row" >
+                        {% for i in range(29,32) %}
+                        <div class="form-check" id="datesFour">
+                            <input class="form-check-input" type="checkbox" value="{{i}}" id="flexCheckDefault" name="task_name{{i}}">
+                            <label class="form-check-label" for="flexCheckDefault">
+                        {{i}}
+                        </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="priority" class="form-label">Priority:</label>
+                    <p>
+                        <select name="priority" id="priority">
+                        <option value="High Priority">High Priority</option> 
+                        <option value="Middle Priority">Middle Priority</option> 
+                        <option value="Low Priority">Low Priority</option> 
+                        </select>
+                    </p>
+                    <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
+                </div>
+                <div class="mb-3">
+                    <label for="due_date" class="form-label ">Due Date:</label>
+                    <input type="date" name="due_date" class="form-control" id="due_date" >
+                </div>
+                <input type="submit" value="Add Task" class="btn btn-primary mb-5">
+            </form>
+            <form action="" method="POST" class="container mx-auto  mt-5" style="width: 410px" ></form>
         </div>
 
     </div>

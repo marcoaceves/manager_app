@@ -40,47 +40,6 @@ class Task:
         result = connectToMySQL(db).query_db(query,data)
         return result
 
-    # Will Call Station Tasks
-    @classmethod
-    def assign_will_call_1(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Will Call Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-
-    @classmethod
-    def assign_will_call_2(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Delivery Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-
-    @classmethod
-    def assign_will_call_3(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Not Scanned Report',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-
-    @classmethod
-    def assign_will_call_4(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Pending in Store Receiving',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-
-    @classmethod
-    def assign_will_call_5(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Check Voice Mail',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-    @classmethod
-    def assign_will_call_6(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('Visual check Will Call',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
-
-    @classmethod
-    def assign_will_call_7(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES ('File Prescriptions',%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
-        result = connectToMySQL(db).query_db(query,data)
-        return result
 
     # Shipping Station Tasks
     @classmethod
@@ -241,6 +200,23 @@ class Task:
         is_valid = True
         if len(task['due_date']) < 3:
             flash("Must Select Due Date!","station")
+            is_valid= False
+
+        return is_valid
+
+    @staticmethod
+    def validate_task_text( task ):
+        is_valid = True
+        if len(task['due_date']) < 3:
+            flash("Must Select Due Date!","task_text")
+            is_valid= False
+
+        return is_valid
+    @staticmethod
+    def validate_task_refill( task ):
+        is_valid = True
+        if len(task['due_date']) < 3:
+            flash("Must Select Due Date!","task_refill")
             is_valid= False
 
         return is_valid

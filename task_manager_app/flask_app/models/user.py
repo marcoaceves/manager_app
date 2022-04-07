@@ -98,7 +98,7 @@ class User:
             flash("Invalid Email!!!","register")
             is_valid=False
         if not PASS_REGEX.match(user['password']):
-            flash("Password must contain at least 8 characters, 1 Uppercase, 1 Lowercase, 1 Number!","register")
+            flash("Password must contain at least 8 characters, 1 Uppercase, 1 Lowercase, 2 Numbers!","register")
             is_valid=False
         if len(user['first_name']) < 3:
             flash("First name must be at least 3 characters","register")

@@ -49,9 +49,9 @@ def add_task():
     Task.task_added_success()
     return redirect (request.referrer)
 
+# prep task calendar assing form
 @app.route('/prep/task', methods=['POST'])
 def add_prep():
-    
     if 'user_id' not in session:
         return redirect('/')
     prep_arr=request.form
@@ -76,6 +76,59 @@ def add_prep():
     Task.task_added_success()
 
     return redirect (request.referrer)
+    # text task calendar form
+@app.route('/text/task', methods=['POST'])
+def add_text():
+    if 'user_id' not in session:
+        return redirect('/')
+    prep_arr=request.form
+    new_arr = []
+    print(request.form)
+    for i in range(32):
+        if "task_name"+str(i+1) in prep_arr:
+            new_arr.append("Text LA"+ str(i+1).zfill(2))
+    print(new_arr)
+    if not Task.validate_task_text(request.form):
+            return redirect(request.referrer)
+    for i in range(len(new_arr)):
+        data = {
+            'task_name': new_arr[i],
+            'priority': request.form['priority'],
+            'due_date': request.form['due_date'],
+            'complete': request.form['complete'],
+            "user_id": request.form["user_id"]
+        }
+
+        Task.create_task(data)
+    Task.task_added_success()
+
+    return redirect (request.referrer)
+    # refill task calendar form
+@app.route('/refill/task', methods=['POST'])
+def add_refill():
+    if 'user_id' not in session:
+        return redirect('/')
+    prep_arr=request.form
+    new_arr = []
+    for i in range(32):
+        if "task_name"+str(i+1) in prep_arr:
+            new_arr.append("Refill Requests LA"+ str(i+1).zfill(2))
+    print(new_arr)
+    if not Task.validate_task_refill(request.form):
+            return redirect(request.referrer)
+    for i in range(len(new_arr)):
+        data = {
+            'task_name': new_arr[i],
+            'priority': request.form['priority'],
+            'due_date': request.form['due_date'],
+            'complete': request.form['complete'],
+            "user_id": request.form["user_id"]
+        }
+
+        Task.create_task(data)
+    Task.task_added_success()
+
+    return redirect (request.referrer)
 
 
 
@@ -83,30 +136,40 @@ def add_prep():
 @app.route('/assign/station', methods=['POST'])
 def assign_station():
     if 'user_id' not in session:
-        return redirect(request.referrer)
-    data = {
-        'priority': request.form['priority'],
-        'due_date': request.form['due_date'],
-        'complete': request.form['complete'],
-        "user_id": request.form["user_id"]
-    }
+        return redirect('/')
+    wc_arr=['Will Call Report', 'Delivery Report', 'Not Scanned Report', 'Pending in store Receiving', 'Check Voice Mail','Visual Check Will Call', 'File Prescriptions']
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
     if request.form['station'] == "will_call":
-        Task.assign_will_call_1(data)
-        Task.assign_will_call_2(data)
-        Task.assign_will_call_3(data)
-        Task.assign_will_call_4(data)
-        Task.assign_will_call_5(data)
-        Task.assign_will_call_6(data)
-        Task.assign_will_call_7(data)
+        for i in range(len(wc_arr)):
+            data = {
+                'task_name': wc_arr[i],
+                'priority': request.form['priority'],
+                'due_date': request.form['due_date'],
+                'complete': request.form['complete'],
+                "user_id": request.form["user_id"]
+            }
+            Task.create_task(data)
+            Task.task_added_success()
+    shipping_arr=['Clean and Calibrate Kirbys','Receive Cardinal Order','PSA Report','FedEx Exception Report','Financial Hardship Report','Submit Daily Order']
     if request.form['station'] == "shipping":
-        Task.assign_shipping_1(data)
-        Task.assign_shipping_2(data)
-        Task.assign_shipping_3(data)
-        Task.assign_shipping_4(data)
-        Task.assign_shipping_5(data)
-        Task.assign_shipping_6(data)
+        for i in range(len(shipping_arr)):
+            data = {
+                'task_name': shipping_arr[i],
+                'priority': request.form['priority'],
+                'due_date': request.form['due_date'],
+                'complete': request.form['complete'],
+                "user_id": request.form["user_id"]
+            }
+            Task.create_task(data)
+            Task.task_added_success()
+
+    data = {
+                'priority': request.form['priority'],
+                'due_date': request.form['due_date'],
+                'complete': request.form['complete'],
+                "user_id": request.form["user_id"]
+            }
     if request.form['station'] == "drop_off":
         Task.assign_drop_off_1(data)
         Task.assign_drop_off_2(data)
