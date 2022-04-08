@@ -173,6 +173,14 @@ class Task:
     def destroy(cls, data):
         query = 'DELETE FROM tasks WHERE tasks.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+    @classmethod
+    def get_one(cls, data):
+        query = 'SELECT * FROM tasks WHERE tasks.id = %(id)s;'
+        results = connectToMySQL(db).query_db(query, data)
+        if len(results) == 0:
+            return(1)
+        print(results)
+        return cls(results[0])
 
     @staticmethod
     def validate_task( task ):

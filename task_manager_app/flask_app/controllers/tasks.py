@@ -150,7 +150,7 @@ def assign_station():
                 "user_id": request.form["user_id"]
             }
             Task.create_task(data)
-            Task.task_added_success()
+        Task.task_added_success()
     shipping_arr=['Clean and Calibrate Kirbys','Receive Cardinal Order','PSA Report','FedEx Exception Report','Financial Hardship Report','Submit Daily Order']
     if request.form['station'] == "shipping":
         for i in range(len(shipping_arr)):
@@ -162,7 +162,7 @@ def assign_station():
                 "user_id": request.form["user_id"]
             }
             Task.create_task(data)
-            Task.task_added_success()
+        Task.task_added_success()
 
     data = {
                 'priority': request.form['priority'],
@@ -175,15 +175,17 @@ def assign_station():
         Task.assign_drop_off_2(data)
         Task.assign_drop_off_3(data)
         Task.assign_drop_off_4(data)
+        Task.task_added_success()
     if request.form['station'] == "station_1":
         Task.assign_station_one_1(data)
         Task.assign_station_one_2(data)
         Task.assign_station_one_3(data)
         Task.assign_station_one_4(data)
+        Task.task_added_success()
     if request.form['station'] == "station_2":
         Task.assign_station_two_1(data)
         Task.assign_station_two_2(data)
-    Task.task_added_success()
+        Task.task_added_success()
     return redirect (request.referrer)
 
 @app.route('/user/task/<int:user_id>')
@@ -211,7 +213,7 @@ def update_complete():
         'complete': request.form['complete'],
         'id': request.form['id']
     }
-    # print(data)
+    print(data)
     Task.complete_update(data)
     return redirect(request.referrer)
 # add comment to task form
@@ -227,12 +229,51 @@ def comment_task():
     Task.update_comment(data)
     return redirect(request.referrer)
 
-@app.route('/destroy/task/', methods=['POST'])
+@app.route('/update/task/', methods=['POST'])
 def destroy_task():
     if 'user_id' not in session:
         return redirect('/')
-    data = {
-        'id': request.form['id']
-    }
-    Task.destroy(data)
+    if request.method == "POST":
+        checked_list=request.form.getlist('checked1')
+    for i in range(len(checked_list)):
+            data = {
+            'id': checked_list[i]}
+            Task.destroy(data)
+
+    completed=request.form.getlist('complete')
+
+    print(completed,"COMPLETED")
+    for i in range(len(completed)):
+            data = {
+            'id': completed[i]}
+            data2=Task.get_one(data)
+            print(data2.complete)
+            if data2.complete == 0:
+                data = {
+            'id': completed[i],
+            'complete': 1}
+                Task.complete_update(data)
+            if data2.complete == 1:
+                data = {
+            'id': completed[i],
+            'complete': 0}
+                Task.complete_update(data)
+
+    comments=request.form.getlist('comment')
+    print(comments,)
+    for i in range(len(comments)-1):
+            data = {
+            'comment': comments[i+1],
+            'id': comments[i]}
+            if comments[i+1]=="":
+                data2=Task.get_one(data)
+                data = {
+            'comment': data2.comment,
+            'id': comments[i]}
+            print(comments[i],comments[i+1])
+            i+=1
+            Task.update_comment(data)
+
+
+
     return redirect(request.referrer)

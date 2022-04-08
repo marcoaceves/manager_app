@@ -12,18 +12,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
-        $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
-    }
+//     if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
+//         $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
+//     }
 
-    $(window).on("scroll", function() {
-        localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
-    });
+//     $(window).on("scroll", function() {
+//         localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
+//     });
 
-  });
+    // });
+    function toggle(source) {
+  checkboxes = document.getElementsByName('checked1');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+    function toggle2(source) {
+  checkboxes = document.getElementsByName('complete');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+
+
+
 </script>
+
 </head>
 <body>
 
@@ -75,7 +91,7 @@ $(document).ready(function () {
             <!-- messages -->
     <div class="wrapper">
 
-
+        <form action="/update/task/" method="POST" id="my-form">
             <!-- navigation bar -->
             <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark ">
                 <h1 class="text-center  ms-5 text-capitalize"> {{user2.first_name}}'s Assigned Task(s)</h1>
@@ -91,7 +107,7 @@ $(document).ready(function () {
                 <div class="row d-flex justify-content-center align-items">
                     <div class="col-md-12 col-xl-12 pb-2">
                         <div class="card mask-custom ">
-                            <div class="card-body p-4 text-white">
+                            <fo class="card-body p-4 text-white">
                                 <table class="table text-white mb-0 ">
                                     <thead>
                                     <tr>
@@ -99,10 +115,11 @@ $(document).ready(function () {
                                         <th scope="col">Due Date</th>
                                         <th scope="col">Priority</th>
                                         <th scope="col">Status</th>
-                                        {% if user.role == 'admin'%}
-                                        <th scope="col">Action</th>
-                                        {% endif %}
+
                                         <th scope="col">Comment(s)</th>
+                                        {% if user.role == 'admin'%}
+                                        <th scope="col">Delete</th>
+                                        {% endif %}
 
                                     </tr>
                                     </thead>
@@ -139,59 +156,77 @@ $(document).ready(function () {
 
                                         <td class="align-middle">
                                             {% if task.complete == 0 %}
-                                            <form action="/complete/submit" method="POST" >
-                                                <input type="hidden" name="id" value="{{task.id}}" class="form-control">
-                                                <input type="checkbox" name="complete" id="check" value="1" onChange='submit();'>
-                                            </form>
+                                            <div name="completed_task" >
+                                                <input type="checkbox" name="complete" id="check" value="{{task.id}}" >
+                                            </div>
                                             {% endif %}
                                             {% if task.complete == 1 %}
-                                            <form action="/complete/submit" method="POST" >
-                                                <input type="hidden" name="id" value="{{task.id}}" class="form-control">
-                                                <input type="hidden" name="user_id" value="{{user2.id}}">
-                                                <input type="checkbox" name="complete" id="check2" value="0" onChange='submit();'>
-                                            </form>
+                                            <div name="completed_task">
+                                                <input type="checkbox" name="complete" id="check2" value="{{task.id}}" >
+                                            </div>
                                             {% endif %}
                                         </td>
-                                        {% if user.role == 'admin'%}
-                                        <td class="align-middle ">
-                                            <form action="/destroy/task/" method="Post">
-                                                <input type="hidden" name="id" value="{{task.id}}" class="form-control">
-                                                <button type="submit" class="btn btn-danger badge badge-pill badge-primary" id="deleteBtn">
-                                                    <i class="bi bi-trash">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg>
-                                                    </i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                        {% endif %}
-                                        {% if user.role == 'staff'%}
-                                        <td class="align-middle">
-                                            <form action="/task/comment" method="POST">
-                                                <input type="hidden" name="id" value="{{task.id}}" class="form-control">
-                                                <input type="hidden" name="user_id" value="{{user2.id}}">
-                                                <input type="text" id="taskComment" name="comment" placeholder="{{task.comment}}">
-                                                <button class="btn btn-primary badge badge-pill badge-primary" style="text-align:center" type="sumit">Add</button>
-                                            </form>
-                                        </td>
-                                        {% endif %}
                                         {% if user.role == 'admin'%}
                                         <td class="align-middle">
                                             <p scope="col">{{task.comment}}</p>
                                         </td>
                                         {% endif %}
+                                        {% if user.role == 'admin'%}
+                                        <td class="align-middle ">
+
+                                            <input class="form-check-input" value="{{task.id}}" type="checkbox" name="checked1" id="flexRadioDefault1">
+
+                                        </td>
+                                        {% endif %}
+                                        {% if user.role == 'staff'%}
+                                        <td class="align-middle">
+                                                <input type="hidden" name="comment" value="{{task.id}}" class="form-control">
+                                                <input type="hidden" name="user_id" value="{{user2.id}}">
+                                                <input type="text" id="taskComment" name="comment" placeholder="{{task.comment}}">
+                                                <button class="btn btn-primary badge badge-pill badge-primary" style="text-align:center" type="submit">Update</button>
+                                        </td>
+                                        {% endif %}
+                                        
                                         {% endif %}
 
                                     </tr>
                                     </tbody>
                                     {% endfor %}
+                                    {% if user.role == 'admin'%}
+                                    <tr>
+                                        <div  class="d-flex justify-content-end">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> </td>
+                                            <td></td>
+                                            <td><input  form="my-form" class="form-check-input align-items-end mb-3" type="checkbox" onClick="toggle(this)" /> Select All<br/></td>
+                                            
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div  class="d-flex justify-content-end">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> </td>
+                                            <td></td>
+                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" > Update</button></td>
+                                            
+                                        </div>
+                                    </tr>
+                                    {% endif %}
                                 </table>
+                            </form>
+                                
                             </div>
+                            
                         </div>
+                        
                     </div>
+                    
                 </div>
+                
             </div>
         </section>
 
