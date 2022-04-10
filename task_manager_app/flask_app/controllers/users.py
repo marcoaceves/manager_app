@@ -117,7 +117,7 @@ def user_task_dash():
     today=datetime.today().date()
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
-    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)
+    return render_template("user_task.html",user=User.get_user_and_tasks(data), users=users, tasks=tasks, user2=User.get_one(user_data), today=today)
 
 @app.route('/dashboard')
 def dashboard():

@@ -72,7 +72,7 @@ class User:
 # get all users and get all tasks
     @classmethod
     def get_user_and_tasks(cls,data):
-        query  = "SELECT * FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id WHERE user2.id =  %(user2)s;"
+        query  = "SELECT user2.id, LOWER(first_name) as first_name, LOWER(last_name) as last_name, email, password, role, user2.created_at as created_at, user2.updated_at as updated_at FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id WHERE user2.id =  %(user2)s;"
         results = connectToMySQL(db).query_db(query, data)
         if len(results) == 0:
             return(1)

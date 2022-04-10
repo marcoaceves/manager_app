@@ -94,7 +94,7 @@
         <form action="/update/task/" method="POST" id="my-form">
             <!-- navigation bar -->
             <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark ">
-                <h1 class="text-center  ms-5 text-capitalize"> {{user2.first_name}}'s Assigned Task(s)</h1>
+                <h1 class="text-center  ms-5 text-capitalize"> {{user2.first_name}}'s Assigned Tasks</h1>
             </div>
             {% for task in tasks%}
                 {% if task.due_date == None%}
@@ -183,15 +183,24 @@
                                                 <input type="hidden" name="comment" value="{{task.id}}" class="form-control">
                                                 <input type="hidden" name="user_id" value="{{user2.id}}">
                                                 <input type="text" id="taskComment" name="comment" placeholder="{{task.comment}}">
-                                                <button class="btn btn-primary badge badge-pill badge-primary" style="text-align:center" type="submit">Update</button>
                                         </td>
                                         {% endif %}
-                                        
                                         {% endif %}
 
                                     </tr>
                                     </tbody>
                                     {% endfor %}
+
+                                    <tr>
+                                        <div  class="d-flex justify-content-end">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> </td>
+                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary " > Update</button></td>
+                                            <td></td>
+                                        </div>
+                                    </tr>
                                     {% if user.role == 'admin'%}
                                     <tr>
                                         <div  class="d-flex justify-content-end">
@@ -200,7 +209,7 @@
                                             <td></td>
                                             <td> </td>
                                             <td></td>
-                                            <td><input  form="my-form" class="form-check-input align-items-end mb-3" type="checkbox" onClick="toggle(this)" /> Select All<br/></td>
+                                            <td><input  form="my-form" class="form-check-input align-items-end mb-3" type="checkbox" onClick="toggle(this)" /> Delete All<br/></td>
                                             
                                         </div>
                                     </tr>
