@@ -48,15 +48,12 @@
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
 
         {% if user.role == 'admin'%}
-        
             <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
             <div>
-
                 <a href="/dashboard"><button type="link"  class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Dashboard</button></a>
                 <a href="/add/new_user/"><button type="link"  class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
                 <a href="/task/new"><button type="submit"  class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
                 <a href="/manage/users"><button type="submit"  class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
-    
                 <!-- Dropdown -->
                 <div class="dropdown btn btn-primary badge badge-pill badge-primary">
                     <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
@@ -190,7 +187,7 @@
                                     </tr>
                                     </tbody>
                                     {% endfor %}
-
+                                    {% if user.role == 'staff'%}
                                     <tr>
                                         <div  class="d-flex justify-content-end">
                                             <td></td>
@@ -201,6 +198,7 @@
                                             <td></td>
                                         </div>
                                     </tr>
+                                    {% endif %}
                                     {% if user.role == 'admin'%}
                                     <tr>
                                         <div  class="d-flex justify-content-end">
@@ -210,7 +208,6 @@
                                             <td> </td>
                                             <td></td>
                                             <td><input  form="my-form" class="form-check-input align-items-end mb-3" type="checkbox" onClick="toggle(this)" /> Delete All<br/></td>
-                                            
                                         </div>
                                     </tr>
                                     <tr>
@@ -221,21 +218,15 @@
                                             <td> </td>
                                             <td></td>
                                             <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" > Update</button></td>
-                                            
                                         </div>
                                     </tr>
                                     {% endif %}
                                 </table>
                             </form>
-                                
                             </div>
-                            
                         </div>
-                        
                     </div>
-                    
                 </div>
-                
             </div>
         </section>
 

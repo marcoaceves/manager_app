@@ -215,6 +215,7 @@ def update_complete():
     }
     print(data)
     Task.complete_update(data)
+
     return redirect(request.referrer)
 # add comment to task form
 @app.route('/task/comment', methods=['POST'])
@@ -241,7 +242,6 @@ def destroy_task():
             Task.destroy(data)
 
     completed=request.form.getlist('complete')
-
     print(completed,"COMPLETED")
     for i in range(len(completed)):
             data = {
@@ -273,7 +273,6 @@ def destroy_task():
             print(comments[i],comments[i+1])
             i+=1
             Task.update_comment(data)
-
 
 
     return redirect(request.referrer)

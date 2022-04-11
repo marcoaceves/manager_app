@@ -40,3 +40,4 @@ class Email:
         email['Subject'] = 'AHF TAKS MANAGER'
         email.set_content("You have a New Task! Please check your AHF Task Manager Dashboard!  54.219.210.192/")
         server.send_message(email)
+

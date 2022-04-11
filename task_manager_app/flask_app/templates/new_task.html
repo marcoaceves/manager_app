@@ -63,7 +63,7 @@
                     <p>
                         <select class="text-capitalize" name="user_id">
                         {% for user in users %}
-                        <option class="text-capitalize" value="{{user.id}}">{{user.first_name}}</option>
+                        <option class="uppername" value="{{user.id}}">{{user.first_name}}</option>
                         {% endfor %}
                         </select>
                     </p>
@@ -105,7 +105,7 @@
                     <p>
                         <select  class="text-capitalize" name="user_id">
                         {% for user in users %}
-                        <option value="{{user.id}}">{{user.first_name}}</option>
+                        <option class="text-capitalize" value="{{user.id}}">{{user.first_name}}</option>
                         {% endfor %}
                         </select>
                     </p>
