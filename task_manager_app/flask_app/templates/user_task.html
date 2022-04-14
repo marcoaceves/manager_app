@@ -106,6 +106,7 @@
                         <div class="card mask-custom ">
                             <fo class="card-body p-4 text-white">
                                 <table class="table text-white mb-0 ">
+                                    <input type="hidden" name="user2_id" value="{{user2.id}}">
                                     <thead>
                                     <tr>
                                         <th scope="col">Task(s)</th>
@@ -178,7 +179,7 @@
                                         {% if user.role == 'staff'%}
                                         <td class="align-middle">
                                                 <input type="hidden" name="comment" value="{{task.id}}" class="form-control">
-                                                <input type="hidden" name="user_id" value="{{user2.id}}">
+                                                
                                                 <input type="text" id="taskComment" name="comment" placeholder="{{task.comment}}">
                                         </td>
                                         {% endif %}

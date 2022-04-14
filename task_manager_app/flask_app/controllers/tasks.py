@@ -8,6 +8,7 @@ from flask_app.models.task import Task
 from flask_app.models.user import User
 from flask_app.models.post import Post
 from flask_app.models.mail_auto import Email
+from flask_app.models.mail_pic import Email_Pic
 from datetime import datetime
 
 
@@ -41,7 +42,6 @@ def add_task():
     }
     user_email=Email.get_one_email(data2)
     email = user_email[0]['email']
-    print(email)
     if not Task.validate_task(request.form):
         return redirect(request.referrer)
     Task.create_task(data)
@@ -56,11 +56,11 @@ def add_prep():
         return redirect('/')
     prep_arr=request.form
     new_arr = []
-    print(request.form)
+
     for i in range(32):
         if "task_name"+str(i+1) in prep_arr:
             new_arr.append("Prep LA"+ str(i+1).zfill(2))
-    print(new_arr)
+
     if not Task.validate_task_date(request.form):
             return redirect(request.referrer)
     for i in range(len(new_arr)):
@@ -83,11 +83,9 @@ def add_text():
         return redirect('/')
     prep_arr=request.form
     new_arr = []
-    print(request.form)
     for i in range(32):
         if "task_name"+str(i+1) in prep_arr:
             new_arr.append("Text LA"+ str(i+1).zfill(2))
-    print(new_arr)
     if not Task.validate_task_text(request.form):
             return redirect(request.referrer)
     for i in range(len(new_arr)):
@@ -113,7 +111,6 @@ def add_refill():
     for i in range(32):
         if "task_name"+str(i+1) in prep_arr:
             new_arr.append("Refill Requests LA"+ str(i+1).zfill(2))
-    print(new_arr)
     if not Task.validate_task_refill(request.form):
             return redirect(request.referrer)
     for i in range(len(new_arr)):
@@ -213,7 +210,7 @@ def update_complete():
         'complete': request.form['complete'],
         'id': request.form['id']
     }
-    print(data)
+
     Task.complete_update(data)
 
     return redirect(request.referrer)
@@ -231,7 +228,7 @@ def comment_task():
     return redirect(request.referrer)
 
 @app.route('/update/task/', methods=['POST'])
-def destroy_task():
+def update_tasks():
     if 'user_id' not in session:
         return redirect('/')
     if request.method == "POST":
@@ -241,13 +238,17 @@ def destroy_task():
             'id': checked_list[i]}
             Task.destroy(data)
 
+
+
+    user2data = {
+        "user2": request.form['user2_id']
+    }
     completed=request.form.getlist('complete')
-    print(completed,"COMPLETED")
+    user2data=User.get_user_and_tasks(user2data)
     for i in range(len(completed)):
             data = {
             'id': completed[i]}
             data2=Task.get_one(data)
-            print(data2.complete)
             if data2.complete == 0:
                 data = {
             'id': completed[i],
@@ -258,9 +259,9 @@ def destroy_task():
             'id': completed[i],
             'complete': 0}
                 Task.complete_update(data)
+            Email_Pic.send_email(user2data)
 
     comments=request.form.getlist('comment')
-    print(comments,)
     for i in range(len(comments)-1):
             data = {
             'comment': comments[i+1],
@@ -270,7 +271,6 @@ def destroy_task():
                 data = {
             'comment': data2.comment,
             'id': comments[i]}
-            print(comments[i],comments[i+1])
             i+=1
             Task.update_comment(data)
 
