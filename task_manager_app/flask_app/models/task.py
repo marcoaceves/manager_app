@@ -232,3 +232,6 @@ class Task:
     @staticmethod
     def task_added_success( ):
         flash("Task(s) Added Successfully!","task_success")
+    @staticmethod
+    def task_updated_success( ):
+        flash("Task(s) Updated Successfully!","task_completed")

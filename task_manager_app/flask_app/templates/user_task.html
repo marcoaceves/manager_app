@@ -93,6 +93,15 @@
             <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark ">
                 <h1 class="text-center  ms-5 text-capitalize"> {{user2.first_name}}'s Assigned Tasks</h1>
             </div>
+                {% with messages = get_flashed_messages(category_filter=['task_completed']) %}     <!-- declare a variable called messages -->
+                    {% if messages %}                            <!-- check if there are any messages -->
+                        {% for message in messages %}            <!-- loop through the messages -->
+                            <p class="text-success text-center">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
             {% for task in tasks%}
                 {% if task.due_date == None%}
                 <h1 class="text-center  ms-5">This User Has No Tasks</h1>

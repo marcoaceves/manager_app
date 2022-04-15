@@ -260,7 +260,7 @@ def update_tasks():
             'complete': 0}
                 Task.complete_update(data)
             Email_Pic.send_email(user2data)
-
+            Task.task_updated_success()
     comments=request.form.getlist('comment')
     for i in range(len(comments)-1):
             data = {
