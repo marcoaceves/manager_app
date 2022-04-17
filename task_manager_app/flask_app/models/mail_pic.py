@@ -30,7 +30,6 @@ class Email_Pic:
 
     @staticmethod
     def send_email(usertask):
-        print(usertask.first_name, '!!!!!!!!!!!!!!')
         username=usertask.first_name.capitalize()
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()

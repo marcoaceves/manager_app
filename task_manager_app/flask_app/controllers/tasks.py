@@ -249,19 +249,20 @@ def update_tasks():
             data = {
             'id': completed[i]}
             data2=Task.get_one(data)
-            if data2.complete != None:
-                if data2.complete == 0:
-                    data = {
-                'id': completed[i],
-                'complete': 1}
-                    Task.complete_update(data)
-                if data2.complete == 1:
-                    data = {
-                'id': completed[i],
-                'complete': 0}
-                    Task.complete_update(data)
-                Email_Pic.send_email(user2data)
-                Task.task_updated_success()
+            if hasattr(data2, 'complete'):
+                if data2.complete != None:
+                    if data2.complete == 0:
+                        data = {
+                    'id': completed[i],
+                    'complete': 1}
+                        Task.complete_update(data)
+                    if data2.complete == 1:
+                        data = {
+                    'id': completed[i],
+                    'complete': 0}
+                        Task.complete_update(data)
+                    Email_Pic.send_email(user2data)
+            Task.task_updated_success()
     comments=request.form.getlist('comment')
     for i in range(len(comments)-1):
             data = {
