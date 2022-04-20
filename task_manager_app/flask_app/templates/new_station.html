@@ -101,9 +101,6 @@
 
         <!-- display station tasks -->
         <div class="d-flex justify-content-evenly" >
-
-            <form action="/add/station" method="POST" class="container mx-auto card" style="height: 500px; width: 900px ">
-                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
                 <!-- <h1>Stations</h1> -->
                 {% with messages = get_flashed_messages(category_filter=['task']) %}
                     {% if messages %}
@@ -125,13 +122,16 @@
                         <tbody>
                             {% for station in station_tasks%}
                             {% if station.task_name != 'NULL' %}
-                        <tr>
-                            <td class="text-capitalize">{{station.name}}</td>
-                            <td>{{station.task_name}}</td>
-                            <td>Delete</td>
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
+                            <form action="/destroy/station/task" method="POST">
+                                <tr class="text-capitalize">
+                                    <td >{{station.name}}</td>
+                                    <td>{{station.task_name}}</td>
+                                    <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                                    <input type="hidden" name="id" id="id" value="{{station.id}}">
+                                </tr>
+                            </form>
+                            {% endif %}
+                            {% endfor %}
                         </tbody>
                     </table>
 

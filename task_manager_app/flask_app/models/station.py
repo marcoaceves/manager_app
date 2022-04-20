@@ -39,3 +39,7 @@ class Station:
         for i in results:
             stations_tasks.append( cls(i) )
         return stations_tasks
+    @classmethod
+    def destroy(cls, data):
+        query = 'DELETE FROM stations WHERE stations.id = %(id)s;'
+        return connectToMySQL(db).query_db(query,data)

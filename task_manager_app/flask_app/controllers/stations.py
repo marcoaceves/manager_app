@@ -37,3 +37,16 @@ def add_station():
     Station.create_station(data)
     Task.task_added_success()
     return redirect (request.referrer)
+
+# destroy station task
+
+@app.route('/destroy/station/task', methods=['POST'])
+def destroy_station_task():
+    if 'user_id' not in session:
+        return redirect('/')
+    data={
+            'id': request.form['id']
+        }
+
+    Station.destroy(data)
+    return redirect(request.referrer)
