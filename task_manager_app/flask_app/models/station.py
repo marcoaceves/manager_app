@@ -33,7 +33,7 @@ class Station:
         return stations
     @classmethod
     def get_all_stations_tasks(cls):
-        query = "SELECT * FROM stations;"
+        query = "SELECT * FROM stations ORDER BY (name);"
         results = connectToMySQL(db).query_db(query)
         stations_tasks = []
         for i in results:

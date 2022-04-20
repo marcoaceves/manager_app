@@ -67,7 +67,7 @@
             </form>
 
             <!-- add task to station -->
-            <form action="/assign/station" method="POST" class="container mx-auto card" style="width: 400px" >
+            <form action="/add/station" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1>Add Task to Station</h1>
                 {% with messages = get_flashed_messages(category_filter=['station']) %}     <!-- declare a variable called messages -->
                 {% if messages %}                            <!-- check if there are any messages -->
@@ -97,11 +97,14 @@
                 <input type="submit" value="Add Task" class="btn btn-success mb-5">
             </form>
         </div>
+
+
+        <!-- display station tasks -->
         <div class="d-flex justify-content-evenly" >
 
             <form action="/add/station" method="POST" class="container mx-auto card" style="height: 500px; width: 900px ">
                 <input type="hidden" name="complete" id="complete" value="0" class="form-control">
-                <h1>Stations</h1>
+                <!-- <h1>Stations</h1> -->
                 {% with messages = get_flashed_messages(category_filter=['task']) %}
                     {% if messages %}
                         {% for message in messages %}
@@ -110,14 +113,28 @@
                     {% endif %}
                 {% endwith %}
 
-                <h1>{}</h1>
-                {% for station in station_tasks%}
-                    {% if station.task_name != 'NULL' %}
-                    <div class="mb-3">
-                        <p>{{station.task_name}}</p>
-                    </div>
-                    {% endif %}
-                {% endfor %}
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Station</th>
+                            <th scope="col">Task</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for station in station_tasks%}
+                            {% if station.task_name != 'NULL' %}
+                        <tr>
+                            <td class="text-capitalize">{{station.name}}</td>
+                            <td>{{station.task_name}}</td>
+                            <td>Delete</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
             </form>
         </div>
 
