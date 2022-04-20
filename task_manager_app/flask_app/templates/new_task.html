@@ -22,6 +22,7 @@
         <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
         <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
         <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+        <a href="/stations"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Stations</button></a>
 
         <!-- Dropdown -->
         <div class="dropdown btn btn-primary badge badge-pill badge-primary">
@@ -91,6 +92,9 @@
                 </div>
                 <input type="submit" value="Add Task" class="btn btn-primary mb-5">
             </form>
+
+
+            <!-- Assign Station -->
             <form action="/assign/station" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1>Assign Station</h1>
                 {% with messages = get_flashed_messages(category_filter=['station']) %}     <!-- declare a variable called messages -->
@@ -117,12 +121,10 @@
                 <div class="mb-3">
                     <label for="station" class="form-label">Station:</label>
                     <p>
-                        <select name='station'>
-                        <option value="will_call">Will Call</option> 
-                        <option value="shipping">Shipping</option> 
-                        <option value="drop_off">Drop Off</option> 
-                        <option value="station_1">Station 1</option> 
-                        <option value="station_2">Station 2</option> 
+                        <select  class="text-capitalize" name="station_name">
+                        {% for station in stations %}
+                        <option class="text-capitalize" value="{{station.name}}">{{station.name}}</option>
+                        {% endfor %}
                         </select>
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->

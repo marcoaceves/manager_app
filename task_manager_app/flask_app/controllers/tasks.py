@@ -6,7 +6,7 @@ from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.task import Task
 from flask_app.models.user import User
-from flask_app.models.post import Post
+from flask_app.models.station import Station
 from flask_app.models.mail_auto import Email
 from flask_app.models.mail_pic import Email_Pic
 from datetime import datetime
@@ -23,7 +23,7 @@ def add_new_task():
     data ={
         'id': session['user_id']
     }
-    return render_template('new_task.html', user=User.get_one(data), users= User.get_all())
+    return render_template('new_task.html', user=User.get_one(data), users= User.get_all(),stations= Station.get_all_stations() )
 
 # process adding form
 @app.route('/add/task', methods=['POST'])
@@ -135,54 +135,46 @@ def assign_station():
     if 'user_id' not in session:
         return redirect('/')
     wc_arr=['Will Call Report', 'Delivery Report', 'Not Scanned Report', 'Pending in store Receiving', 'Check Voice Mail','Visual Check Will Call', 'File Prescriptions']
+    data = {
+            'name': request.form['station_name']
+            }
+    willcall=Station.get_one_stations_tasks(data)
+    print(willcall[0].task_name, "WWWWWWWWWWWWWWW")
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
-    if request.form['station'] == "will_call":
-        for i in range(len(wc_arr)):
-            data = {
-                'task_name': wc_arr[i],
-                'priority': request.form['priority'],
-                'due_date': request.form['due_date'],
-                'complete': request.form['complete'],
-                "user_id": request.form["user_id"]
-            }
-            Task.create_task(data)
-        Task.task_added_success()
-    shipping_arr=['Clean and Calibrate Kirbys','Receive Cardinal Order','PSA Report','FedEx Exception Report','Financial Hardship Report','Submit Daily Order']
-    if request.form['station'] == "shipping":
-        for i in range(len(shipping_arr)):
-            data = {
-                'task_name': shipping_arr[i],
-                'priority': request.form['priority'],
-                'due_date': request.form['due_date'],
-                'complete': request.form['complete'],
-                "user_id": request.form["user_id"]
-            }
-            Task.create_task(data)
-        Task.task_added_success()
 
-    data = {
+    for i in range(len(willcall)):
+            data = {
+                'task_name': willcall[i].task_name,
                 'priority': request.form['priority'],
                 'due_date': request.form['due_date'],
                 'complete': request.form['complete'],
                 "user_id": request.form["user_id"]
             }
-    if request.form['station'] == "drop_off":
-        Task.assign_drop_off_1(data)
-        Task.assign_drop_off_2(data)
-        Task.assign_drop_off_3(data)
-        Task.assign_drop_off_4(data)
-        Task.task_added_success()
-    if request.form['station'] == "station_1":
-        Task.assign_station_one_1(data)
-        Task.assign_station_one_2(data)
-        Task.assign_station_one_3(data)
-        Task.assign_station_one_4(data)
-        Task.task_added_success()
-    if request.form['station'] == "station_2":
-        Task.assign_station_two_1(data)
-        Task.assign_station_two_2(data)
-        Task.task_added_success()
+            print(data, "TATATATA")
+            if data['task_name'] != 'NULL':
+                Task.create_task(data)
+    Task.task_added_success()
+    # shipping_arr=['Clean and Calibrate Kirbys','Receive Cardinal Order','PSA Report','FedEx Exception Report','Financial Hardship Report','Submit Daily Order']
+    # if request.form['station'] == "shipping":
+    #     for i in range(len(shipping_arr)):
+    #         data = {
+    #             'task_name': shipping_arr[i],
+    #             'priority': request.form['priority'],
+    #             'due_date': request.form['due_date'],
+    #             'complete': request.form['complete'],
+    #             "user_id": request.form["user_id"]
+    #         }
+    #         Task.create_task(data)
+    #     Task.task_added_success()
+
+    # data = {
+    #             'priority': request.form['priority'],
+    #             'due_date': request.form['due_date'],
+    #             'complete': request.form['complete'],
+    #             "user_id": request.form["user_id"]
+    #         }
+
     return redirect (request.referrer)
 
 @app.route('/user/task/<int:user_id>')
