@@ -155,26 +155,6 @@ def assign_station():
             if data['task_name'] != 'NULL':
                 Task.create_task(data)
     Task.task_added_success()
-    # shipping_arr=['Clean and Calibrate Kirbys','Receive Cardinal Order','PSA Report','FedEx Exception Report','Financial Hardship Report','Submit Daily Order']
-    # if request.form['station'] == "shipping":
-    #     for i in range(len(shipping_arr)):
-    #         data = {
-    #             'task_name': shipping_arr[i],
-    #             'priority': request.form['priority'],
-    #             'due_date': request.form['due_date'],
-    #             'complete': request.form['complete'],
-    #             "user_id": request.form["user_id"]
-    #         }
-    #         Task.create_task(data)
-    #     Task.task_added_success()
-
-    # data = {
-    #             'priority': request.form['priority'],
-    #             'due_date': request.form['due_date'],
-    #             'complete': request.form['complete'],
-    #             "user_id": request.form["user_id"]
-    #         }
-
     return redirect (request.referrer)
 
 @app.route('/user/task/<int:user_id>')
