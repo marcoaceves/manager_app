@@ -1,0 +1,14 @@
+#stationsTable{    border: solid 3px;
+    border-radius: 8px;
+    border-color: rgba(211, 208, 208, 0.795);
+    
+
+
+}
+td{
+    border: none;
+    border-color: rgba(211, 208, 208, 0.795);
+}
+#bold{
+    font-weight: 500;
+}
