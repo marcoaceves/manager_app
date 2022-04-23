@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.user import User
+from flask_app.models.password import Password
 
 from flask_bcrypt import Bcrypt
 import re
@@ -20,6 +21,12 @@ def forgot():
 
     return render_template("forgot.html")
 
-@app.route('/send/password/link')
+@app.route('/send/password/link', methods=['POST'])
 def send_pass_link():
-    User.get_one()
+
+    data = {
+        'email': request.form['email'],
+    }
+    Password.get_by_email(data)
+    Password.pass_email_success()
+    return redirect(request.referrer)

@@ -27,10 +27,10 @@
         <div class="d-flex justify-content-evenly" >
             <form action="/send/password/link" method="POST" class="container mx-auto card" style="width: 400px" >
                 <h1 class="mb-3">Reset Password</h1>
-                {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
+                {% with messages = get_flashed_messages(category_filter=['email_pass']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
-                            <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                            <p class="text-success">{{message}}</p>                   <!-- display each message in a paragraph tag -->
                         {% endfor %}
                     {% endif %}
                 {% endwith %}

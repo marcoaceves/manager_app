@@ -1,21 +1,34 @@
-
-# from winreg import QueryInfoKey
+# from asyncio.windows_events import NULL
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
 from flask_app import app
-from datetime import datetime
-import math
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 from flask import flash
 import smtplib
 
 from email.message import EmailMessage
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+PASS_REGEX = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")
 db = 'ahf_db'
 
-class Email_Pic:
+class Password:
     def __init__(self, data):
+        self.id = data['id']
         self.email = data['email']
 
+
+    @classmethod
+    def get_by_email(cls,data):
+        query = "SELECT id, email FROM users WHERE email = %(email)s;"
+        result = connectToMySQL(db).query_db(query,data)
+        print(result[0] ,'!!!!!!!!!!!')
+        return result[0]
+
+    @staticmethod
+    def pass_email_success( ):
+        flash("Submit Successfully! Please Check Your Email!","email_pass")
 
 
 
@@ -41,4 +54,3 @@ class Email_Pic:
         email['Subject'] = 'Task Completed! AHF TAKS MANAGER'
         email.set_content(f"{username} has completed a Task! Please check your AHF Task Manager Dashboard!  http://54.193.73.88/")
         server.send_message(email)
-
