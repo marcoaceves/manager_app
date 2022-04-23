@@ -1,3 +1,10 @@
+<!-- log in page has link to page
+    page has a form were you can submit your email
+    on submit database will send a link to your email
+    the link will be a secret page that has the user id
+    page lets updated user password in data base
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +25,8 @@
     </div>
     <div class="wrapper">
         <div class="d-flex justify-content-evenly" >
-            <form action="/login" method="POST" class="container mx-auto card" style="width: 400px" >
-                <h1>Login</h1>
+            <form action="/send/password/link" method="POST" class="container mx-auto card" style="width: 400px" >
+                <h1 class="mb-3">Reset Password</h1>
                 {% with messages = get_flashed_messages(category_filter=['login']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
@@ -28,15 +35,11 @@
                     {% endif %}
                 {% endwith %}
                 <div class="mb-3">
-                    <label for="email" class="form-label ">Email:</label>
-                    <input type="text" name="email" class="form-control" id="email" >
+                    <label for="email" class="form-label mb-3 ">Email:</label>
+                    <input type="text" name="email" class="form-control mb-5" id="email" >
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">password:</label>
-                    <input type="password" name="password" class="form-control" id="password" >
-                </div>
-                <input type="submit" value="login" class="btn btn-success mb-3">
-                <a href="/forgot"> Forgot Password?</a>
+                <input type="submit" value="Send Email" class="btn btn-primary mb-5">
+
             </form>
         </div>
 
