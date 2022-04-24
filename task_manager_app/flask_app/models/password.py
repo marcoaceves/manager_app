@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask import flash
 import smtplib
-
+from itsdangerous import URLSafeTimedSerializer as Serializer
 from email.message import EmailMessage
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -47,6 +47,7 @@ class Password:
 
     @staticmethod
     def send_email(receiver):
+        token=Password.get_token()
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         # Make sure to give app access in your Google account
@@ -54,6 +55,22 @@ class Password:
         email = EmailMessage()
         email['From'] = 'ahf.task.manager@gmail.com'
         email['To'] = receiver
-        email['Subject'] = 'AHF TAKS MANAGER'
+        email['Subject'] = 'Password Reset Request AHF TAKS MANAGER'
         email.set_content("Here is your password Reset link!  http://54.193.73.88/")
         server.send_message(email)
+
+    @classmethod
+    def get_token(self, expires_sec=900):
+        serial=Serializer(app.config['secret_key'], expires_in=expires_sec)
+        return serial.dumps({'user_id':Password.id}).decode('utf-8')
+
+
+    @staticmethod
+    def verify_token(token):
+        serial=Serializer(app.config['secret_key'])
+        try:
+            user_id=serial.loads(token)['user_id']
+        except:
+            return None
+        return Password.query.get(id)
+

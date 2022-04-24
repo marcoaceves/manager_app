@@ -116,3 +116,5 @@ class User:
     @staticmethod
     def validate_role( ):
         flash("Role Updated Successfully!","updated")
+
+

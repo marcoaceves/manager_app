@@ -36,3 +36,10 @@ def send_pass_link():
     Password.send_email(email)
     Password.pass_email_success()
     return redirect(request.referrer)
+
+@app.route('/reset_password/<token>', methods=['GET','POST']):
+def reset_token(token):
+    user=Password.verify_token(token)
+    if user is None:
+        flash('Expired Token', 'warning')
+        return redirect('/forgot')
