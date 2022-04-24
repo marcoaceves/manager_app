@@ -25,7 +25,6 @@ class Password:
         result = connectToMySQL(db).query_db(query,data)
         if len(result) <1  :
             return False
-        print(result[0] ,'!!!!!!!!!!!')
         return result[0]
 
     @staticmethod
@@ -47,15 +46,14 @@ class Password:
 
 
     @staticmethod
-    def send_email(usertask):
-        username=usertask.first_name.capitalize()
+    def send_email(receiver):
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         # Make sure to give app access in your Google account
         server.login('ahf.task.manager@gmail.com', 'xrhkeiruhpcazfws')
         email = EmailMessage()
         email['From'] = 'ahf.task.manager@gmail.com'
-        email['To'] = 'mr.aceves@gmail.com'
-        email['Subject'] = 'Task Completed! AHF TAKS MANAGER'
-        email.set_content(f"{username} has completed a Task! Please check your AHF Task Manager Dashboard!  http://54.193.73.88/")
+        email['To'] = receiver
+        email['Subject'] = 'AHF TAKS MANAGER'
+        email.set_content("Here is your password Reset link!  http://54.193.73.88/")
         server.send_message(email)

@@ -31,7 +31,8 @@ def send_pass_link():
     if Password.get_by_email(data)==False:
         Password.pass_email_notfound()
         return redirect(request.referrer)
-    Password.get_by_email(data)
-
+    email_data=Password.get_by_email(data)
+    email=email_data['email']
+    Password.send_email(email)
     Password.pass_email_success()
     return redirect(request.referrer)
