@@ -1,3 +1,4 @@
+from ast import Pass
 from flask_app import app
 from flask import Flask, render_template, request, redirect, session, flash
 from flask_app.models.user import User
@@ -31,15 +32,34 @@ def send_pass_link():
     if Password.get_by_email(data)==False:
         Password.pass_email_notfound()
         return redirect(request.referrer)
+
     email_data=Password.get_by_email(data)
+    user_id=email_data['id']
+    print(user_id, "$$$$$$$$$$$")
     email=email_data['email']
-    Password.send_email(email)
+    Password.send_email(email, user_id)
     Password.pass_email_success()
     return redirect(request.referrer)
 
-@app.route('/reset_password/<token>', methods=['GET','POST']):
+@app.route('/reset_password/<token>', methods=['GET','POST'])
 def reset_token(token):
     user=Password.verify_token(token)
     if user is None:
         flash('Expired Token', 'warning')
         return redirect('/forgot')
+    print(user['id'],'^^^^^^^')
+    return render_template("change_password.html",user=user)
+
+@app.route('/update/password',methods=['POST'])
+def update_password():
+    if not Password.validate_password(request.form):
+        return redirect(request.referrer)
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    print(pw_hash)
+    data = {
+        'id': request.form['id'],
+        'password': pw_hash,
+        'confirm_password': request.form['confirm_password'],
+    }
+    Password.update(data)
+    return redirect ('/')

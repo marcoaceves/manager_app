@@ -18,13 +18,22 @@ class Password:
         self.id = data['id']
         self.email = data['email']
 
-
+    @classmethod
+    def update(cls,data):
+        query = 'UPDATE users SET password = %(password)s WHERE id = %(id)s;'
+        return connectToMySQL(db).query_db(query, data)
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT id, email FROM users WHERE email = %(email)s;"
         result = connectToMySQL(db).query_db(query,data)
         if len(result) <1  :
             return False
+        return result[0]
+    @classmethod
+    def get_by_id(cls,data):
+        query = "SELECT id, email FROM users WHERE id = %(id)s;"
+        result = connectToMySQL(db).query_db(query,data)
+        # print(result[0],'^^^^^^^^^')
         return result[0]
 
     @staticmethod
@@ -46,8 +55,8 @@ class Password:
 
 
     @staticmethod
-    def send_email(receiver):
-        token=Password.get_token()
+    def send_email(receiver, user_id):
+        token=Password.get_token(user_id)
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         # Make sure to give app access in your Google account
@@ -56,21 +65,35 @@ class Password:
         email['From'] = 'ahf.task.manager@gmail.com'
         email['To'] = receiver
         email['Subject'] = 'Password Reset Request AHF TAKS MANAGER'
-        email.set_content("Here is your password Reset link!  http://54.193.73.88/")
+        email.set_content(f"Here is your password Reset link!  http://localhost:5000/reset_password/{token}")
         server.send_message(email)
 
     @classmethod
-    def get_token(self, expires_sec=900):
-        serial=Serializer(app.config['secret_key'], expires_in=expires_sec)
-        return serial.dumps({'user_id':Password.id}).decode('utf-8')
+    def get_token(self, user_id):
+        serial=Serializer(app.secret_key)
+        return serial.dumps({'user_id':user_id},max_age=3600)
 
 
     @staticmethod
-    def verify_token(token):
-        serial=Serializer(app.config['secret_key'])
+    def verify_token(token,expiration=3600):
+        serial=Serializer(app.secret_key)
         try:
-            user_id=serial.loads(token)['user_id']
+            user_id=serial.loads(token,max_age=expiration)['user_id']
         except:
             return None
-        return Password.query.get(id)
+        data = {
+        'id': user_id,
+        }
+        return Password.get_by_id(data)
 
+
+
+    @staticmethod
+    def validate_password( user ):
+        is_valid = True
+        if not PASS_REGEX.match(user['password']):
+            flash("Password must contain at least 8 characters, 1 Uppercase, 1 Lowercase, 2 Numbers!","register")
+            is_valid=False
+        if user['password'] != user['confirm_password']:
+            flash("Passwords don't match","register")
+        return is_valid
