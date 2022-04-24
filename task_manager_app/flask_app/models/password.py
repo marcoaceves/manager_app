@@ -1,4 +1,4 @@
-# from asyncio.windows_events import NULL
+
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
 from flask_app import app
@@ -23,12 +23,17 @@ class Password:
     def get_by_email(cls,data):
         query = "SELECT id, email FROM users WHERE email = %(email)s;"
         result = connectToMySQL(db).query_db(query,data)
+        if len(result) <1  :
+            return False
         print(result[0] ,'!!!!!!!!!!!')
         return result[0]
 
     @staticmethod
     def pass_email_success( ):
         flash("Submit Successfully! Please Check Your Email!","email_pass")
+    @staticmethod
+    def pass_email_notfound( ):
+        flash("Email Not Found!","email_notfound")
 
 
 

@@ -27,6 +27,11 @@ def send_pass_link():
     data = {
         'email': request.form['email'],
     }
+
+    if Password.get_by_email(data)==False:
+        Password.pass_email_notfound()
+        return redirect(request.referrer)
     Password.get_by_email(data)
+
     Password.pass_email_success()
     return redirect(request.referrer)
