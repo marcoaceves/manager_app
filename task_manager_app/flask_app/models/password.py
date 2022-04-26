@@ -65,7 +65,7 @@ class Password:
         email['From'] = 'ahf.task.manager@gmail.com'
         email['To'] = receiver
         email['Subject'] = 'Password Reset Request AHF TAKS MANAGER'
-        email.set_content(f"Here is your password Reset link!  http://localhost:5000/reset_password/{token}")
+        email.set_content(f"Here is your password Reset link!  http://54.193.73.88/reset_password/{token}")
         server.send_message(email)
 
     @classmethod
