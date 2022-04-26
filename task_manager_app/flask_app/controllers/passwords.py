@@ -35,7 +35,6 @@ def send_pass_link():
 
     email_data=Password.get_by_email(data)
     user_id=email_data['id']
-    print(user_id, "$$$$$$$$$$$")
     email=email_data['email']
     Password.send_email(email, user_id)
     Password.pass_email_success()
@@ -47,7 +46,6 @@ def reset_token(token):
     if user is None:
         flash('Expired Token', 'warning')
         return redirect('/forgot')
-    print(user['id'],'^^^^^^^')
     return render_template("change_password.html",user=user)
 
 @app.route('/update/password',methods=['POST'])
@@ -62,4 +60,5 @@ def update_password():
         'confirm_password': request.form['confirm_password'],
     }
     Password.update(data)
+    flash("Password Updated Successfully! Please Log in.","update_success")
     return redirect ('/')

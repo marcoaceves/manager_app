@@ -42,6 +42,13 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+                {% with messages = get_flashed_messages(category_filter=['invalid_token']) %}     <!-- declare a variable called messages -->
+                    {% if messages %}                            <!-- check if there are any messages -->
+                        {% for message in messages %}            <!-- loop through the messages -->
+                            <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <div class="mb-3">
                     <label for="email" class="form-label mb-3 ">Email:</label>
                     <input type="text" name="email" class="form-control mb-5" id="email" >

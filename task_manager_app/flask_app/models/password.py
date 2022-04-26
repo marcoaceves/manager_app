@@ -71,7 +71,7 @@ class Password:
     @classmethod
     def get_token(self, user_id):
         serial=Serializer(app.secret_key)
-        return serial.dumps({'user_id':user_id},max_age=3600)
+        return serial.dumps({'user_id':user_id})
 
 
     @staticmethod
@@ -80,6 +80,7 @@ class Password:
         try:
             user_id=serial.loads(token,max_age=expiration)['user_id']
         except:
+            flash("Your Link has expired! please resubmit Email!","invalid_token")
             return None
         data = {
         'id': user_id,
