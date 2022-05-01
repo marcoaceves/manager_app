@@ -24,19 +24,23 @@
 
     // });
     function toggle(source) {
-  checkboxes = document.getElementsByName('checked1');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes = document.getElementsByName('checked1');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
     checkboxes[i].checked = source.checked;
-  }
+    }
 }
     function toggle2(source) {
-  checkboxes = document.getElementsByName('complete');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes = document.getElementsByName('complete');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
     checkboxes[i].checked = source.checked;
-  }
+    }
 }
 
-
+function disableButton(button) {
+     button.disabled = true;
+     button.value = "submitting...."
+     button.form.submit();
+}
 
 </script>
 
@@ -226,7 +230,7 @@
                                             <td></td>
                                             <td> </td>
                                             <td></td>
-                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" > Update</button></td>
+                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" onclick="disableButton(this)"> Update</button></td>
                                         </div>
                                     </tr>
                                     {% endif %}
