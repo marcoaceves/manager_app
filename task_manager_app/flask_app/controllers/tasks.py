@@ -139,7 +139,7 @@ def assign_station():
             'name': request.form['station_name']
             }
     willcall=Station.get_one_stations_tasks(data)
-    print(willcall[0].task_name, "WWWWWWWWWWWWWWW")
+    # print(willcall[0].task_name, "WWWWWWWWWWWWWWW")
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
 

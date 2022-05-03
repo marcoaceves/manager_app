@@ -53,7 +53,7 @@ class Task:
 # get all tasks that belong to one user
     @classmethod
     def get_all_user_tasks(cls,data):
-        query = "SELECT id, user_id, LOWER(task_name) as task_name, priority, complete, date(due_date) as due_date, comment, created_at, updated_at FROM tasks WHERE user_id =  %(user2)s ORDER by due_date ASC"
+        query = "SELECT id, user_id, task_name as task_name, priority, complete, date(due_date) as due_date, comment, created_at, updated_at FROM tasks WHERE user_id =  %(user2)s ORDER by due_date ASC"
         results = connectToMySQL(db).query_db(query,data)
         tasks = []
         for task in results:
