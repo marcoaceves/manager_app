@@ -139,7 +139,6 @@ def assign_station():
             'name': request.form['station_name']
             }
     willcall=Station.get_one_stations_tasks(data)
-    # print(willcall[0].task_name, "WWWWWWWWWWWWWWW")
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
 
@@ -209,9 +208,6 @@ def update_tasks():
             data = {
             'id': checked_list[i]}
             Task.destroy(data)
-
-
-
     user2data = {
         "user2": request.form['user2_id']
     }
@@ -233,8 +229,16 @@ def update_tasks():
                     'id': completed[i],
                     'complete': 0}
                         Task.complete_update(data)
-                    Email_Pic.send_email(user2data)
-            Task.task_updated_success()
+    if len(completed) > 0:
+        data = {
+                'id': completed[i]}
+        data2=Task.get_one(data)
+        if hasattr(data2, 'complete'):
+            if data2.complete != None:
+                Email_Pic.send_email(user2data)
+                Task.task_updated_success()
+
+
     comments=request.form.getlist('comment')
     for i in range(len(comments)-1):
             data = {
