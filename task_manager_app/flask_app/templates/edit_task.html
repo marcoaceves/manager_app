@@ -39,7 +39,7 @@
 </div>
 
     <div class="wrapper">
-        {% with messages = get_flashed_messages(category_filter=['task_success']) %}
+        {% with messages = get_flashed_messages(category_filter=['task_edit_success']) %}
         {% if messages %}
             {% for message in messages %}
                 <p class="text-success text-center">{{message}}</p>
@@ -75,9 +75,9 @@
                     <label for="priority" class="form-label">Priority:</label>
                     <p>{{task.priority}}
                         <!-- <select name="priority" id="priority">
-                        <option value="High Priority">High Priority</option> 
-                        <option value="Middle Priority">Middle Priority</option> 
-                        <option value="Low Priority">Low Priority</option> 
+                        <option value="High Priority">High Priority</option>
+                        <option value="Middle Priority">Middle Priority</option>
+                        <option value="Low Priority">Low Priority</option>
                         </select> -->
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
@@ -88,7 +88,7 @@
                     <input type="hidden" name="due_date" class="form-control" id="due_date"
                     onfocus="(this.type='date')" value="{{task.due_date}}">
                 </div>
-                <input type="submit" value="Add Task" class="btn btn-primary mb-5">
+                <input type="submit" value="Update Task" class="btn btn-primary mb-5">
             </form>
 
 
