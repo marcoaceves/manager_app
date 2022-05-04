@@ -71,6 +71,12 @@ table.table-bordered > tbody > tr > td{
     background-color: transparent;
     text-decoration: none;
 }
+#taskLink{
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
 
 #due{
   font-weight: bold;

@@ -49,6 +49,41 @@ def add_task():
     Task.task_added_success()
     return redirect (request.referrer)
 
+# html page for editing task
+@app.route('/edit/<int:task_id>')
+def edit_task(task_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    if session['role'] == 'staff':
+        return redirect("/user/dash")
+    data ={
+        'id': task_id
+    }
+    user_id = Task.get_one(data).user_id
+    user_data={
+        'id': user_id
+    }
+
+
+    return render_template('edit_task.html',  task=Task.get_one(data), user=User.get_one(user_data)  )
+
+# route for processing edit
+@app.route('/edit/task', methods=['POST'])
+def edit_task_process():
+    if 'user_id' not in session:
+        return redirect('/')
+    data = {
+        'task_name': request.form['task_name'],
+        'due_date': request.form['due_date'],
+        'complete': request.form['complete'],
+        'id' : request.form['task_id']
+    }
+
+
+    Task.edit_task(data)
+    Task.task_added_success()
+    return redirect (request.referrer)
+
 # prep task calendar assing form
 @app.route('/prep/task', methods=['POST'])
 def add_prep():

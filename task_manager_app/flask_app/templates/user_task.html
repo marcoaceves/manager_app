@@ -138,9 +138,12 @@ function disableButton(button) {
                                     <tbody>
                                     <tr class="fw-normal">
                                         {% if task.due_date != None%}
-                                        <th class="" >
-                                            <span >{{task.task_name}}</span>
-                                        </th>
+                                        <td class="align-middle" >
+                                            <span class="ms-2 text-center" >
+                                                <a href="/edit/{{task.id}}"  id="taskLink" >{{task.task_name}}</a>
+                                            </span>
+
+                                        </td>
                                         {% if today == task.due_date %}
                                         <td class="align-middle">
                                             <span class="text" id="due">{{task.due_date.strftime('%B %d, %Y')}}</span >
@@ -178,11 +181,11 @@ function disableButton(button) {
                                         </td>
                                         {% if user.role == 'admin'%}
                                         <td class="align-middle">
-                                            <p scope="col">{{task.comment}}</p>
+                                            <span class="text">{{task.comment}}</span>
                                         </td>
                                         {% endif %}
                                         {% if user.role == 'admin'%}
-                                        <td class="align-middle ">
+                                        <td class="align-middle">
 
                                             <input class="form-check-input" value="{{task.id}}" type="checkbox" name="checked1" id="flexRadioDefault1">
 
@@ -191,8 +194,7 @@ function disableButton(button) {
                                         {% if user.role == 'staff'%}
                                         <td class="align-middle">
                                                 <input type="hidden" name="comment" value="{{task.id}}" class="form-control">
-                                                
-                                                <input type="text" id="taskComment" name="comment" placeholder="{{task.comment}}">
+                                                <input type="text"  id="taskComment" name="comment" placeholder="{{task.comment}}">
                                         </td>
                                         {% endif %}
                                         {% endif %}
@@ -207,7 +209,7 @@ function disableButton(button) {
                                             <td></td>
                                             <td></td>
                                             <td> </td>
-                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary " > Update</button></td>
+                                            <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" onclick="disableButton(this)"> Update</button></td>
                                             <td></td>
                                         </div>
                                     </tr>

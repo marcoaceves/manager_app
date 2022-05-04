@@ -68,6 +68,10 @@ class Task:
     def update_comment(cls, data):
         query = "UPDATE tasks SET comment=%(comment)s WHERE id = %(id)s;"
         return connectToMySQL(db).query_db(query,data)
+    @classmethod
+    def edit_task(cls, data):
+        query = "UPDATE tasks SET task_name=%(task_name)s, due_date=%(due_date)s  WHERE id = %(id)s;"
+        return connectToMySQL(db).query_db(query,data)
 
     @classmethod
     def destroy(cls, data):
