@@ -56,7 +56,6 @@ def destroy_station_html():
     if 'user_id' not in session:
         return redirect('/')
 
-
     return render_template("delete_station.html", stations= Station.get_all_stations())
 
 @app.route('/destroying/station/', methods=['POST'])
@@ -68,4 +67,5 @@ def destroy_station():
         }
 
     Station.destroy_station(data)
+    flash("Station Successfully Deleted!", "delete_success")
     return redirect(request.referrer)

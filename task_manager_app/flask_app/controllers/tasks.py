@@ -176,8 +176,6 @@ def assign_station():
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
     dates=request.form['due_date'].split(',')
-    print(dates,'$$$$$$$$$$$$$')
-    print(dates[1],'******')
     for x in range(len(dates)):
         for i in range(len(willcall)):
             data = {
@@ -187,7 +185,6 @@ def assign_station():
                 'complete': request.form['complete'],
                 "user_id": request.form["user_id"]
             }
-            print(data, "TATATATA")
             if data['task_name'] != 'NULL':
                 Task.create_task(data)
     Task.task_added_success()
