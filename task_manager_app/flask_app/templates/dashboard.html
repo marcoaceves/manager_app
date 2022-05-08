@@ -9,22 +9,23 @@
     <link type="image/png" rel="icon" href="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/ff4f0755a2e5442cb887170a7d3060e9/1/5feFb8zhrk/App%20Icon%20%252843%2529.png?dpr=2">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    
 
 </head>
 <body>
 
             <!-- navigation bar -->
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
-        <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
+        <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" id="ahf_logo"></a>
         <div>
-            <a href="/dashboard"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Dashboard</button></a>
-            <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Add User</button></a>
-            <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Assign Task</button></a>
-            <a href="/stations"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Stations</button></a>
-            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary"" style="text-align:center">Manage Users</button></a>
+            <a href="/dashboard"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Dashboard</button></a>
+            <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Add User</button></a>
+            <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Assign Task</button></a>
+            <a href="/stations"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Stations</button></a>
+            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Users</button></a>
 
             <!-- Dropdown -->
-            <div class="dropdown btn btn-primary badge badge-pill badge-primary">
+            <div class="dropdown btn btn-primary badge badge-pill badge-primary" id="mobilebtn">
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
                 <div class="dropdown-content ">
                     <a href="/links">Links</a>
@@ -34,71 +35,68 @@
             </div>
 
         </div>
-        <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger" style="text-align:center">Logout</button></a>
+        <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger" style="text-align:center" id="mobilebtn">Logout</button></a>
     </div>
     <!-- messages -->
-    <div class="wrapper">
+    <div class="container">
+        <div class="wrapper">
+            <div class="d-flex justify-content-start align-items-center mb-3 border-bottom border-5 border-dark">
+                <h3 class="text-center  text-capitalize">Welcome, {{user.first_name}}</h3>
 
-        <div class="d-flex justify-content-start align-items-center mb-3 border-bottom border-5 border-dark">
-            <h3 class="text-center me-5 text-capitalize">Welcome, {{user.first_name}}!</h3>
-            <h1 class="text-center  ms-5">DASHBOARD</h1>
+            </div>
+            <!-- gradient table -->
+            <section class="gradient-custom-2">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items h-100">
+                        <div class="col-md-12 col-xl-12">
+                            <div class="card mask-custom">
+                                <div class="card-body p-4 text-white">
+                                    <div class="text-center pt-3 pb-2">
+                                    </div>
+                                    <table class="table text-white mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="text-center">Team Member</th>
+                                            <th scope="col" class="text-center">Pending Task's</th>
+                                            <th scope="col" class="text-center">Privileges</th>
+                                            <th scope="col" class="text-center">Completed Task's</th>
+                                        </tr>
+                                        </thead>
+                                        {% for count in counts %}
+                                        <tbody>
+                                        <tr class="fw-normal">
+                                            <th>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" alt="avatar 1"
+                                                style="width: 45px; height: auto;">
+                                            <span class="ms-2 text-center lowername uppername" > <a href="/user/task/{{count.user_id}}" id="userLink">{{count.first_name}}</a></span>
+                                            </th>
+                                            <td class="align-middle text-center">
+                                                {% if count.count != 0 %}
+                                            <span >{{count.count - count.complete}}</span >
+                                                {% endif %}
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                {% if count.role == 'admin' %}
+                                                <span class="tag2 tag2-blue" id="due">Admin</span>
+                                                {% endif %}
+                                                {% if count.role == 'staff' %}
+                                                <span class="tag2 tag2-purple" id="due">Staff</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span >{{count.complete}}</span >
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <!-- gradient table -->
-        <section class=" gradient-custom-2">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items h-100">
-                    <div class="col-md-12 col-xl-12">
-                        <div class="card mask-custom">
-                            <div class="card-body p-4 text-white">
-                                <div class="text-center pt-3 pb-2">
-                                </div>
-                                <table class="table text-white mb-0">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="text-center">Team Member</th>
-                                        <th scope="col" class="text-center">Pending Task's</th>
-                                        <th scope="col" class="text-center">Privileges</th>
-                                        <th scope="col" class="text-center">Completed Task's</th>
-                                    </tr>
-                                    </thead>
-                                    {% for count in counts %}
-                                    <tbody>
-                                    <tr class="fw-normal">
-                                        <th>
-                                        <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" alt="avatar 1"
-                                            style="width: 45px; height: auto;">
-                                        <span class="ms-2 text-center lowername uppername" > <a href="/user/task/{{count.user_id}}" id="userLink">{{count.first_name}}</a></span>
-                                        </th>
-                                        <td class="align-middle text-center">
-                                            {% if count.count != 0 %}
-                                        <span >{{count.count - count.complete}}</span >
-                                            {% endif %}
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            {% if count.role == 'admin' %}
-                                            <span class="tag2 tag2-blue" id="due">Admin</span>
-                                            {% endif %}
-                                            {% if count.role == 'staff' %}
-                                            <span class="tag2 tag2-purple" id="due">Staff</span>
-                                            {% endif %}
-                                        </td>
-                                        <td class="align-middle text-center">
-
-                                            <span >{{count.complete}}</span >
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    {% endfor %}
-                                </table>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-        </section>
-
     </div>
-
 </body>
 </html>

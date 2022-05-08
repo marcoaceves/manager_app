@@ -2,13 +2,25 @@
     margin: 0;
     padding: 0;
     }
-
 .wrapper{
-    padding: 30px 100px;
-
-    max-width: 1200px;
-    margin: 0 auto; 
+      padding: 2.3% 7.3%;
+      max-width: 1200px;
+      margin: 0 auto; 
+  }
+#ahf_logo{
+  max-width: 250px;
+  width: auto;
 }
+
+/* nav bar  */
+#nav{
+  background-color: black;
+  padding: 5px 90px;
+}
+
+
+
+
 /* drop down  */
 .dropbtn {
   background-color: #0d6efd;
@@ -58,11 +70,7 @@ table.table-bordered > tbody > tr > td{
     border:1px solid rgb(0, 0, 0);
 }
 
-/* nav bar  */
-#nav{
-    background-color: black;
-    padding: 5px 90px;
-}
+
 
 
 #userLink{
@@ -323,5 +331,39 @@ background: linear-gradient(to bottom, #00a8c5, #00f8e3);
 
 
 #selectbox{border-radius: 8px;}
+@media screen and (max-width: 480px) {
+  #ahf_logo {
+    margin: 0;
+      width: 100px;
+  }
+  #nav{
+    background-color: black;
+    padding: 0;
+  }
+  th, tr, td{
+    font-size: 12px;
+  }
+  .tag2, .tag2-blue{width: 1px;
 
+  }
+  .wrapper{
+    padding: 0%;
+
+}
+  #mobilebtn{
+    width: auto;
+    margin: 0;
+    padding: 0.5%;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .dropbtn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0px;
+    font-size: 10px;
+    border: none;
+  }
+
+}
 
