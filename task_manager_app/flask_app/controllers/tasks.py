@@ -169,19 +169,21 @@ def add_refill():
 def assign_station():
     if 'user_id' not in session:
         return redirect('/')
-    wc_arr=['Will Call Report', 'Delivery Report', 'Not Scanned Report', 'Pending in store Receiving', 'Check Voice Mail','Visual Check Will Call', 'File Prescriptions']
     data = {
             'name': request.form['station_name']
             }
     willcall=Station.get_one_stations_tasks(data)
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
-
-    for i in range(len(willcall)):
+    dates=request.form['due_date'].split(',')
+    print(dates,'$$$$$$$$$$$$$')
+    print(dates[1],'******')
+    for x in range(len(dates)):
+        for i in range(len(willcall)):
             data = {
                 'task_name': willcall[i].task_name,
                 'priority': request.form['priority'],
-                'due_date': request.form['due_date'],
+                'due_date': dates[x],
                 'complete': request.form['complete'],
                 "user_id": request.form["user_id"]
             }

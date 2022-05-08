@@ -50,3 +50,22 @@ def destroy_station_task():
 
     Station.destroy(data)
     return redirect(request.referrer)
+
+@app.route('/destroy/station/')
+def destroy_station_html():
+    if 'user_id' not in session:
+        return redirect('/')
+
+
+    return render_template("delete_station.html", stations= Station.get_all_stations())
+
+@app.route('/destroying/station/', methods=['POST'])
+def destroy_station():
+    if 'user_id' not in session:
+        return redirect('/')
+    data={
+            'name': request.form['station_name']
+        }
+
+    Station.destroy_station(data)
+    return redirect(request.referrer)

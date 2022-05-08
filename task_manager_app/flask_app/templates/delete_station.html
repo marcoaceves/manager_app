@@ -47,30 +47,10 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <!-- new station -->
-        <div class="d-flex justify-content-evenly mb-5" >
-
-            <form action="/add/station" method="POST" class="container mx-auto card" style="width: 400px" >
-                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
-                <h1>New Station</h1>
-                {% with messages = get_flashed_messages(category_filter=['task']) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <p class="text-danger">{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-                <div class="mb-3">
-                    <label for="name" class="form-label">Station Name:</label>
-                    <input type="text" name="station_name" id="station_name" class="form-control">
-                </div>
-                <input type="hidden" name="task_name" id="task_name" value="NULL">
-                <input type="submit" value="Create Station" class="btn btn-primary mb-5">
-            </form>
 
             <!-- add task to station -->
-            <form action="/add/station" method="POST" class="container mx-auto card" style="width: 400px" >
-                <h1>Add Task to Station</h1>
+            <form action="/destroying/station/" method="POST" class="container mx-auto card" style="width: 400px" >
+                <h1>Delete Station</h1>
                 {% with messages = get_flashed_messages(category_filter=['station']) %}     <!-- declare a variable called messages -->
                 {% if messages %}                            <!-- check if there are any messages -->
                     {% for message in messages %}            <!-- loop through the messages -->
@@ -88,59 +68,10 @@
                         </select>
                     </p>
                 </div>
-                <input type="hidden" name="complete" id="complete" value="0" class="form-control">
-                <input type="hidden" name="priority" id="priority" value="Middle Priority" class="form-control">
-                <div class="mb-3">
-                    <label for="task_name" class="form-label">Task Name:</label>
-                    <input type="text" name="task_name" id="task_name" class="form-control">
-                </div>
                 <div class="mb-3">
                 </div>
-                <input type="submit" value="Assign Task to Station" class="btn btn-success mb-5">
-                <a href="/destroy/station" class="mb-3"> Delete a station</a>
+                <input type="submit" value="Delete Station" class="btn btn-danger mb-5">
             </form>
-        </div>
-
-
-        <!-- display station tasks -->
-        <div class="d-flex justify-content-evenly" id="stationsTable" >
-                <!-- <h1>Stations</h1> -->
-                {% with messages = get_flashed_messages(category_filter=['task']) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <p class="text-danger">{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-
-
-                    <table class="table table-hover" >
-                        <thead>
-                        <tr class="lead" id="bold">
-                            <th scope="col">Station</th>
-                            <th scope="col">Task</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {% for station in station_tasks%}
-                            {% if station.task_name != 'NULL' %}
-                            <form action="/destroy/station/task" method="POST">
-                                <tr class="text-capitalize">
-                                    <td class="lead" id="bold">{{station.name}}</td>
-                                    <td>{{station.task_name}}</td>
-                                    <td><button type="submit" class="btn btn-danger">Delete</button></td>
-                                    <input type="hidden" name="id" id="id" value="{{station.id}}">
-                                </tr>
-                            </form>
-                            {% endif %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
-            </form>
-        </div>
-
     </div>
 </body>
 </html>

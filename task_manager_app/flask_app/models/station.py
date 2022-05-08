@@ -51,3 +51,8 @@ class Station:
     def destroy(cls, data):
         query = 'DELETE FROM stations WHERE stations.id = %(id)s;'
         return connectToMySQL(db).query_db(query,data)
+
+    @classmethod
+    def destroy_station(cls, data):
+        query = 'DELETE FROM stations WHERE stations.name = %(name)s;'
+        return connectToMySQL(db).query_db(query,data)
