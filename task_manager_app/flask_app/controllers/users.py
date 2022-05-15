@@ -130,6 +130,8 @@ def dashboard():
         return redirect("/user/dash")
     users= User.get_all()
     counts = Count.get_all_counts(data)
+
+
     return render_template("dashboard.html",user=User.get_one(data), users=users, counts=counts)
 
 @app.route('/links')

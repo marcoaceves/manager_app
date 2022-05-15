@@ -246,6 +246,9 @@ def update_tasks():
         "user2": request.form['user2_id']
     }
     completed=request.form.getlist('complete')
+    status=request.form.getlist('status')
+    print(completed, "TTTTTTTTTTT")
+    print(status, "TTTTTTTTTTT")
     user2data=User.get_user_and_tasks(user2data)
     for i in range(len(completed)):
             data = {
@@ -253,15 +256,17 @@ def update_tasks():
             data2=Task.get_one(data)
             if hasattr(data2, 'complete'):
                 if data2.complete != None:
-                    if data2.complete == 0:
+                    if (status[i] == '1'):
                         data = {
                     'id': completed[i],
-                    'complete': 1}
+                    'complete': '1',
+                    'status':status[i]}
                         Task.complete_update(data)
-                    if data2.complete == 1:
+                    if (status[i] != '1'):
                         data = {
                     'id': completed[i],
-                    'complete': 0}
+                    'complete': '0',
+                    "status":status[i]}
                         Task.complete_update(data)
     if len(completed) > 0:
         data = {

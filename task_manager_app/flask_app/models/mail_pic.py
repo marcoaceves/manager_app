@@ -37,7 +37,7 @@ class Email_Pic:
         server.login('ahf.task.manager@gmail.com', 'xrhkeiruhpcazfws')
         email = EmailMessage()
         email['From'] = 'ahf.task.manager@gmail.com'
-        email['To'] = 'negar.shirazpour@ahfrx.org'
+        email['To'] = 'mr.aceves@gmail.com'
         email['Subject'] = 'Task Completed! AHF TAKS MANAGER'
         email.set_content(f"{username} has completed a Task! Please check your AHF Task Manager Dashboard!  http://54.215.222.20/")
         server.send_message(email)

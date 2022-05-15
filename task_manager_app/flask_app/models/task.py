@@ -19,6 +19,7 @@ class Task:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
+        self.status = data['status']
 
     def time_span(self):
         now = datetime.now()
@@ -36,7 +37,7 @@ class Task:
 
     @classmethod
     def create_task(cls, data):
-        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date) VALUES (%(task_name)s,%(user_id)s,%(priority)s,%(complete)s,%(due_date)s);"
+        query= "INSERT INTO tasks (task_name, user_id, priority, complete, due_date, status) VALUES (%(task_name)s,%(user_id)s,%(priority)s,%(complete)s,%(due_date)s,0);"
         result = connectToMySQL(db).query_db(query,data)
         return result
 
@@ -53,7 +54,7 @@ class Task:
 # get all tasks that belong to one user
     @classmethod
     def get_all_user_tasks(cls,data):
-        query = "SELECT id, user_id, task_name as task_name, priority, complete, date(due_date) as due_date, comment, created_at, updated_at FROM tasks WHERE user_id =  %(user2)s ORDER by due_date ASC"
+        query = "SELECT id, user_id, task_name as task_name, status as status, priority, complete, date(due_date) as due_date, comment, created_at, updated_at FROM tasks WHERE user_id =  %(user2)s ORDER by due_date ASC "
         results = connectToMySQL(db).query_db(query,data)
         tasks = []
         for task in results:
@@ -62,7 +63,7 @@ class Task:
 
     @classmethod
     def complete_update(cls, data):
-        query = "UPDATE tasks SET complete=%(complete)s WHERE id = %(id)s;"
+        query = "UPDATE tasks SET complete=%(complete)s, status=%(status)s WHERE id = %(id)s;"
         return connectToMySQL(db).query_db(query,data)
     @classmethod
     def update_comment(cls, data):
