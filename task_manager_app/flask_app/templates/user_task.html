@@ -37,9 +37,9 @@
 }
 
 function disableButton(button) {
-     button.disabled = true;
-     button.value = "submitting...."
-     button.form.submit();
+    button.disabled = true;
+    button.value = "submitting...."
+    button.form.submit();
 }
 
 </script>
@@ -233,7 +233,14 @@ function disableButton(button) {
                                         <div  class="d-flex justify-content-end">
                                             <td></td>
                                             <td></td>
-                                            <td></td>
+                                            <td>
+                                                <input type="hidden" name='id' value="{{user.id}}" class="form-control">
+                                                <select name="status" class="badge bg-success " id="statusSelect">
+                                                    <option class="bg-light text-dark"  value="staff" id="complete" >Complete</option>
+                                                    <option class="bg-light text-dark" value="admin" id="working">Working on it</option>
+                                                    <option class="bg-light text-dark" value="admin" id="pending">Pending</option>
+                                                </select>
+                                            </td>
                                             <td> </td>
                                             <td></td>
                                             <td><button form="my-form" type="submit" class="btn btn-primary badge badge-pill badge-primary" onclick="disableButton(this)"> Update</button></td>
@@ -248,4 +255,23 @@ function disableButton(button) {
                 </div>
             </div>
         </section>
+
+        <script>    $('#statusSelect').change(function () {
+            var selectedId = $('option:selected', this).attr('id');
+            console.log(selectedId)
+            if (selectedId == "pending") {
+                jQuery(this).attr("class","badge bg-danger");}
+            if (selectedId == "complete") {
+                jQuery(this).attr("class","badge bg-success");}
+            if (selectedId == "working") {
+                jQuery(this).attr("class","badge bg-warning");
+            
+            }
+        });
+        
+        </script>
+    </body>
+
+
+</html>
 
