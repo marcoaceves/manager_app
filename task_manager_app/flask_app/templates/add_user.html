@@ -40,10 +40,10 @@
 
             <form action="/register" method="POST" class="container mx-auto bg-light card " style="width: 400px" >
                 <h1>Add New User</h1>
-                {% with messages = get_flashed_messages(category_filter=['register']) %}     <!-- declare a variable called messages -->
-                    {% if messages %}                            <!-- check if there are any messages -->
-                        {% for message in messages %}            <!-- loop through the messages -->
-                            <p class="text-danger">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% with messages = get_flashed_messages(category_filter=['register']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
