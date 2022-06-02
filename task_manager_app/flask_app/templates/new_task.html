@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css') }}">
 
 </head>
 <body>
@@ -89,9 +89,14 @@
                     </p>
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="due_date" class="form-label ">Due Date:</label>
                     <input type="date" name="due_date" class="form-control" id="due_date" >
+                </div> -->
+                <div class="mb-3">
+                    <label for="Txt_Date" class="form-label ">Due Date:</label>
+                    <!-- <input type="date" name="due_date" class="form-control" id="due_date" > -->
+                    <input type="text" id="Txt_Date" name="due_date" class="form-control" placeholder="Choose Date" style="cursor: pointer;">
                 </div>
                 <input type="submit" value="Add Task" class="btn btn-primary mb-5">
             </form>
@@ -133,9 +138,9 @@
                     <!-- <input type="text" name="priority" id="priority" class="form-control"> -->
                 </div>
                 <div class="mb-3">
-                    <label for="Txt_Date" class="form-label ">Due Date:</label>
+                    <label for="Txt_Date1" class="form-label ">Due Date:</label>
                     <!-- <input type="date" name="due_date" class="form-control" id="due_date" > -->
-                    <input type="text" id="Txt_Date" name="due_date" class="form-control" placeholder="Choose Date" style="cursor: pointer;">
+                    <input type="text" id="Txt_Date1" name="due_date" class="form-control" placeholder="Choose Date" style="cursor: pointer;">
                 </div>
                 <input type="submit" value="Add Task" class="btn btn-success">
             </form>
@@ -441,6 +446,15 @@
 
 <script type="text/javascript">
     $("#Txt_Date").datepicker({
+    format: 'yyyy-m-d',
+    inline: false,
+    lang: 'en',
+    step: 5,
+    multidate: 5,
+    closeOnDateSelect: true
+});</script>
+<script type="text/javascript">
+    $("#Txt_Date1").datepicker({
     format: 'yyyy-m-d',
     inline: false,
     lang: 'en',

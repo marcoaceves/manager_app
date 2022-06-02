@@ -30,21 +30,25 @@ def add_new_task():
 def add_task():
     if 'user_id' not in session:
         return redirect('/')
-    data = {
-        'task_name': request.form['task_name'],
-        'priority': request.form['priority'],
-        'due_date': request.form['due_date'],
-        'complete': request.form['complete'],
-        "user_id": request.form["user_id"]
-    }
+    if not Task.validate_task(request.form):
+        return redirect(request.referrer)
+    dates= request.form['due_date'].split(',')
+    for x in range(len(dates)):
+        data = {
+            'task_name': request.form['task_name'],
+            'priority': request.form['priority'],
+            'due_date': dates[x],
+            'complete': request.form['complete'],
+            "user_id": request.form["user_id"]
+        }
+        if data['task_name'] != 'NULL':
+            Task.create_task(data)
     data2 ={
         "id": request.form["user_id"]
     }
     user_email=Email.get_one_email(data2)
     email = user_email[0]['email']
-    if not Task.validate_task(request.form):
-        return redirect(request.referrer)
-    Task.create_task(data)
+
     Email.send_email(email)
     Task.task_added_success()
     return redirect (request.referrer)
