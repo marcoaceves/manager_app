@@ -109,7 +109,11 @@
                                     </tr>
                                     </thead>
                                     {% for task in tasks%}
-
+                                    {% set number = today.strftime('%Y%m%d') | int %}
+                                    {% set taskdate = task.due_date.strftime('%Y%m%d') | int %}
+                                    {% if taskdate  > (number - 14) %}
+                                    {% if taskdate  < (number + 14) %}
+                                    <!-- <p>{{taskdate}}, {{number +2}} </p> -->
                                     <tbody>
                                     <tr class="fw-normal">
                                         {% if task.due_date != None%}
@@ -200,6 +204,8 @@
 
                                     </tr>
                                     </tbody>
+                                    {% endif %}
+                                    {% endif %}
                                     {% endfor %}
                                     {% if user.role == 'staff'%}
                                     <tr>
