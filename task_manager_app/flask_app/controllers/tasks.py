@@ -10,6 +10,8 @@ from flask_app.models.station import Station
 from flask_app.models.mail_auto import Email
 from flask_app.models.mail_pic import Email_Pic
 from datetime import datetime
+import calendar
+
 
 
 
@@ -176,21 +178,35 @@ def assign_station():
     data = {
             'name': request.form['station_name']
             }
-    willcall=Station.get_one_stations_tasks(data)
+    station=Station.get_one_stations_tasks(data)
+
     if not Task.validate_station(request.form):
         return redirect(request.referrer)
+
+    word = 'Tuesday'
+    tuesday = ''
+
     dates=request.form['due_date'].split(',')
     for x in range(len(dates)):
-        for i in range(len(willcall)):
+        Myday= datetime.strptime(dates[x], '%Y-%m-%d').date()
+        for i in range(len(station)):
+
             data = {
-                'task_name': willcall[i].task_name,
+                'task_name': station[i].task_name,
                 'priority': request.form['priority'],
                 'due_date': dates[x],
                 'complete': request.form['complete'],
                 "user_id": request.form["user_id"]
             }
-            if data['task_name'] != 'NULL':
-                Task.create_task(data)
+            if word in station[i].task_name:
+                tuesday = "Tuesday"
+                if calendar.day_name[Myday.weekday()] == tuesday:
+                    Task.create_task(data)
+                else:print('hello')
+            else:
+                if data['task_name'] != 'NULL':
+                    Task.create_task(data)
+            tuesday = ''
     Task.task_added_success()
     return redirect (request.referrer)
 
