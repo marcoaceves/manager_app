@@ -11,6 +11,8 @@ from flask_app.models.mail_auto import Email
 from flask_app.models.mail_pic import Email_Pic
 from datetime import datetime
 import calendar
+import datetime
+
 
 
 
@@ -220,11 +222,28 @@ def user_task(user_id):
     user_data ={
         'id': session['user_id']
     }
-    today=datetime.today().date()
+    today = datetime.date.today()
+    users = User.get_all()
+    tasks = Task.get_all_user_tasks(data)
+    next_week = today + datetime.timedelta(days=13)
+    past_week = today + datetime.timedelta(days=-7)
+    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today, next_week = next_week, past_week=past_week)
+
+@app.route('/all/user/task/<int:user_id>')
+def all_user_task(user_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data = {
+        "user2":user_id
+    }
+    user_data ={
+        'id': session['user_id']
+    }
+    today = datetime.date.today()
     users= User.get_all()
     tasks = Task.get_all_user_tasks(data)
 
-    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)
+    return render_template("all_user_tasks.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)
 
 # process edit form
 @app.route('/complete/submit', methods=['POST'])
