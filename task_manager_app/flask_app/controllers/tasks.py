@@ -86,11 +86,12 @@ def edit_task_process():
         'complete': request.form['complete'],
         'id' : request.form['task_id']
     }
+    user2=request.form['user_id']
 
 
     Task.edit_task(data)
     Task.task_added_success()
-    return redirect (request.referrer)
+    return redirect ("/user/task/"+user2)
 
 # prep task calendar assing form
 @app.route('/prep/task', methods=['POST'])
@@ -190,7 +191,7 @@ def assign_station():
 
     dates=request.form['due_date'].split(',')
     for x in range(len(dates)):
-        Myday= datetime.strptime(dates[x], '%Y-%m-%d').date()
+        Myday= datetime.datetime.strptime(dates[x], '%Y-%m-%d').date()
         for i in range(len(station)):
 
             data = {
@@ -273,6 +274,7 @@ def comment_task():
 
 @app.route('/update/task/', methods=['POST'])
 def update_tasks():
+    task_names=[]
     if 'user_id' not in session:
         return redirect('/')
     if request.method == "POST":
@@ -287,7 +289,7 @@ def update_tasks():
     completed=request.form.getlist('complete')
     status=request.form.getlist('status')
     print(completed, "TTTTTTTTTTT")
-    print(status, "TTTTTTTTTTT")
+    # print(status, "TTTTTTTTTTT")
     user2data=User.get_user_and_tasks(user2data)
     for i in range(len(completed)):
             data = {
@@ -300,6 +302,7 @@ def update_tasks():
                     'id': completed[i],
                     'complete': '1',
                     'status':status[i]}
+                        task_names.append("$$$$$$$$")
                         Task.complete_update(data)
                     if (status[i] != '1'):
                         data = {
@@ -313,6 +316,7 @@ def update_tasks():
         data2=Task.get_one(data)
         if hasattr(data2, 'complete'):
             if data2.complete != None:
+                print(task_names)
                 Email_Pic.send_email(user2data)
                 Task.task_updated_success()
 
@@ -332,3 +336,37 @@ def update_tasks():
 
 
     return redirect(request.referrer)
+
+# sort
+@app.route('/sort/user/task/<int:user_id>')
+def user_task_sort(user_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data = {
+        "user2":user_id
+    }
+    user_data ={
+        'id': session['user_id']
+    }
+    today = datetime.date.today()
+    users = User.get_all()
+    tasks = Task.get_all_user_tasks_sort(data)
+    next_week = today + datetime.timedelta(days=13)
+    past_week = today + datetime.timedelta(days=-7)
+    return render_template("user_task.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today, next_week = next_week, past_week=past_week)
+
+@app.route('/sort/all/user/task/<int:user_id>')
+def all_user_task_sort(user_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data = {
+        "user2":user_id
+    }
+    user_data ={
+        'id': session['user_id']
+    }
+    today = datetime.date.today()
+    users= User.get_all()
+    tasks = Task.get_all_user_tasks_sort(data)
+
+    return render_template("all_user_tasks.html",user=User.get_one(user_data), users=users, tasks=tasks, user2=User.get_user_and_tasks(data), today=today)

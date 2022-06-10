@@ -398,3 +398,6 @@ background: linear-gradient(to bottom, #00a8c5, #00f8e3);
 
 }
 
+th {
+  cursor: pointer;
+}
