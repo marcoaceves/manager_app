@@ -274,7 +274,7 @@ def comment_task():
 
 @app.route('/update/task/', methods=['POST'])
 def update_tasks():
-    task_names=[]
+    task_names=['opp']
     if 'user_id' not in session:
         return redirect('/')
     if request.method == "POST":
@@ -289,7 +289,6 @@ def update_tasks():
     completed=request.form.getlist('complete')
     status=request.form.getlist('status')
     print(completed, "TTTTTTTTTTT")
-    # print(status, "TTTTTTTTTTT")
     user2data=User.get_user_and_tasks(user2data)
     for i in range(len(completed)):
             data = {
@@ -302,8 +301,13 @@ def update_tasks():
                     'id': completed[i],
                     'complete': '1',
                     'status':status[i]}
-                        task_names.append("$$$$$$$$")
+
                         Task.complete_update(data)
+                        new_data=Task.get_one(data)
+                        if data2.complete != new_data.complete:
+                            print('hello')
+                            task_names.append(data2.task_name) 
+                        
                     if (status[i] != '1'):
                         data = {
                     'id': completed[i],
