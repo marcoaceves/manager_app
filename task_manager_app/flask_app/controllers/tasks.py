@@ -274,7 +274,7 @@ def comment_task():
 
 @app.route('/update/task/', methods=['POST'])
 def update_tasks():
-    task_names=['opp']
+    task_names=[]
     if 'user_id' not in session:
         return redirect('/')
     if request.method == "POST":
@@ -320,8 +320,8 @@ def update_tasks():
         data2=Task.get_one(data)
         if hasattr(data2, 'complete'):
             if data2.complete != None:
-                print(task_names)
-                Email_Pic.send_email(user2data)
+                # print(task_names)
+                Email_Pic.send_email(user2data, task_names)
                 Task.task_updated_success()
 
 

@@ -29,7 +29,10 @@ class Email_Pic:
 
 
     @staticmethod
-    def send_email(usertask):
+    def send_email(usertask, tasks):
+        task=''
+        for i in tasks:
+            task = i + ', ' + task
         username=usertask.first_name.capitalize()
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
@@ -39,6 +42,6 @@ class Email_Pic:
         email['From'] = 'ahf.task.manager@gmail.com'
         email['To'] = 'negar.shirazpour@ahfrx.org'
         email['Subject'] = 'Task Completed! AHF TAKS MANAGER'
-        email.set_content(f"{username} has completed a Task! Please check your AHF Task Manager Dashboard!  http://54.215.222.20/")
+        email.set_content(f"{username} has completed the following task(s): {task} Please check your AHF Task Manager Dashboard!  http://54.215.222.20/")
         server.send_message(email)
 
