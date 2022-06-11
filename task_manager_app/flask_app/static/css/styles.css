@@ -9,6 +9,11 @@
       width: max-content;
       margin: 0 auto; 
   }
+.wrapper1{
+      padding: 2.3% 7.3%;
+      max-width: 1200px;
+      margin: 0 auto; 
+  }
 #ahf_logo{
   max-width: 250px;
   width: auto;
