@@ -1,6 +1,6 @@
 ![130fa84f422d4565910bd820e8e352aa](https://user-images.githubusercontent.com/85464208/165571473-b7efc156-34f2-4b75-b1a6-aa1172a0add6.png)
 
-![2022-06-24_23-14-45_AdobeExpress](https://user-images.githubusercontent.com/85464208/175761074-8834f55c-9f60-4553-a615-bb02cfa79817.gif)
+![2022-06-24_23-14-45_AdobeExpress (2)](https://user-images.githubusercontent.com/85464208/175761151-4a2bf0bc-4b64-46ca-b74a-5a195db49faf.gif)
 
 Video demonstration Here: https://youtu.be/VwwfeWVWhZ4
 
