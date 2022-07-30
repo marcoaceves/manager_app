@@ -19,7 +19,7 @@ class Count:
 # total # of tasks
     @classmethod
     def get_all_counts(cls,data):
-        query = "SELECT first_name, user2.id as user_id, sum(complete) as complete, task_name, role, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
+        query = "SELECT first_name, ANY_VALUE(user2.id) as user_id, sum(complete) as complete, ANY_VALUE(role) as role, COUNT(tasks.user_id) as count FROM  users as user2 LEFT JOIN tasks ON user2.id = tasks.user_id GROUP BY first_name"
         results = connectToMySQL(db).query_db(query,data)
         print(results)
         counts = []
