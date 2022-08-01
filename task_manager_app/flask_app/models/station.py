@@ -13,8 +13,6 @@ class Station:
         self.id = data['id']
         self.name = data['name']
         self.task_name = data['task_name']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
 
 
     @classmethod
@@ -25,7 +23,7 @@ class Station:
         return result
     @classmethod
     def get_all_stations(cls):
-        query = "SELECT * FROM stations GROUP BY(name);"
+        query = "SELECT ANY_VALUE(id) as id,ANY_VALUE(id) as id,ANY_VALUE(name) as name,ANY_VALUE(task_name) as task_name FROM stations GROUP BY(name);"
         results = connectToMySQL(db).query_db(query)
         stations = []
         for i in results:
