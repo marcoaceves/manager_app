@@ -108,6 +108,7 @@ $(document).ready(function () {
                 </div>
             </form>
         </div>
+        {% if posts != None%}
         {% for post in posts%}
         <div id="post" class="border-bottom border-3 border-dark ">
             <div class="container">
@@ -136,6 +137,7 @@ $(document).ready(function () {
             </div>
         </div>
         {% endfor %}
+        {%endif%}
 
     </div>
 

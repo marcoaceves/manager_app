@@ -42,11 +42,13 @@ class Post:
 # total # of tasks
     @classmethod
     def get_all_posts(cls,data):
-        query = """SELECT first_name, user2.id as user_id, posts.id as id, posts.created_at, posts.updated_at, count(post_id) as total_likes,  content
+        query = """SELECT first_name as first_name, ANY_VALUE(user2.id) as user_id, ANY_VALUE(posts.id) as id, ANY_VALUE(posts.created_at) as created_at, ANY_VALUE(posts.updated_at) as updated_at, count(post_id) as total_likes,  ANY_VALUE(content) as content
         FROM  users as user2 JOIN posts ON user2.id = posts.user_id LEFT JOIN likes ON posts.id = likes.post_id  GROUP BY created_at ORDER by posts.id DESC"""
         results = connectToMySQL(db).query_db(query,data)
         # print(results)
         posts = []
+        if results==False:
+            return None
         for post in results:
             posts.append( cls(post) )
         # print('POST',posts)

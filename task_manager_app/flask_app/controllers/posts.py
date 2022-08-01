@@ -18,6 +18,7 @@ def announcemets():
     }
     users= User.get_all()
     posts = Post.get_all_posts(data)
+    print(posts)
     return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
 
 @app.route("/like/<int:post_id>")
