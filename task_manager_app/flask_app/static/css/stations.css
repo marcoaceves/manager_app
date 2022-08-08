@@ -1,10 +1,41 @@
+.wrappersignoff{
+    padding: 2.3% 7.3%;
+
+    margin: 0 auto; 
+}
+
+
 #stationsTable{    border: solid 3px;
     border-radius: 8px;
     border-color: rgba(211, 208, 208, 0.795);
+    width:100%
     
 
 
 }
+td{
+    border: none;
+    border-color: rgba(211, 208, 208, 0.795);
+}
+#bold{
+    font-weight: 500;
+} 
+
+#signoffTable{   
+    
+    margin: 10px;
+    border: solid 3px;
+    border-radius: 8px;
+    border-color: rgba(211, 208, 208, 0.795);
+    width:100%
+    
+
+
+}
+#signoffh1{
+    font-family: monospace;
+}
+
 td{
     border: none;
     border-color: rgba(211, 208, 208, 0.795);
