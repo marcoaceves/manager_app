@@ -1,10 +1,5 @@
-
-
-
-
-
 -- MySQL Workbench Synchronization
--- Generated: 2022-08-08 11:37
+-- Generated: 2022-08-11 12:08
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -19,15 +14,35 @@ ALTER SCHEMA `ahf_db`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_
 ALTER TABLE `ahf_db`.`stations` 
 CHARACTER SET = utf8 , COLLATE = utf8_general_ci ;
 
-CREATE TABLE IF NOT EXISTS `ahf_db`.`register` (
+ALTER TABLE `ahf_db`.`register` 
+CHARACTER SET = utf8 , COLLATE = utf8_general_ci ;
+
+CREATE TABLE IF NOT EXISTS `ahf_db`.`reg_users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `date` DATETIME NULL DEFAULT NULL,
-  `name` VARCHAR(255) NULL DEFAULT NULL,
-  `tech_initial` VARCHAR(45) NULL DEFAULT NULL,
-  `rph_initial` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `pharmacy_name` VARCHAR(245) NULL DEFAULT NULL,
+  `password` VARCHAR(255) NULL DEFAULT NULL,
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `ahf_db`.`multi_register` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `reg_user_id` INT(11) NOT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `rph_initial` VARCHAR(255) NULL DEFAULT NULL,
+  `date` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `fk_multi_register_reg_users1_idx` (`reg_user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_multi_register_reg_users1`
+    FOREIGN KEY (`reg_user_id`)
+    REFERENCES `ahf_db`.`reg_users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

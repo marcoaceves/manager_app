@@ -16,18 +16,38 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
+    <!-- Navigation Bar -->
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
-        <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" id="ahf_logo"></a>
-        <div>
-            <a href="/dashboard"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Dashboard</button></a>
-            <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Add User</button></a>
-            <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Assign Task</button></a>
-            <a href="/stations"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Stations</button></a>
-            <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Users</button></a>
+        {% if user.role == 'admin'%}
 
-            <!-- Dropdown -->
-            <div class="dropdown btn btn-primary badge badge-pill badge-primary" id="mobilebtn">
+            <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" id="ahf_logo"></a>
+            <div>
+                <a href="/dashboard"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Dashboard</button></a>
+                <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Add User</button></a>
+                <a href="/task/new"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Assign Task</button></a>
+                <a href="/stations"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Stations</button></a>
+                <a href="/manage/users"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Manage Users</button></a>
+                <a href="/signoffsheet"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Register Sheet</button></a>
+
+                <!-- Dropdown -->
+                <div class="dropdown btn btn-primary badge badge-pill badge-primary" id="mobilebtn">
+                    <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
+                    <div class="dropdown-content ">
+                        <a href="/links">Links</a>
+                        <a href="/announcements">Announcements</a>
+                        <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Translate</a>
+                    </div>
+                </div>
+
+            </div>
+            <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger" style="text-align:center" id="mobilebtn">Logout</button></a>
+        {% endif %}
+        {% if user.role == 'staff'%}
+        <a href="/user/dash"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
+        <div>
+            <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Task's</button></a>
+            <a href="/signoffsheet"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Register Sheet</button></a>
+            <div class="dropdown btn btn-primary badge badge-pill badge-primary">
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
                 <div class="dropdown-content ">
                     <a href="/links">Links</a>
@@ -35,11 +55,11 @@
                     <a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Translate</a>
                 </div>
             </div>
-
         </div>
         <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger" style="text-align:center" id="mobilebtn">Logout</button></a>
+        {% endif %}
     </div>
-
+    <!-- end nav -->
     <div class="wrappersignoff">
         <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark "id="singoffh1">
             <h1 class="text-center  ms-5 text-capitalize" id="singoffh1"> Closing The Register Sign Off Sheet</h1>
@@ -61,7 +81,6 @@
                         <tr class="lead" id="bold">
                             <th scope="col">Date</th>
                             <th scope="col">Name</th>
-                            <th>Tech Initials</th>
                             <th>RPH Initials</th>
                             <th>Action</th>
                         </tr>
@@ -72,10 +91,10 @@
                             <form action="/update/signoff_sheet" method="POST">
                                 <tr class="text-capitalize ">
                                     <th class="lead" id="bold" scope="row"><span class="text" id="due">{{reg.date}}</span ></th>
-                                    <th><input type="text" placeholder="Name" name="name" value="{{reg.name}}"></th>
-                                    <th><input type="text" placeholder="Tech Initials" name="tech_initial" value="{{reg.tech_initial}}"></th>
-                                    <th><input type="text" placeholder="RPH Initials" name="rph_initial" value="{{reg.rph_initial}}"></th>
+                                    <th><input type="text" placeholder="Name" name="name" value="{{reg.name}}" class="inputsignoff"></th>
+                                    <th><input type="text" placeholder="RPH Initials" name="rph_initial" value="{{reg.rph_initial}}" class="inputsignoff"></th>
                                     <input type="hidden" name="id" id="id" value="{{reg.id}}">
+                                    <input type="hidden" name="tech_initial" value="{{reg.tech_initial}}">
                                     <th><button type="submit" class="btn btn-primary">Submit</button></th>
                                 </tr>
                             </form>
@@ -88,8 +107,9 @@
             </form>
             
         </div>
-        <a href="/delete/create/new" class="btn btn-danger">Delete</a>
-
+        {% if user.role == 'admin'%}
+        <a href="/delete/create/new" class="btn btn-danger" id="btn-danger-signoff">Delete</a>
+        {% endif%}
     </div>
 </body>
 </html>
