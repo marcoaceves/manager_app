@@ -90,6 +90,7 @@ def update_signoff_multi():
     }
 
     Multi_Register.signoff_update(data)
+    flash(" Register Sheet Successfully Upadated!", "update")
     return redirect(request.referrer)
 
 

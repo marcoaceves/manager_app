@@ -29,6 +29,18 @@
             <a href="/logout/multiregister"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger" style="text-align:center" id="mobilebtn">Logout</button></a>
     </div>
     <!-- end nav -->
+
+    {% with messages = get_flashed_messages(category_filter=['update']) %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success text-center alertsignoff" role="alert">
+                {{message}}
+              </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
     <div class="wrappersignoff">
         <div class="d-flex justify-content-center align-items-center mb-3 border-bottom border-5 border-dark "id="singoffh1">
             <h1 class="text-center  ms-5 text-capitalize" id="singoffh1"> Closing The Register Sign Off Sheet</h1>
@@ -36,14 +48,6 @@
         <!-- display station tasks -->
         <div class="d-flex justify-content-evenly mw-100" id="signoffTable" >
                 <!-- <h1>Stations</h1> -->
-                {% with messages = get_flashed_messages(category_filter=['task']) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <p class="text-danger">{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-
 
                     <table class="table table-hover" >
                         <thead>
