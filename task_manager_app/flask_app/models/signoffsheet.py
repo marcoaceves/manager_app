@@ -42,6 +42,8 @@ class Register:
         query = "SELECT id, name, tech_initial, rph_initial, DATE_FORMAT(date,'%b %d, %Y') as date FROM register ORDER BY (date);"
 
         results = connectToMySQL(db).query_db(query)
+        if results==False:
+            return False
         register_dates = []
         for i in results:
             register_dates.append( cls(i) )

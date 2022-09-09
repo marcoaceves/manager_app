@@ -21,6 +21,9 @@ def signoff_sheet_display():
     }
 
     register =Register.get_signoff_sheet()
+    print(register,'###')
+    if register==False:
+        return render_template('register_signoff.html', user=User.get_one(data), register=register)
     for reg in register:
         if reg.name==None:
             reg.name=""
@@ -63,4 +66,5 @@ def update_signoff():
     }
 
     Register.signoff_update(data)
+    flash(" Register Sheet Successfully Upadated!", "update")
     return redirect(request.referrer)

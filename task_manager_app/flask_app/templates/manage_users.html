@@ -49,7 +49,7 @@
             {% with messages = get_flashed_messages(category_filter=['updated']) %}     <!-- declare a variable called messages -->
             {% if messages %}                            <!-- check if there are any messages -->
                 {% for message in messages %}            <!-- loop through the messages -->
-                    <p class="text-success text-center  ms-12">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                    <p class="alert alert-success text-center">{{message}}</p>                   <!-- display each message in a paragraph tag -->
                 {% endfor %}
             {% endif %}
         {% endwith %}

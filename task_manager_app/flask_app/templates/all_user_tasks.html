@@ -49,7 +49,7 @@
         {% if user.role == 'staff'%}
         <a href="/user/dash"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
         <div>
-            <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Task's</button></a>
+            <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Tasks</button></a>
             <a href="/signoffsheet"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Register Sheet</button></a>
             <div class="dropdown btn btn-primary badge badge-pill badge-primary">
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
@@ -75,7 +75,7 @@
                 {% with messages = get_flashed_messages(category_filter=['task_completed']) %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
-                            <p class="text-success text-center">{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                            <p class="alert alert-success text-center">{{message}}</p>                   <!-- display each message in a paragraph tag -->
                         {% endfor %}
                     {% endif %}
                 {% endwith %}

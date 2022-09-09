@@ -35,6 +35,15 @@ def like_post(post_id):
         Post.destroy_like(data)
     return redirect("/announcements")
 
+@app.route("/delete/<int:post_id>")
+def delete_post(post_id):
+    data = {
+        "user_id": session["user_id"],
+        "post_id" : post_id
+    }
+    Post.destroy(data)
+    return redirect("/announcements")
+
 
 @app.route('/add/post', methods=['POST'])
 def add_post():

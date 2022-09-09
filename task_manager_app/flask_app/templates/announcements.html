@@ -60,7 +60,7 @@ $(document).ready(function () {
         {% if user.role == 'staff'%}
         <a href="/user/dash"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
         <div>
-            <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Task's</button></a>
+            <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Tasks</button></a>
             <a href="/signoffsheet"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Register Sheet</button></a>
             <div class="dropdown btn btn-primary badge badge-pill badge-primary">
                 <button class="dropbtn btn btn-primary badge badge-pill badge-primary">Dropdown</button>
@@ -117,19 +117,25 @@ $(document).ready(function () {
                         <img src="https://source.unsplash.com/600x400/?computer" alt="card__image" class="card__image" width="600">
                     </div> -->
                     <div class="card__body">
+                        <span class="tag tag-blue lowername uppername"">{{post.first_name}}</span>
+                        <hr>
                         <p>{{post.content}}</p>
                     </div>
+                    <hr>
                     <div class="card__footer">
                         <div class="user">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1057/1057089.png" style="width: 70px; height: auto;" alt="user__image" class="user__image">
+                            
                             <div class="d-flex flex-column user__info ">
-                                <span class="tag tag-blue lowername uppername"">{{post.first_name}}</span>
-                                <small>{{post.created_at.strftime(' %b %a %Y ')}}</small>
+                                
+                                <small>{{post.created_at.strftime(' %b %d, %Y ')}}</small>
                                 <small>{{post.created_at.strftime('%I:%M %p ')}}</small>
                             </div>
                             <!-- likes form -->
-                            <div class="d-flex justify-content-between align-items-center mb-3 ms-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
                                 <a class="btn btn-primary badge badge-pill badge-primary" style="text-align:center" href="/like/{{post.id}}">{{post.total_likes}} Like(s)</a>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3 ms-3">
+                                <a class="btn btn-danger badge badge-pill badge-primary" style="text-align:center" href="/delete/{{post.id}}">Delete</a>
                             </div>
                         </div>
                     </div>

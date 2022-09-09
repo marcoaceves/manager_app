@@ -45,5 +45,29 @@ $(element).change(function () {
 
 
 
-    // sort tables?//
+    // menu for anouncements//
 
+    function changeLanguage(language) {
+        var element = document.getElementById("url");
+        element.value = language;
+        element.innerHTML = language;
+      }
+      
+      function showDropdown() {
+        document.getElementById("menumyDropdown").classList.toggle("menushow");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches(".menudropbtn")) {
+          var dropdowns = document.getElementsByClassName("menudropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("menushow")) {
+              openDropdown.classList.remove("menushow");
+            }
+          }
+        }
+      };
+      

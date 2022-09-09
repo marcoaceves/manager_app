@@ -43,7 +43,7 @@
         {% with messages = get_flashed_messages(category_filter=['task_edit_success']) %}
         {% if messages %}
             {% for message in messages %}
-                <p class="text-success text-center">{{message}}</p>
+                <p class="alert alert-success text-center">{{message}}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
@@ -55,7 +55,7 @@
                 {% with messages = get_flashed_messages(category_filter=['task']) %}
                     {% if messages %}
                         {% for message in messages %}
-                            <p class="text-danger">{{message}}</p>
+                            <p class="alert alert-danger text-center">{{message}}</p>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
