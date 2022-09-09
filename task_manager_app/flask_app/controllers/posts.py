@@ -17,7 +17,7 @@ def announcemets():
         'id': session['user_id']
     }
     users= User.get_all()
-    posts = Post.get_all_posts(data)
+    posts = Post.get_all_posts()
     print(posts)
     return render_template('announcements.html', user=User.get_one(data), users=users, posts=posts)
 
