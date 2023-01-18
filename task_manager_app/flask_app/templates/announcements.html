@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/post.css') }}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/announcements.css') }}">
-    <link type="image/png" rel="icon" href="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/ff4f0755a2e5442cb887170a7d3060e9/1/5feFb8zhrk/App%20Icon%20%252843%2529.png?dpr=2">
+    <link type="image/png" rel="icon" href="{{ url_for('static', filename='img/icon.webp') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 
@@ -35,7 +35,7 @@ $(document).ready(function () {
     <div class="d-flex justify-content-between align-items-center mb-3" id="nav">
         {% if user.role == 'admin'%}
 
-            <a href="/dashboard"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" id="ahf_logo"></a>
+            <a href="/dashboard"><img src="static/img/AHF_white.webp" alt="AHF_Logo" id="ahf_logo"></a>
             <div>
                 <a href="/dashboard"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Dashboard</button></a>
                 <a href="/add/new_user/"><button type="link" value="Add" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Add User</button></a>
@@ -58,7 +58,7 @@ $(document).ready(function () {
             <a href="/logout"><button type="submit" value="Logout" class="btn btn-danger badge badge-pill badge-danger" style="text-align:center" id="mobilebtn">Logout</button></a>
         {% endif %}
         {% if user.role == 'staff'%}
-        <a href="/user/dash"><img src="https://static.spacecrafted.com/c252c12e258d4896a45c93c7a3a8f34b/i/e157cd205d8945ba9440199d43d39d26/1/5feFb8zhrk/AHF_white.png?dpr=2" alt="AHF_Logo" width="250" height="50"></a>
+        <a href="/user/dash"><img src="static/img/AHF_white.webp" alt="AHF_Logo" width="250" height="50"></a>
         <div>
             <a href="/user/dash"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">My Tasks</button></a>
             <a href="/signoffsheet"><button type="submit" value="Logout" class="btn btn-primary badge badge-pill badge-primary" id="mobilebtn" style="text-align:center">Register Sheet</button></a>
